@@ -213,7 +213,7 @@
             <column name="email" type="VARCHAR(45)">
                 <constraints nullable="false"/>
             </column>
-            <column name="gender" type="ENUM('мужской', 'женский')">
+            <column name="gender" type="CHAR(7)">
                 <constraints nullable="false"/>
             </column>
             <column name="city" type="VARCHAR(45)"/>
