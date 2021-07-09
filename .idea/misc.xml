@@ -4,7 +4,19 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/MultipartParent/pom.xml" />
+        <option value="$PROJECT_DIR$/multipart-parent/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/MultipartParent/untitled/pom.xml" />
+        <option value="$PROJECT_DIR$/miltimodule/pom.xml" />
+        <option value="$PROJECT_DIR$/miltimolule_parent/pom.xml" />
+        <option value="$PROJECT_DIR$/multimodule/pom.xml" />
+        <option value="$PROJECT_DIR$/multipart-parent/message-sender/pom.xml" />
+        <option value="$PROJECT_DIR$/multipart-parent/social-module/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK">

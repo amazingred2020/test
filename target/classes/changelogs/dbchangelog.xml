@@ -1,0 +1,370 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="22 (generated)" id="1625584806325-1">
+        <createTable tableName="categories">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categories_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-2">
+        <createTable tableName="comments">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="content" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_comment_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-3">
+        <createTable tableName="friend_invite">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_from_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_to_id" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="status" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-4">
+        <createTable tableName="grant">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="CHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-5">
+        <createTable tableName="group_invite">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_from_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_to_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="target_group_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="status" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="groups_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-6">
+        <createTable tableName="groups">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(150)"/>
+            <column name="image_link" type="VARCHAR(45)"/>
+            <column name="admin_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-7">
+        <createTable tableName="messages">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="content" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_from_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_to_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-8">
+        <createTable tableName="posts">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="content" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_link" type="VARCHAR(50)"/>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-9">
+        <createTable tableName="products">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+            <column name="desctiption" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_link" type="VARCHAR(45)"/>
+            <column name="price" type="DECIMAL(8, 2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-10">
+        <createTable tableName="roles">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="CHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="date"/>
+            <column name="updated_at" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-11">
+        <createTable tableName="roles_grants">
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="grant_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-12">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="CHAR(7)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(45)"/>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-13">
+        <createTable tableName="users_friends">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="friend_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-14">
+        <createTable tableName="users_groups">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-15">
+        <createIndex indexName="fk_categories_categories1" tableName="categories">
+            <column name="categories_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-16">
+        <createIndex indexName="fk_comments_comments1" tableName="comments">
+            <column name="parent_comment_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-17">
+        <createIndex indexName="fk_comments_users2" tableName="comments">
+            <column name="author_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-18">
+        <createIndex indexName="fk_friend_invite_users1" tableName="friend_invite">
+            <column name="user_from_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-19">
+        <createIndex indexName="fk_group_invite_groups1" tableName="group_invite">
+            <column name="groups_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-20">
+        <createIndex indexName="fk_group_invite_users1" tableName="group_invite">
+            <column name="user_from_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-21">
+        <createIndex indexName="fk_messages_users1" tableName="messages">
+            <column name="user_from_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-22">
+        <createIndex indexName="fk_posts_categories1" tableName="posts">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-23">
+        <createIndex indexName="fk_posts_users1" tableName="posts">
+            <column name="author_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-24">
+        <createIndex indexName="fk_products_users1" tableName="products">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-25">
+        <createIndex indexName="fk_roles_has_table1_table11" tableName="roles_grants">
+            <column name="grant_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-26">
+        <createIndex indexName="fk_users_friends_users2" tableName="users_friends">
+            <column name="friend_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-27">
+        <createIndex indexName="fk_users_groups_groups1" tableName="users_groups">
+            <column name="group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-28">
+        <createIndex indexName="fk_users_roles1" tableName="users">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-29">
+        <addForeignKeyConstraint baseColumnNames="categories_id" baseTableName="categories" constraintName="fk_categories_categories1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="categories" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-30">
+        <addForeignKeyConstraint baseColumnNames="parent_comment_id" baseTableName="comments" constraintName="fk_comments_comments1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="comments" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-31">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="comments" constraintName="fk_comments_users2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-32">
+        <addForeignKeyConstraint baseColumnNames="user_from_id" baseTableName="friend_invite" constraintName="fk_friend_invite_users1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-33">
+        <addForeignKeyConstraint baseColumnNames="groups_id" baseTableName="group_invite" constraintName="fk_group_invite_groups1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="groups" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-34">
+        <addForeignKeyConstraint baseColumnNames="user_from_id" baseTableName="group_invite" constraintName="fk_group_invite_users1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-35">
+        <addForeignKeyConstraint baseColumnNames="user_from_id" baseTableName="messages" constraintName="fk_messages_users1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-36">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="posts" constraintName="fk_posts_categories1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="categories" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-37">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="posts" constraintName="fk_posts_users1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-38">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="products" constraintName="fk_products_users1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-39">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="roles_grants" constraintName="fk_roles_has_table1_roles1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-40">
+        <addForeignKeyConstraint baseColumnNames="grant_id" baseTableName="roles_grants" constraintName="fk_roles_has_table1_table11" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="grant" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-41">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_friends" constraintName="fk_users_friends_users1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-42">
+        <addForeignKeyConstraint baseColumnNames="friend_id" baseTableName="users_friends" constraintName="fk_users_friends_users2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-43">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="users_groups" constraintName="fk_users_groups_groups1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="groups" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-44">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_groups" constraintName="fk_users_groups_users" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="22 (generated)" id="1625584806325-45">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users" constraintName="fk_users_roles1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

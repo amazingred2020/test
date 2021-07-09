@@ -266,16 +266,16 @@ ENGINE = InnoDB;
 -- Table `test_project`.`messages`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `test_project`.`messages` (
-  `id` BIGINT(20) NOT NULL,
-  `content` VARCHAR(200) NOT NULL,
-  `user_from_id` BIGINT(20) NOT NULL,
-  `user_to_id` BIGINT(20) NOT NULL,
-  `created_at` DATETIME NOT NULL,
-  `updated_at` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_messages_users1`
-    FOREIGN KEY (`user_from_id`)
-    REFERENCES `test_project`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+   `id` BIGINT(20) NOT NULL,
+   `content` VARCHAR(200) NOT NULL,
+   `user_from_id` BIGINT(20) NOT NULL,
+   `user_to_id` BIGINT(20) NOT NULL,
+   `created_at` DATETIME NOT NULL,
+   `updated_at` DATETIME NULL,
+   PRIMARY KEY (`id`),
+   CONSTRAINT `fk_messages_users1`
+     FOREIGN KEY (`user_from_id`)
+     REFERENCES `test_project`.`users` (`id`)
+     ON DELETE NO ACTION
+     ON UPDATE NO ACTION)
+ ENGINE = InnoDB;

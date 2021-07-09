@@ -1,0 +1,6 @@
+com/senlainc/service/MessageServiceImpl.class
+com/senlainc/Sender.class
+com/senlainc/entity/Message.class
+com/senlainc/builder/MessageBuilder.class
+com/senlainc/service/MessageService.class
+com/senlainc/dao/MessageDao.class
