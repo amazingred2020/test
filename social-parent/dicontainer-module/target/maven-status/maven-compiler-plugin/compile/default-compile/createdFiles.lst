@@ -1,0 +1,4 @@
+com\senlainc\annotation\InjectComponent.class
+com\senlainc\factory\config\ComponentFinder.class
+com\senlainc\factory\ComponentFactory.class
+com\senlainc\factory\config\SimpleComponentFinder.class

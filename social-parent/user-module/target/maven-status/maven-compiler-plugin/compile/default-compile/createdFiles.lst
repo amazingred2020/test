@@ -1,0 +1,8 @@
+com\senlainc\dao\UserDao.class
+com\senlainc\service\UserServiceImpl.class
+com\senlainc\App.class
+com\senlainc\dao\UserDaoImpl.class
+com\senlainc\util\EntityManagerUtility.class
+com\senlainc\controller\UserController.class
+com\senlainc\service\UserService.class
+com\senlainc\entity\User.class
