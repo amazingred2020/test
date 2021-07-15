@@ -1,17 +1,16 @@
 package com.senlainc.service;
 
-import com.senlainc.factory.ComponentFactory;
 import com.senlainc.dao.MessageDao;
 import com.senlainc.entity.Message;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Service
 public class MessageServiceImpl implements MessageService{
 
+    @Autowired
     private MessageDao messageDao;
-
-    public MessageServiceImpl(){
-        this.messageDao = ComponentFactory.getInstance().getComponent(MessageDao.class);
-    }
 
     @Override
     public Message saveMessage(Message message) {
@@ -28,6 +27,7 @@ public class MessageServiceImpl implements MessageService{
         messageDao.deleteMessage(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Message findById(Long id) {
         return messageDao.findById(id);

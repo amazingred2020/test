@@ -2,25 +2,30 @@ package com.senlainc;
 
 import com.senlainc.controller.CategoryController;
 import com.senlainc.entity.Category;
-import com.senlainc.factory.ComponentFactory;
 import com.senlainc.controller.UserController;
 import com.senlainc.entity.User;
 import com.senlainc.service.*;
+import com.senlainc.spring.JpaConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {
     public static void main(String[] args) {
-/*
+
+		ApplicationContext context = new AnnotationConfigApplicationContext(JpaConfiguration.class);
+
 	    User user1 = new User("Имя1","Фамилия1","Название города1", 3l);
 	    User user2 = new User("Имя2","Фамилия2","Название города2", 1l);
 	
-	    UserService userService = new UserServiceImpl();
+	    UserService userService = context.getBean(UserService.class);
 	    userService.saveUser(user1);
 
-		UserController userController = new UserController();
+		UserController userController = context.getBean(UserController.class);
 		userController.addUser(user2);
 		userController.addUser(new User("Имя3","Фамилия3","Название города3"));
 		userController.findUserById(2L);
 
+        /*
 	    Category сategory1 = new Category("Название категории1");
 	    Category сategory2 = new Category("Название категории2", 1l);
 	
@@ -40,12 +45,13 @@ public class App {
         MessageService messageService = new MessageServiceImpl();
         System.out.println(messageService.findById(2l));
         messageSender.editMessage(2l, "сообщение отредактировано",1l, 2l);
-        */
+
         MessageService messageService = new MessageServiceImpl();
         System.out.println(messageService.findById(2l));
         messageService.deleteMessage(2l);
 
 
         //ComponentFactory.getInstance().getComponentFinder().checkImplementationMap();
+  */
   }
 }

@@ -2,18 +2,18 @@ package com.senlainc.service;
 
 import com.senlainc.dao.UserDao;
 import com.senlainc.entity.User;
-import com.senlainc.annotation.InjectComponent;
-import com.senlainc.factory.ComponentFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
-	@InjectComponent
+	@Autowired
     private UserDao userDao;
 
-    public UserServiceImpl(){
-		this.userDao = ComponentFactory.getInstance().getComponent(UserDao.class);
-    }
-
+	@Transactional(readOnly = true)
 	public User findUserById(Long id) {
 		return userDao.findById(id);
 	}

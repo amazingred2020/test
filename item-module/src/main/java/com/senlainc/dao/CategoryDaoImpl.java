@@ -1,39 +1,34 @@
 package com.senlainc.dao;
 
 import com.senlainc.entity.Category;
-import com.senlainc.util.EntityManagerUtility;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 
+@Repository
 public class CategoryDaoImpl implements CategoryDao {
 
-	private EntityManager entityManager = EntityManagerUtility.getEntityManager();
+    @PersistenceContext
+	private EntityManager entityManager;
 
     public Category save(Category category){
         EntityTransaction t = entityManager.getTransaction();
-        try {
-            t.begin();
-            entityManager.persist(category);
-            t.commit();
-        } finally {
-                if (t.isActive()) t.rollback();
-        }
+        t.begin();
+        entityManager.persist(category);
+        t.commit();
 
         return category;
     }
 
     public Category findById(Long id){
+        EntityTransaction t = entityManager.getTransaction();
     	Category category;
-    	EntityTransaction t = entityManager.getTransaction();
-    	try {
-    	    t.begin();
-    	    category = entityManager.find(Category.class, id);
-    	    t.commit();
-    	} finally {
-    	    if (t.isActive()) t.rollback();
-    	}
-    	
+    	t.begin();
+    	category = entityManager.find(Category.class, id);
+    	t.commit();
+
         return category;
     }
 }

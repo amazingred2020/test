@@ -2,25 +2,26 @@ package com.senlainc.controller;
 
 import com.senlainc.entity.Category;
 import com.senlainc.service.CategoryService;
-import com.senlainc.annotation.InjectComponent;
-import com.senlainc.factory.ComponentFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class CategoryController {
 
-	@InjectComponent
+	@Autowired
 	private CategoryService categoryService;
 
-	public CategoryController(){
-	    this.categoryService = ComponentFactory.getInstance().getComponent(CategoryService.class);
-    }
+	Logger logger = LogManager.getLogger();
 
     public void addCategory(Category category){
     	Category saveCategory = categoryService.saveCategory(category);
-        System.out.println(String.format("Категория %s успешно сохранена", saveCategory.toString())); 
+        logger.info(String.format("Категория %s успешно сохранена", saveCategory.toString()));
     }
 
     public void findCategoryById(Long id){
     	Category category = categoryService.findCategoryById(id);
-    	System.out.println(String.format("Найденная категория по id = %d : %s", id, category.toString())); 
+    	logger.info(String.format("Найденная категория по id = %d : %s", id, category.toString()));
     }
 }

@@ -2,23 +2,24 @@ package com.senlainc.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
+
 import com.senlainc.entity.Message;
-import com.senlainc.util.EntityManagerUtility;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 
+@Repository
 public class MessageDaoImpl implements MessageDao {
-	private EntityManager entityManager = EntityManagerUtility.getEntityManager();
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public Message save(Message message){
         EntityTransaction t = entityManager.getTransaction();
-        try {
-            t.begin();
-            entityManager.persist(message);
-            t.commit();
-        } finally {
-            if (t.isActive()) t.rollback();
-        }
+        t.begin();
+        entityManager.persist(message);
+        t.commit();
 
         return message;
     }
@@ -29,28 +30,19 @@ public class MessageDaoImpl implements MessageDao {
 
     public Message updateMessage(Message message){
         EntityTransaction t = entityManager.getTransaction();
-        try {
-            t.begin();
-            message.setUpdatedAt(LocalDateTime.now());
-            entityManager.merge(message);
-            t.commit();
-        } finally {
-            if (t.isActive()) t.rollback();
-        }
+        t.begin();
+        message.setUpdatedAt(LocalDateTime.now());
+        entityManager.merge(message);
+        t.commit();
 
         return message;
     }
 
     public void deleteMessage(Long id){
         EntityTransaction t = entityManager.getTransaction();
-        try {
-            t.begin();
-            Message message = findById(id);
-            entityManager.remove(message);
-            t.commit();
-        } catch (Exception exception) {
-            t.rollback();
-            exception.printStackTrace();
-        }
+        t.begin();
+        Message message = findById(id);
+        entityManager.remove(message);
+        t.commit();
     }
 }

@@ -1,16 +1,15 @@
 package com.senlainc;
 
-import com.senlainc.factory.ComponentFactory;
 import com.senlainc.entity.Message;
 import com.senlainc.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Sender {
 
+    @Autowired
     private MessageService messageService;
-
-    public Sender(){
-        this.messageService = ComponentFactory.getInstance().getComponent(MessageService.class);
-    }
 
     public void sendMessage(String content, Long to, Long from){
         Message message = new Message.MessageBuilder().addContent(content).addToId(to).addFromId(from).build();
