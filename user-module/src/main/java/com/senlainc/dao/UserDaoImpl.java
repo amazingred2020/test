@@ -5,7 +5,6 @@ import com.senlainc.dao.UserDao;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 @Repository

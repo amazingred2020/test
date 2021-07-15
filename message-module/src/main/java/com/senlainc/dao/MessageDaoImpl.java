@@ -1,7 +1,6 @@
 package com.senlainc.dao;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import com.senlainc.entity.Message;
@@ -16,10 +15,7 @@ public class MessageDaoImpl implements MessageDao {
     private EntityManager entityManager;
 
     public Message save(Message message){
-        EntityTransaction t = entityManager.getTransaction();
-        t.begin();
-        entityManager.persist(message);
-        t.commit();
+        entityManager.persist(message);;
 
         return message;
     }
@@ -28,21 +24,15 @@ public class MessageDaoImpl implements MessageDao {
         return entityManager.find(Message.class, id);
     }
 
-    public Message updateMessage(Message message){
-        EntityTransaction t = entityManager.getTransaction();
-        t.begin();
+    public Message updateMessage(Message message){ ;
         message.setUpdatedAt(LocalDateTime.now());
         entityManager.merge(message);
-        t.commit();
 
         return message;
     }
 
     public void deleteMessage(Long id){
-        EntityTransaction t = entityManager.getTransaction();
-        t.begin();
         Message message = findById(id);
         entityManager.remove(message);
-        t.commit();
     }
 }
