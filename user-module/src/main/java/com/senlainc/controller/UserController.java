@@ -17,11 +17,11 @@ public class UserController {
 
     public void addUser(User user){
     	User saveUser = userService.saveUser(user);
-    	logger.info(String.format("Пользователь %s успешно сохранен", saveUser.toString()));
+    	logger.debug(String.format("Пользователь %s успешно сохранен", saveUser.toString()));
     }
 
     public void findUserById(Long id){
         User user = userService.findUserById(id);
-        logger.info(String.format("Найденный пользователь с id = %d : %s", id, user.toString()));
+        logger.debug(String.format("Найденный пользователь с id = %d : %s", id, user.toString()));
     }
 }
