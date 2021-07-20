@@ -10,23 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>user-module</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <spring.version>5.1.9.RELEASE</spring.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.senlainc</groupId>
-            <artifactId>item-module</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.senlainc</groupId>
-            <artifactId>message-module</artifactId>
+            <artifactId>api-module</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -34,6 +30,7 @@
             <artifactId>liquibase-core</artifactId>
             <version>4.3.5</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -44,6 +41,14 @@
                 <version>3.8.0</version>
                 <configuration>
                     <propertyFile>liquibase.properties</propertyFile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>

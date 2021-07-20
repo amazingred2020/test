@@ -7,14 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dicontainer-module" />
+        <module name="trading-module" />
+        <module name="post-module" />
         <module name="user-module" />
-        <module name="message-module" />
-        <module name="item-module" />
+        <module name="api-module" />
+        <module name="comment-module" />
+        <module name="group-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="dicontainer-module" target="8" />
       <module name="entitymanager-module" target="8" />
+      <module name="item-module" target="8" />
+      <module name="message-module" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,6 +2,7 @@ package com.senlainc.service;
 
 import com.senlainc.dao.UserDao;
 import com.senlainc.entity.User;
+import com.senlainc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
