@@ -15,6 +15,6 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping(value = "/value")
-    public void publishComment(@RequestBody Comment comment, )
+    /*@PostMapping(value = "/value")
+    public void publishComment(@RequestBody Comment comment, )*/
 }

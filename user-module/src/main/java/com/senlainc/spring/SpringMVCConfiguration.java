@@ -13,7 +13,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.senlainc.com.senlainc.controller")
+@ComponentScan(basePackages = "com.senlainc.controller")
 public class SpringMVCConfiguration implements WebMvcConfigurer {
 
     @Override
@@ -25,10 +25,5 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
     public MappingJackson2HttpMessageConverter getJacksonHttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         return converter;
-    }
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
     }
 }

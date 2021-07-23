@@ -1,5 +1,6 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -23,6 +24,9 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
+    private String gender;
+
+    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)
@@ -31,15 +35,14 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, length = 7)
-    private String gender;
-
     @Column(nullable = false)
     private String city;
 
-    @Embedded
-    private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_friends",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -47,79 +50,43 @@ public class User {
     private Set<User> friends = new HashSet<>();
 
     @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.ALWAYS)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-     */
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String city, Long roleId){
+    public User(String firstName, String lastName, String gender, String city, String email, String username, String password){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = "username";
-        this.password = "123";
-        this.email = "email";
-        this.gender = "gender";
-        this.city = "city";
-    }
-
-    public User(String firstName, String lastName, String city){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = "username";
-        this.password = "123";
-        this.email = "email";
-        this.gender = "gender";
-        this.city = "city";
-    }
-
-    public User(Long id, String firstName, String lastName, String city){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = "username";
-        this.password = "123";
-        this.email = "email";
-        this.gender = "gender";
-        this.city = "city";
+        this.gender = gender;
+        this.city = city;
+        this.email = email;
+        this.username = username;
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "{" +
+        return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
                 ", city='" + city + '\'' +
+                ", role=" + role +
                 ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
-    }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
     }
 
     public Long getId(){
         return id;
-    }
-
-    public Account getAccount() {
-        return account;
     }
 
     public Set<User> getFriends(){
@@ -132,5 +99,29 @@ public class User {
 
     public void deleteFriend(User user){
         getFriends().remove(user);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setRole(Role roleById) {
+        this.role = role;
     }
 }

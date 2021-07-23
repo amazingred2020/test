@@ -1,38 +1,43 @@
 package com.senlainc.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Embeddable
+@Entity
+@Table(name = "accounts")
 public class Account {
 
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "number", nullable = false)
     private Long accountNumber;
 
-    @Column(nullable = false)
-    @org.hibernate.annotations.ColumnDefault("0.00")
-    @org.hibernate.annotations.Generated(
-            org.hibernate.annotations.GenerationTime.INSERT
-    )
-    private BigDecimal accountPrice;
+    @Column(name = "money", nullable = false)
+    private BigDecimal accountMoney;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Account(){
-    }
-
-    public BigDecimal getAccountPrice() {
-        return accountPrice;
     }
 
     public Long getAccountNumber() {
         return accountNumber;
     }
 
+    public BigDecimal getAccountMoney() {
+        return accountMoney;
+    }
+
     public void withdrawMoney(BigDecimal price){
-        accountPrice = getAccountPrice().subtract(price);
+        accountMoney = getAccountMoney().subtract(price);
     }
 
     public void putMoney(BigDecimal price){
-        accountPrice = getAccountPrice().add(price);
+        accountMoney = getAccountMoney().add(price);
     }
 }

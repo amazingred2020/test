@@ -10,30 +10,47 @@ public abstract class Invite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_from_id", nullable = false)
-    private Long userFrom;
+    @ManyToOne
+    @JoinColumn(name = "user_from_id")
+    private User userFrom;
 
-    @Column(name = "user_to_id", nullable = false)
-    private Long userTo;
+    @ManyToOne
+    @JoinColumn(name = "user_to_id")
+    private User userTo;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     Status status;
 
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Invite(){
     }
 
-    public Invite(Long fromId, Long toId, Status status) {
+    public Invite(User fromId, User toId, Status status) {
         this.userFrom = fromId;
         this.userTo = toId;
         this.status = status;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public Long getId(){
+        return id;
+    }
+
     public void setStatus(Status status){
         this.status = status;
+    }
+
+    public void setUserFrom(User userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    public void setUserTo(User userTo) {
+        this.userTo = userTo;
     }
 }

@@ -1,6 +1,5 @@
 package com.senlainc.dao;
 
-import com.senlainc.dao.GroupDao;
 import com.senlainc.entity.Group;
 import com.senlainc.entity.User;
 import org.springframework.stereotype.Repository;

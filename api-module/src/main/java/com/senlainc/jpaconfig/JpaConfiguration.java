@@ -1,5 +1,4 @@
-package com.senlainc.spring;
-
+package com.senlainc.jpaconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -1,5 +1,6 @@
 package com.senlainc.dao;
 
+
 import com.senlainc.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,11 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
     public User save(User user){
-        entityManager.persist(user);
+        if(user.getId() == null){
+            entityManager.persist(user);
+        } else {
+            entityManager.merge(user);
+        }
       
         return user;
     }

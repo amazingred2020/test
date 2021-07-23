@@ -1,6 +1,8 @@
 package com.senlainc.service;
 
 import com.senlainc.dao.UserDao;
+import com.senlainc.entity.FriendInvite;
+import com.senlainc.entity.Status;
 import com.senlainc.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User saveUser(User user) {
-		return userDao.save(user);
+			return userDao.save(user);
 	}
 
 	@Override

@@ -29,17 +29,15 @@ public class Product {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ElementCollection
+    /*@ElementCollection
     @CollectionTable(name = "product_image")
     @AttributeOverride(name = "name", column = @Column(name = "filename", nullable = false))
     private Set<Image> images = new HashSet<Image>();
-
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+*/
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.ALWAYS)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Product(){
@@ -55,5 +53,9 @@ public class Product {
 
     public User getSeller() {
         return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 }

@@ -1,7 +1,6 @@
 package com.senlainc.dao;
 
 import com.senlainc.entity.Group;
-import com.senlainc.entity.User;
 
 public interface GroupDao {
 

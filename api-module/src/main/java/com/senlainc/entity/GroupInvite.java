@@ -11,7 +11,7 @@ public class GroupInvite extends Invite{
     public GroupInvite(){
     }
 
-    public GroupInvite(Long fromId, Long toId, Status status, Long groupId) {
+    public GroupInvite(User fromId, User toId, Status status, Long groupId) {
         super(fromId, toId, status);
         this.groupId = groupId;
     }
