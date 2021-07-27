@@ -1,5 +1,7 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -17,9 +19,6 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    //@Lob
-    //private byte[] image;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User user;
@@ -28,19 +27,35 @@ public class Post {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.ALWAYS)
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Post(){
     }
 
+    public Post(String content){
+        this.content = content;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setAuthor(User author) {
@@ -49,5 +64,9 @@ public class Post {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public void setId(Long postId) {
+        id = postId;
     }
 }

@@ -7,12 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="trading-module" />
-        <module name="post-module" />
+        <module name="privilege-module" />
         <module name="user-module" />
+        <module name="liquibase-module" />
+        <module name="post-module" />
+        <module name="product-module" />
         <module name="api-module" />
         <module name="comment-module" />
         <module name="group-module" />
+        <module name="common-mvc-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,6 +23,7 @@
       <module name="entitymanager-module" target="8" />
       <module name="item-module" target="8" />
       <module name="message-module" target="8" />
+      <module name="trading-module" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

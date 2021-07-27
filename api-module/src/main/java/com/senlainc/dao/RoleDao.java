@@ -6,4 +6,5 @@ public interface RoleDao {
 
     Role save(Role role);
     Role findById(Long id);
+    void delete(Long id);
 }

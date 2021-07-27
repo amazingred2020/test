@@ -1,10 +1,13 @@
 package com.senlainc.controller;
 
-import com.senlainc.entity.Group;
+import com.senlainc.dto.group.GroupUserRequest;
+import com.senlainc.dto.group.NewGroupRequest;
 import com.senlainc.service.GroupService;
-import com.senlainc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/group")
@@ -13,21 +16,30 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @Autowired
-    private UserService userService;
-
     @PostMapping(value = "/new")
-    public void addGroup(@RequestBody Group group, @RequestParam Long userId){
-        group.setAdmin(userService.findUserById(userId));
-        groupService.saveGroup(group);
+    public void newGroup(@RequestBody @Valid NewGroupRequest request, BindingResult result){
+        if(!result.hasErrors()){
+            groupService.addGroup(request);
+        }
     }
 
-    @GetMapping(value = "/add/user")
-    public void addUserToGroup(@RequestParam Long groupId, @RequestParam Long userId){
-        groupService.addUserToGroup(groupId, userId);
+    @GetMapping(value = "/{id}")
+    public void deleteGroup(@PathVariable("id") Long groupId){
+        groupService.deleteGroup(groupId);
     }
-    @GetMapping(value = "/del/user")
-    public void deleteUserFromGroup(@RequestParam Long groupId, @RequestParam Long userId){
-        groupService.removeUserFromGroup(groupId, userId);
+
+    @PostMapping(value = "/change")
+    public void changeAdmin(@RequestBody @Valid GroupUserRequest request, BindingResult result){
+        if(!result.hasErrors()) groupService.changeAdmin(request.getGroupId(), request.getUserId());
+    }
+
+    @PostMapping(value = "/user/a")
+    public void addUserToGroup(@RequestBody @Valid GroupUserRequest request, BindingResult result){
+        if(!result.hasErrors()) groupService.addUserToGroup(request.getGroupId(), request.getUserId(), request.getUserFromId());
+    }
+
+    @GetMapping(value = "/user/d")
+    public void removeUserFromGroup(@RequestBody @Valid GroupUserRequest request, BindingResult result){
+        if(!result.hasErrors()) groupService.removeUserFromGroup(request.getGroupId(), request.getUserId());
     }
 }

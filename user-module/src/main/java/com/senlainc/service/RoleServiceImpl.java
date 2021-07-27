@@ -1,6 +1,7 @@
 package com.senlainc.service;
 
 import com.senlainc.dao.RoleDao;
+import com.senlainc.dto.privileges.NewRoleRequest;
 import com.senlainc.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,17 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
 
-    @Override
-    public Role saveRole(Role role) {
-        return roleDao.save(role);
-    }
-
     @Transactional(readOnly = true)
     @Override
     public Role findRoleById(Long id) {
         return roleDao.findById(id);
+    }
+
+    @Override
+    public void deleteRole(Long id) {
+    }
+
+    @Override
+    public void createNewRole(NewRoleRequest newRoleRequest) {
     }
 }

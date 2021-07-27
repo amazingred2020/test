@@ -1,20 +1,59 @@
 package com.senlainc.service;
 
+import com.senlainc.dao.CategoryDao;
+import com.senlainc.dao.PostDao;
+import com.senlainc.dao.UserDao;
+import com.senlainc.dto.post.AddPostRequest;
+import com.senlainc.dto.post.EditPostRequest;
 import com.senlainc.entity.Post;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public class PostServiceImpl implements PostService {
+@Service
+@Transactional
+public class PostServiceImpl implements PostService{
+
+    @Autowired
+    private PostDao postDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
+
     @Override
     public Post savePost(Post post) {
-        return null;
+        return postDao.save(post);
     }
 
     @Override
     public Post findPostById(Long id) {
-        return null;
+        return postDao.findById(id);
     }
 
     @Override
     public void deletePost(Long id) {
+        postDao.remove(id);
+    }
 
+    @Override
+    public Post publishPost(AddPostRequest request) {
+        Post newPost = new Post(request.getContent());
+        newPost.setAuthor(userDao.findById(request.getUserId()));
+        newPost.setCategory(categoryDao.findById(request.getCategoryId()));
+
+        return postDao.save(newPost);
+    }
+
+    @Override
+    public Post editPost(EditPostRequest request) {
+        Post editPost = findPostById(request.getPostId());
+        if(request.getCategoryId() != null){
+            editPost.setCategory(categoryDao.findById(request.getCategoryId()));
+        }
+
+        return postDao.save(editPost);
     }
 }

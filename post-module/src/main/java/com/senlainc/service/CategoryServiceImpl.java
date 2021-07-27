@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl implements CategoryService{
 
     @Autowired
     private CategoryDao categoryDao;
@@ -26,5 +26,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findCategoryById(Long id) {
         return categoryDao.findById(id);
+    }
+
+    @Override
+    public void createCategory(String name, Long parentId) {
+        Category newCategory = new Category(name);
+        if(parentId != null){
+            newCategory.setParent(categoryDao.findById(parentId));
+        }
+        categoryDao.save(newCategory);
     }
 }

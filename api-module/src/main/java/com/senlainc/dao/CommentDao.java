@@ -5,6 +5,6 @@ import com.senlainc.entity.Comment;
 public interface CommentDao {
 
     Comment save(Comment comment);
-    Comment publishComment(Comment comment, Long userId, Long postId);
+    Comment findById(Long id);
     void remove(Long id);
 }

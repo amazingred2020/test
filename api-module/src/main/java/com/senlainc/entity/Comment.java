@@ -1,5 +1,8 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -30,16 +33,24 @@ public class Comment {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> child = new ArrayList<>();
 
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.ALWAYS)
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Comment(){
+    }
+
+    public Comment(String content){
+        this.content = content;
+    }
 
     public Long getId() {
         return id;
@@ -51,5 +62,13 @@ public class Comment {
 
     public void setAuthor(User user){
         this.user = user;
+    }
+
+    public void setParent(Comment parent) {
+        this.parent = parent;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

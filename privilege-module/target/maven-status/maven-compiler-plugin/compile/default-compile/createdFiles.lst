@@ -1,0 +1,5 @@
+com/senlainc/service/GrantServiceImpl.class
+com/senlainc/controller/PrivilegeController.class
+com/senlainc/dao/RoleDaoImpl.class
+com/senlainc/service/RoleServiceImpl.class
+com/senlainc/dao/GrantDaoImpl.class

@@ -1,6 +1,5 @@
 package com.senlainc.dao;
 
-import com.senlainc.dao.PostDao;
 import com.senlainc.entity.Post;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class PostDaoImpl implements PostDao {
+public class PostDaoImpl implements PostDao{
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -31,9 +30,6 @@ public class PostDaoImpl implements PostDao {
 
     @Override
     public void remove(Long id) {
-        Post post = findById(id);
-        if(post != null){
-            entityManager.remove(post);
-        }
+        entityManager.remove(findById(id));
     }
 }

@@ -1,8 +1,6 @@
 package com.senlainc.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -13,7 +11,7 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,5 +39,13 @@ public class Category {
 
     public Long getId() {
         return id;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
     }
 }

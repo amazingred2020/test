@@ -1,5 +1,8 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -20,34 +23,30 @@ public class Group {
 
     private String description;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_groups",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
 
-    //@Lob
-    //private byte[] image;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private User user;
 
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.ALWAYS)
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Group(){
     }
 
-    public Group(String name, String description, User user){
+    public Group(String name){
         this.name = name;
-        this.description = description;
-        this.user = user;
     }
 
     public Long getId() {
@@ -60,6 +59,10 @@ public class Group {
 
     public void setAdmin(User user){
         this.user = user;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void addUserToGroup(User user){

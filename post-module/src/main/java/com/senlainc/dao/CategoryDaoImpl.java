@@ -1,6 +1,5 @@
 package com.senlainc.dao;
 
-import com.senlainc.dao.CategoryDao;
 import com.senlainc.entity.Category;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class CategoryDaoImpl implements CategoryDao {
+public class CategoryDaoImpl implements  CategoryDao{
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -31,9 +30,6 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public void remove(Long id) {
-        Category category = findById(id);
-        if(category != null){
-            entityManager.remove(category);
-        }
+        entityManager.remove(findById(id));
     }
 }

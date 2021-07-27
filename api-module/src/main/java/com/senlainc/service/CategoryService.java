@@ -7,4 +7,5 @@ public interface CategoryService {
     Category saveCategory(Category category);
     void deleteCategory(Long id);
     Category findCategoryById(Long id);
+    void createCategory(String name, Long parentId);
 }

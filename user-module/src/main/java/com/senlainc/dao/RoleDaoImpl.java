@@ -27,4 +27,9 @@ public class RoleDaoImpl implements RoleDao{
     public Role findById(Long id) {
         return entityManager.find(Role.class, id);
     }
+
+    @Override
+    public void delete(Long id) {
+
+    }
 }

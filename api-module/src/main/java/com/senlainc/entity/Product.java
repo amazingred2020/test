@@ -1,5 +1,7 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import org.hibernate.annotations.GenerationTime;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +24,7 @@ public class Product {
 
     private String description;
 
-    @Column(nullable = false, precision = 8, scale = 2)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,13 +36,16 @@ public class Product {
     @AttributeOverride(name = "name", column = @Column(name = "filename", nullable = false))
     private Set<Image> images = new HashSet<Image>();
 */
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
     public Product(){
+    }
+
+    public Product(String name, BigDecimal price){
+        this.name = name;
+        this.price = price;
     }
 
     public Long getId() {
@@ -57,5 +62,9 @@ public class Product {
 
     public void setUser(User user){
         this.user = user;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

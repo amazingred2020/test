@@ -1,15 +1,13 @@
 package com.senlainc.dao;
 
 import com.senlainc.entity.Comment;
-import com.senlainc.entity.Post;
-import com.senlainc.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class CommentDaoImpl implements CommentDao {
+public class CommentDaoImpl implements CommentDao{
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -25,18 +23,13 @@ public class CommentDaoImpl implements CommentDao {
         return comment;
     }
 
-    public Comment publishComment(Comment comment, Long userId, Long postId){
-        comment.setPost(entityManager.find(Post.class, postId));
-        comment.setAuthor(entityManager.find(User.class, userId));
-        return save(comment);
+    @Override
+    public Comment findById(Long id) {
+        return entityManager.find(Comment.class, id);
     }
 
     @Override
     public void remove(Long id) {
-        Comment comment = entityManager.find(Comment.class, id);
-        if(comment != null){
-            entityManager.remove(comment);
-        }
+        entityManager.remove(findById(id));
     }
-
 }

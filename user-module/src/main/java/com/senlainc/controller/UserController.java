@@ -2,15 +2,14 @@ package com.senlainc.controller;
 
 import com.senlainc.dto.user.AddFriendRequest;
 import com.senlainc.dto.user.DeleteFriendRequest;
-import com.senlainc.dto.user.UserDTO;
-import com.senlainc.entity.FriendInvite;
-import com.senlainc.entity.Status;
+import com.senlainc.dto.user.UserRequest;
 import com.senlainc.entity.User;
-import com.senlainc.service.InviteService;
 import com.senlainc.service.RoleService;
 import com.senlainc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -22,12 +21,9 @@ public class UserController {
 	@Autowired
     private RoleService roleService;
 
-	@Autowired
-    private InviteService inviteService;
-
     @PostMapping(value="/new")
-    public User addUser(@RequestBody UserDTO dto, @RequestParam(required = false) Long roleId){
-    	User newUser = dto.convertToUserEntity();
+    public User addUser(@RequestBody @Valid UserRequest request, @RequestParam(required = false) Long roleId){
+    	User newUser = request.convertToUserEntity();
         if(roleId != null){
             newUser.setRole(roleService.findRoleById(roleId));
         }
@@ -47,16 +43,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/friend/add")
-    public void addFriend(@RequestBody AddFriendRequest requestAddFriend){
-        FriendInvite friendInvite = new FriendInvite(userService.findUserById(requestAddFriend.getUserFrom()),
-                userService.findUserById(requestAddFriend.getUserTo()),
-                requestAddFriend.getStatus());
-        inviteService.save(friendInvite);
-        friendInvite = inviteService.changeInviteStatus(friendInvite);
-        if(friendInvite.getStatus() == Status.CONFIRM){
-            userService.addFriend(requestAddFriend.getUserFrom(), requestAddFriend.getUserTo());
-            inviteService.deleteFriendInvite(requestAddFriend.getUserTo());
-        }
+    public void addFriend(@RequestBody AddFriendRequest request){
+        userService.addFriend(request);
     }
 
 

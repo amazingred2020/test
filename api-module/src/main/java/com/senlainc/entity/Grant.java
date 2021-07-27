@@ -1,5 +1,7 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -15,20 +17,21 @@ public class Grant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.ALWAYS)
-    private LocalDateTime updatedAt;
-
-    @ManyToMany(mappedBy = "grants")
-    private Set<Role> actors = new HashSet<Role>();
-
     public Grant(){
+    }
+
+    public Grant(String name){
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

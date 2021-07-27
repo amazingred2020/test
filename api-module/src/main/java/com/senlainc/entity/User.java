@@ -1,7 +1,9 @@
 package com.senlainc.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.GenerationTime;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,20 +40,23 @@ public class User {
     @Column(nullable = false)
     private String city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_friends",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id"))
     private Set<User> friends = new HashSet<>();
 
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
@@ -93,14 +98,6 @@ public class User {
         return friends;
     }
 
-    public void addFriend(User user){
-        getFriends().add(user);
-    }
-
-    public void deleteFriend(User user){
-        getFriends().remove(user);
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -109,16 +106,46 @@ public class User {
         return lastName;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
+    /*
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+    */
+
+    public Role getRole() {
+        return role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void addFriend(User user){
+        getFriends().add(user);
+    }
+
+    public void deleteFriend(User user){
+        getFriends().remove(user);
     }
 
     public void setRole(Role roleById) {
