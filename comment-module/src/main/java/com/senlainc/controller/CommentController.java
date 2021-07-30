@@ -6,9 +6,8 @@ import com.senlainc.entity.Comment;
 import com.senlainc.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/comment")
@@ -18,19 +17,13 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping(value = "/new")
-    public Comment addComment(@RequestBody @Valid AddCommentRequest request, BindingResult result){
-        if (!result.hasErrors()){
-            return commentService.addComment(request);
-        }
-        return null;
+    public Comment addComment(@RequestBody @Validated AddCommentRequest request){
+        return commentService.addComment(request);
     }
 
     @PostMapping(value = "/edit")
-    public Comment editComment(@RequestBody @Valid EditCommentRequest request, BindingResult result){
-        if(!result.hasErrors()){
-            return commentService.editComment(request);
-        }
-        return null;
+    public Comment editComment(@RequestBody @Validated EditCommentRequest request){
+        return commentService.editComment(request);
     }
 
     @GetMapping(value = "/{id}")

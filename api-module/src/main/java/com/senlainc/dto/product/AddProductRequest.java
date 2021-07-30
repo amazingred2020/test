@@ -1,8 +1,13 @@
 package com.senlainc.dto.product;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
+@Getter
+@NoArgsConstructor
 public class AddProductRequest {
 
     @NotEmpty
@@ -17,22 +22,10 @@ public class AddProductRequest {
 
     private String description;
 
-    public AddProductRequest(){
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public String getDescription() {
-        return description;
+    public AddProductRequest(String name, BigDecimal price, Long userId, String description) {
+        this.name = name;
+        this.price = price;
+        this.userId = userId;
+        this.description = description;
     }
 }

@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Random;
+
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
@@ -56,14 +59,14 @@ public class ProductServiceImpl implements ProductService {
         Product product = productDao.findById(productId);
         User buyer = userDao.findById(buyerId);
         if(solvencyBuyerCheck(buyer, product)){
-            accountDao.getAccountByUserId(buyerId).withdrawMoney(product.getPrice());
-            accountDao.getAccountByUserId(product.getSeller().getId()).putMoney(product.getPrice());
+            accountDao.getAccountByUser(buyer.getId()).get().withdrawMoney(product.getPrice());
+            accountDao.getAccountByUser(product.getSeller().getId()).get().putMoney(product.getPrice());
             productDao.remove(productId);
         }
     }
 
     private boolean solvencyBuyerCheck(User buyer, Product product) {
-        Account account = accountDao.getAccountByUserId(buyer.getId());
+        Account account = accountDao.getAccountByUser(buyer.getId()).get();
         if(account != null && account.getAccountMoney().compareTo(product.getPrice()) > 0){
             return  true;
         }
@@ -71,9 +74,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void checkUserAccount(User seller) {
-        if(accountDao.getAccountByUserId(seller.getId()) == null){
+        if(!accountDao.getAccountByUser(seller.getId()).isPresent()){
             Account account = new Account();
             account.setUser(seller);
+            account.setAccountNumber(Long.valueOf(new Random().nextInt(100000000)));
+            account.setAccountMoney(new BigDecimal(0.00));
             accountDao.save(account);
         }
     }

@@ -2,6 +2,8 @@ package com.senlainc.dao;
 
 import com.senlainc.entity.User;
 
+import java.util.List;
+
 public interface UserDao {
 	
 	User save(User user);
@@ -9,4 +11,5 @@ public interface UserDao {
     void remove(Long id);
     void addFriend(Long userId, Long friendId);
 	void deleteFriend(Long userId, Long friendId);
+	List<User> findByCriteries(String name, String surname);
 }

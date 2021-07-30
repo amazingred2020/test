@@ -8,4 +8,6 @@ public interface RoleService {
     Role findRoleById(Long id);
     void deleteRole(Long id);
     void createNewRole(NewRoleRequest newRoleRequest);
+
+    Role createNewRole1(NewRoleRequest newRoleRequest);
 }

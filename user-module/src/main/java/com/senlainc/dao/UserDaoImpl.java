@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -42,6 +47,26 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteFriend(Long userId, Long friendId) {
         findById(userId).deleteFriend(findById(friendId));
+    }
+
+    @Override
+    public List<User> findByCriteries(String name, String surname) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        Predicate predicateForName = builder.equal(
+                root.get("firstName"), name);
+        Predicate predicateFromSurname = builder.equal(
+                root.get("lastName"), surname);
+        Predicate predicate = builder.and(
+                predicateForName,
+                predicateFromSurname);
+        query.where(predicate).select(root);
+        query.orderBy(
+                builder.asc(root.get("gender")),
+                builder.desc(root.get("firstName")),
+                builder.asc(root.get("lastName")));
+        return entityManager.createQuery(query).getResultList();
     }
 }
 

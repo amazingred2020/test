@@ -3,19 +3,17 @@ package com.senlainc.dto.message;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class SendMessageRequest {
-
-    @NotEmpty
-    private String content;
+public class MessageCriteriaRequest {
 
     @NotNull
-    private Long userFrom;
-
+    @Past
+    private LocalDateTime dateTime;
     @NotNull
-    private Long userTo;
+    private Boolean border;
 }

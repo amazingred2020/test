@@ -29,8 +29,9 @@ public class FriendsInviteDaoImpl implements FriendsInviteDao{
 
     @Override
     public void deleteByUsersId(Long userFrom, Long userTo) {
-        FriendInvite invite = entityManager.createQuery("select fi from FriendInvite fi where userFrom = :idFrom and userTo = :idTo",
-                FriendInvite.class).setParameter("idFrom", userFrom).setParameter("idTo", userTo).getSingleResult();
+        FriendInvite invite = entityManager.createQuery("select fi from FriendInvite fi " +
+                        "where fi.userFrom.id = :idFrom and fi.userTo.id = :idTo", FriendInvite.class)
+                .setParameter("idFrom", userFrom).setParameter("idTo", userTo).setMaxResults(1).getSingleResult();
         remove(invite.getId());
     }
 }

@@ -1,39 +1,19 @@
 package com.senlainc.dto.privileges;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
+@Getter
+@NoArgsConstructor
 public class NewRoleRequest {
 
-    @NotNull
+    @NotEmpty
     private String roleName;
-    @NotNull
-    @NotBlank
+    @NotEmpty
     private String grantOne;
     private String grantTwo;
     private String grantThree;
     private String grantFour;
-
-    public NewRoleRequest(){
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public String getGrantOne() {
-        return grantOne;
-    }
-
-    public String getGrantTwo() {
-        return grantTwo;
-    }
-
-    public String getGrantThree() {
-        return grantThree;
-    }
-
-    public String getGrantFour() {
-        return grantFour;
-    }
 }

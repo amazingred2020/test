@@ -61,7 +61,7 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public void addGroup(NewGroupRequest request) {
         Group newGroup = new Group(request.getName());
-        newGroup.setAdmin(userDao.findById(request.getUserId()));
+        newGroup.setUser(userDao.findById(request.getUserId()));
         if(request.getDescription() != null){
             newGroup.setDescription(request.getDescription());
         }
@@ -71,7 +71,7 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public void changeAdmin(Long groupId, Long userId) {
         Group group = groupDao.findById(groupId);
-        group.setAdmin(userDao.findById(userId));
+        group.setUser(userDao.findById(userId));
         groupDao.save(group);
     }
 }

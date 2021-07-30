@@ -9,21 +9,36 @@
         <outputRelativeToContentRoot value="true" />
         <module name="privilege-module" />
         <module name="user-module" />
+        <module name="message-module" />
         <module name="liquibase-module" />
         <module name="post-module" />
         <module name="product-module" />
-        <module name="api-module" />
         <module name="comment-module" />
         <module name="group-module" />
         <module name="common-mvc-module" />
+      </profile>
+      <profile name="Annotation profile for social-parent" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="mapstruct.defaultComponentModel" value="spring" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
+        </processorPath>
+        <module name="api-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dicontainer-module" target="8" />
       <module name="entitymanager-module" target="8" />
       <module name="item-module" target="8" />
-      <module name="message-module" target="8" />
       <module name="trading-module" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-module" options="-Amapstruct.defaultComponentModel=spring" />
+    </option>
   </component>
 </project>

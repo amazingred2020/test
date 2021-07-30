@@ -2,14 +2,15 @@ package com.senlainc.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
-import org.hibernate.annotations.GenerationTime;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
+@Getter
+@NoArgsConstructor
 @Table(name = "grants")
 public class Grant {
 
@@ -24,14 +25,7 @@ public class Grant {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public Grant(){
-    }
-
     public Grant(String name){
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

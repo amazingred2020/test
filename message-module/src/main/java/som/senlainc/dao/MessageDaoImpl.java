@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class MessageDaoImpl implements MessageDao {
@@ -32,5 +38,21 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public void remove(Long id) {
         entityManager.remove(findById(id));
+    }
+
+    @Override
+    public List<Message> findMessagesByCriteries(LocalDateTime dateTime, boolean flag) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Message> query = builder.createQuery(Message.class);
+        Root<Message> root = query.from(Message.class);
+        if(flag){
+            query.where(builder.lessThanOrEqualTo(
+                    root.get("createdAt"), dateTime));
+        } else {
+            query.where(builder.greaterThanOrEqualTo(root.get("createdAt"), dateTime));
+        }
+        query.select(root);
+
+        return entityManager.createQuery(query).getResultList();
     }
 }

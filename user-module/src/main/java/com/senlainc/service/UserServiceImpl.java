@@ -1,11 +1,14 @@
 package com.senlainc.service;
 
 import com.senlainc.dao.FriendsInviteDao;
+import com.senlainc.dao.RoleDao;
 import com.senlainc.dao.UserDao;
 import com.senlainc.dto.user.AddFriendRequest;
+import com.senlainc.dto.user.UserRequest;
 import com.senlainc.entity.FriendInvite;
 import com.senlainc.entity.Status;
 import com.senlainc.entity.User;
+import com.senlainc.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,12 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
 	@Autowired
+	private RoleDao roleDao;
+
+	@Autowired
+	UserMapper mapper;
+
+	@Autowired
 	private FriendsInviteDao friendsInviteDao;
 
 	@Transactional(readOnly = true)
@@ -25,8 +34,15 @@ public class UserServiceImpl implements UserService {
 		return userDao.findById(id);
 	}
 
-	public User saveUser(User user) {
-			return userDao.save(user);
+	@Override
+	public User saveUser(UserRequest request) {
+		User newUser = mapper.userDtoToUser(request);
+		if(request.getRoleId() != null){
+			newUser.setRole(roleDao.findById(request.getRoleId()));
+		} else {
+			newUser.setRole(roleDao.findById(3l));
+		}
+		return userDao.save(newUser);
 	}
 
 	@Override
@@ -59,6 +75,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteFriend(Long userId, Long friendId) {
 		userDao.deleteFriend(userId, friendId);
+	}
+
+	@Override
+	public void changeRole(Long userId, Long roleId) {
+		userDao.findById(userId).setRole(roleDao.findById(roleId));
 	}
 
 }

@@ -3,6 +3,12 @@ package com.senlainc.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
@@ -11,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "comments")
 public class Comment {
 
@@ -21,20 +30,21 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 10)
     private List<Comment> child = new ArrayList<>();
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
@@ -45,30 +55,7 @@ public class Comment {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Comment(){
-    }
-
     public Comment(String content){
-        this.content = content;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    public void setAuthor(User user){
-        this.user = user;
-    }
-
-    public void setParent(Comment parent) {
-        this.parent = parent;
-    }
-
-    public void setContent(String content) {
         this.content = content;
     }
 }

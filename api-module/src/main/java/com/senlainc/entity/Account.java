@@ -2,12 +2,18 @@ package com.senlainc.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "accounts")
 public class Account {
 
@@ -22,7 +28,7 @@ public class Account {
     @Column(name = "money")
     private BigDecimal accountMoney;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -33,21 +39,6 @@ public class Account {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    public Account(){
-    }
-
-    public Long getAccountNumber() {
-        return accountNumber;
-    }
-
-    public BigDecimal getAccountMoney() {
-        return accountMoney;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public void withdrawMoney(BigDecimal price){
         accountMoney = getAccountMoney().subtract(price);

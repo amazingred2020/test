@@ -2,8 +2,10 @@ package com.senlainc.dao;
 
 import com.senlainc.entity.Account;
 
+import java.util.Optional;
+
 public interface AccountDao {
 
     void save(Account account);
-    Account getAccountByUserId(Long id);
+    Optional<Account> getAccountByUser(Long id);
 }

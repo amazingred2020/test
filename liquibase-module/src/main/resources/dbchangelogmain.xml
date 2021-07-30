@@ -8,4 +8,5 @@
     <includeAll path="changelogs/comment"/>
     <includeAll path="changelogs/message"/>
     <includeAll path="changelogs/product"/>
+    <includeAll path="changelogs/begin-insert"/>
 </databaseChangeLog>

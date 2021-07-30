@@ -2,11 +2,17 @@ package com.senlainc.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "group_invite")
 public class GroupInvite{
 
@@ -23,6 +29,10 @@ public class GroupInvite{
     @JoinColumn(name = "user_to_id")
     private User userTo;
 
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group groupId;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     Status status;
@@ -31,24 +41,9 @@ public class GroupInvite{
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
-    private Group groupId;
-
-    public GroupInvite(){
-    }
-
     public GroupInvite(User userFrom, User userTo, Status status){
         this.userFrom = userFrom;
         this.userTo = userTo;
-        this.status = status;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
         this.status = status;
     }
 }

@@ -5,9 +5,8 @@ import com.senlainc.dto.group.NewGroupRequest;
 import com.senlainc.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/group")
@@ -17,10 +16,8 @@ public class GroupController {
     private GroupService groupService;
 
     @PostMapping(value = "/new")
-    public void newGroup(@RequestBody @Valid NewGroupRequest request, BindingResult result){
-        if(!result.hasErrors()){
-            groupService.addGroup(request);
-        }
+    public void newGroup(@RequestBody @Validated NewGroupRequest request){
+        groupService.addGroup(request);
     }
 
     @GetMapping(value = "/{id}")
@@ -29,17 +26,17 @@ public class GroupController {
     }
 
     @PostMapping(value = "/change")
-    public void changeAdmin(@RequestBody @Valid GroupUserRequest request, BindingResult result){
-        if(!result.hasErrors()) groupService.changeAdmin(request.getGroupId(), request.getUserId());
+    public void changeAdmin(@RequestBody @Validated GroupUserRequest request){
+        groupService.changeAdmin(request.getGroupId(), request.getUserId());
     }
 
     @PostMapping(value = "/user/a")
-    public void addUserToGroup(@RequestBody @Valid GroupUserRequest request, BindingResult result){
-        if(!result.hasErrors()) groupService.addUserToGroup(request.getGroupId(), request.getUserId(), request.getUserFromId());
+    public void addUserToGroup(@RequestBody @Validated GroupUserRequest request){
+        groupService.addUserToGroup(request.getGroupId(), request.getUserId(), request.getUserFromId());
     }
 
     @GetMapping(value = "/user/d")
-    public void removeUserFromGroup(@RequestBody @Valid GroupUserRequest request, BindingResult result){
-        if(!result.hasErrors()) groupService.removeUserFromGroup(request.getGroupId(), request.getUserId());
+    public void removeUserFromGroup(@RequestBody @Validated GroupUserRequest request){
+        groupService.removeUserFromGroup(request.getGroupId(), request.getUserId());
     }
 }

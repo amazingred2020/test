@@ -7,9 +7,8 @@ import com.senlainc.service.CategoryService;
 import com.senlainc.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/post")
@@ -22,11 +21,8 @@ public class PostController {
     private CategoryService categoryService;
 
     @PostMapping(value = "/new")
-    public Post newPost(@RequestBody @Valid AddPostRequest request, BindingResult result){
-        if(!result.hasErrors()) {
-            return postService.publishPost(request);
-        }
-        return null;
+    public Post newPost(@RequestBody @Validated AddPostRequest request){
+        return postService.publishPost(request);
     }
 
     @GetMapping(value = "/{postId}")
@@ -35,11 +31,8 @@ public class PostController {
     }
 
     @PostMapping(value = "/edit")
-    public Post editPost(@RequestBody EditPostRequest request, BindingResult result){
-        if(!result.hasErrors()){
-            return postService.editPost(request);
-        }
-        return null;
+    public Post editPost(@RequestBody @Validated EditPostRequest request){
+        return postService.editPost(request);
     }
 
     @GetMapping(value = "/category")

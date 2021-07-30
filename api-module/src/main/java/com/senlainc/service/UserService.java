@@ -7,8 +7,9 @@ import com.senlainc.entity.User;
 public interface UserService {
 
     User findUserById(Long id);
-    User saveUser(User category);
+    User saveUser(UserRequest request);
     void deleteUser(Long id);
     void addFriend(AddFriendRequest addFriendRequest);
     void deleteFriend(Long userId, Long friendId);
+    void changeRole(Long userId, Long roleId);
 }

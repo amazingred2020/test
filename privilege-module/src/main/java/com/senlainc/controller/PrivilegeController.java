@@ -6,9 +6,8 @@ import com.senlainc.service.GrantService;
 import com.senlainc.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/privilege")
@@ -21,8 +20,8 @@ public class PrivilegeController {
     private GrantService grantService;
 
     @PostMapping(value = "/role")
-    public void createRole(@RequestBody @Valid NewRoleRequest newRoleRequest, BindingResult result){
-        if(!result.hasErrors()) roleService.createNewRole(newRoleRequest);
+    public void createRole(@RequestBody @Validated NewRoleRequest newRoleRequest){
+        roleService.createNewRole(newRoleRequest);
     }
 
     @GetMapping(value = "/role/{id}")

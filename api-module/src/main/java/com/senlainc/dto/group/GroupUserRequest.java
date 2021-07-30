@@ -1,7 +1,12 @@
 package com.senlainc.dto.group;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotNull;
 
+@Getter
+@NoArgsConstructor
 public class GroupUserRequest {
 
     @NotNull
@@ -11,19 +16,4 @@ public class GroupUserRequest {
     private Long userId;
 
     private Long userFromId;
-
-    public GroupUserRequest(){
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Long getUserFromId() {
-        return userFromId;
-    }
 }

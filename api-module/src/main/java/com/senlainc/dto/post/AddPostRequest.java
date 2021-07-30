@@ -1,34 +1,21 @@
 package com.senlainc.dto.post;
 
-import javax.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@NoArgsConstructor
 public class AddPostRequest {
 
-    @NotNull
-    @NotBlank
+    @NotEmpty
     private String content;
 
     @NotNull
-    @NotBlank
     private Long userId;
 
     @NotNull
-    @NotBlank
     private Long categoryId;
-
-    public AddPostRequest(){
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
 }

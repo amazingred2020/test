@@ -1,8 +1,14 @@
 package com.senlainc.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@NoArgsConstructor
 @Table(name = "categories")
 public class Category {
 
@@ -14,12 +20,9 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;
-
-    public Category() {
-    }
 
     public Category(String name){
         this.name = name;
@@ -27,25 +30,5 @@ public class Category {
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Category getParent() {
-        return parent;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
     }
 }
