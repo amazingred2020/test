@@ -3,30 +3,27 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="privilege-module" />
-        <module name="user-module" />
-        <module name="message-module" />
-        <module name="liquibase-module" />
-        <module name="post-module" />
-        <module name="product-module" />
-        <module name="comment-module" />
-        <module name="group-module" />
-        <module name="common-mvc-module" />
-      </profile>
       <profile name="Annotation profile for social-parent" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <option name="mapstruct.defaultComponentModel" value="spring" />
         <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.20/lombok-1.18.20.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
+        <module name="privilege-module" />
+        <module name="security-module" />
+        <module name="user-module" />
+        <module name="message-module" />
+        <module name="liquibase-module" />
+        <module name="post-module" />
+        <module name="product-module" />
         <module name="api-module" />
+        <module name="comment-module" />
+        <module name="common-mvc-module" />
+        <module name="group-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -39,6 +36,16 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="comment-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="common-mvc-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="group-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="liquibase-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="message-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="post-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="privilege-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="product-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="security-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="user-module" options="-Amapstruct.defaultComponentModel=spring" />
     </option>
   </component>
 </project>

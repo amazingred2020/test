@@ -11,5 +11,6 @@ public interface UserDao {
     void remove(Long id);
     void addFriend(Long userId, Long friendId);
 	void deleteFriend(Long userId, Long friendId);
+	User findByUsername(String username);
 	List<User> findByCriteries(String name, String surname);
 }

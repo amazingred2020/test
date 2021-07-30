@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public Comment addComment(AddCommentRequest request) {
         Comment newComment = new Comment(request.getContent());
-        newComment.setAuthor(userDao.findById(request.getUserId()));
+        newComment.setUser(userDao.findById(request.getUserId()));
         newComment.setPost(postDao.findById(request.getPostId()));
         if(request.getParentId() != null){
             newComment.setParent(commentDao.findById(request.getParentId()));

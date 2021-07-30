@@ -10,6 +10,7 @@
             <column name="email" value="some@mail.ru"/>
             <column name="gender" value="мужской"/>
             <column name="city" value="орел"/>
+            <column name="role_id" value="1"/>
         </insert>
         <rollback/>
     </changeSet>

@@ -41,7 +41,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public Post publishPost(AddPostRequest request) {
         Post newPost = new Post(request.getContent());
-        newPost.setAuthor(userDao.findById(request.getUserId()));
+        newPost.setUser(userDao.findById(request.getUserId()));
         newPost.setCategory(categoryDao.findById(request.getCategoryId()));
 
         return postDao.save(newPost);

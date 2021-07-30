@@ -5,7 +5,6 @@ import com.senlainc.dto.comment.EditCommentRequest;
 import com.senlainc.entity.Comment;
 import com.senlainc.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

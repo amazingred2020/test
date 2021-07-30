@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
         User buyer = userDao.findById(buyerId);
         if(solvencyBuyerCheck(buyer, product)){
             accountDao.getAccountByUser(buyer.getId()).get().withdrawMoney(product.getPrice());
-            accountDao.getAccountByUser(product.getSeller().getId()).get().putMoney(product.getPrice());
+            accountDao.getAccountByUser(product.getUser().getId()).get().putMoney(product.getPrice());
             productDao.remove(productId);
         }
     }

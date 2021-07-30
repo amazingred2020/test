@@ -76,10 +76,10 @@ public class User {
     }
 
     public void addFriend(User user){
-        getFriends().add(user);
+        friends.add(user);
     }
 
     public void deleteFriend(User user){
-        getFriends().remove(user);
+        friends.remove(user);
     }
 }

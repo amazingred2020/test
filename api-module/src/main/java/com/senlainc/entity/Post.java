@@ -39,4 +39,8 @@ public class Post {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Post(String content) {
+        this.content = content;
+    }
 }
