@@ -2,6 +2,7 @@ package com.senlainc.dao;
 
 
 import com.senlainc.entity.User;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,7 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
-
+@Log4j2
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -30,7 +31,6 @@ public class UserDaoImpl implements UserDao {
 
     public User findById(Long id){
         User user = entityManager.find(User.class, id);
-
         return user;
     }
 
@@ -53,10 +53,13 @@ public class UserDaoImpl implements UserDao {
     public User findByUsername(String username) {
         return entityManager.createQuery("select u from User u where u.username = :username", User.class)
                 .setParameter("username", username).getSingleResult();
+
     }
 
     @Override
     public List<User> findByCriteries(String name, String surname) {
+        String temp1 = name;
+        String temp2 = surname;
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root<User> root = query.from(User.class);
@@ -64,12 +67,11 @@ public class UserDaoImpl implements UserDao {
                 root.get("firstName"), name);
         Predicate predicateFromSurname = builder.equal(
                 root.get("lastName"), surname);
-        Predicate predicate = builder.and(
+        Predicate predicate = builder.or(
                 predicateForName,
                 predicateFromSurname);
-        query.where(predicate).select(root);
+        query.where(predicate);
         query.orderBy(
-                builder.asc(root.get("gender")),
                 builder.desc(root.get("firstName")),
                 builder.asc(root.get("lastName")));
         return entityManager.createQuery(query).getResultList();

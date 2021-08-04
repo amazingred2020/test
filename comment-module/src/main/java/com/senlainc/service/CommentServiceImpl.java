@@ -24,11 +24,6 @@ public class CommentServiceImpl implements CommentService{
     private PostDao postDao;
 
     @Override
-    public Comment saveComment(Comment comment) {
-        return commentDao.save(comment);
-    }
-
-    @Override
     public void deleteComment(Long id) {
         commentDao.remove(id);
     }

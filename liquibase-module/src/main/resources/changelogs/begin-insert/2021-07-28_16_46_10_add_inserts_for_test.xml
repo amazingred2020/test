@@ -2,21 +2,19 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet author="liquibase-script"  id="2021-07-28 16:50:10">
         <insert tableName="users">
-            <column name="id" value="1"/>
             <column name="first_name" value="Вася"/>
             <column name="last_name" value="Петров"/>
             <column name="username" value="nickname"/>
-            <column name="password" value="password"/>
+            <column name="password" value="$2y$12$9XdNGS2gZdP0cVlCwVPU5.Wi/9fxXRwsGHSxnHmHQWSWvfaV0kPOO"/>
             <column name="email" value="some@mail.ru"/>
             <column name="gender" value="мужской"/>
-            <column name="city" value="орел"/>
-            <column name="role_id" value="1"/>
+            <column name="city" value="city"/>
+            <column name="role_id" value="4"/>
         </insert>
         <rollback/>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-28 16:50:20">
         <insert tableName="accounts">
-            <column name="id" value="1"/>
             <column name="number" value="11122233"/>
             <column name="money" value="50000.00"/>
             <column name="user_id" value="1"/>

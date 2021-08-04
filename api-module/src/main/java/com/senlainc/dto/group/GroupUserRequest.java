@@ -3,6 +3,7 @@ package com.senlainc.dto.group;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -15,5 +16,7 @@ public class GroupUserRequest {
     @NotNull
     private Long userId;
 
-    private Long userFromId;
+    private Long fromId;
+
+    private String buttonName;
 }

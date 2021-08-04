@@ -41,11 +41,11 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    public List<Message> findMessagesByCriteries(LocalDateTime dateTime, boolean flag) {
+    public List<Message> findMessagesByCriteries(LocalDateTime dateTime, boolean borderDate) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Message> query = builder.createQuery(Message.class);
         Root<Message> root = query.from(Message.class);
-        if(flag){
+        if(borderDate){
             query.where(builder.lessThanOrEqualTo(
                     root.get("createdAt"), dateTime));
         } else {

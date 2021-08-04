@@ -13,9 +13,4 @@ public class DeleteFriendRequest {
     private Long userFrom;
     @NotNull
     private Long userTo;
-
-    public DeleteFriendRequest(long userFrom, long userTo) {
-        this.userFrom = userFrom;
-        this.userTo = userTo;
-    }
 }

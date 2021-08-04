@@ -34,35 +34,28 @@
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-27 15:47:40">
         <insert tableName="roles">
-            <column name="id" value="1"/>
             <column name="name" value="User"/>
         </insert>
         <insert tableName="roles">
-            <column name="id" value="2"/>
             <column name="name" value="Admin"/>
         </insert>
         <insert tableName="roles">
-            <column name="id" value="3"/>
             <column name="name" value="Guest"/>
         </insert>
         <rollback/>
     </changeSet>
-    <changeSet author="liquibase-script"  id="2021-07-27 15:47:50">
+    <changeSet author="liquibase-script"  id="2021-07-28 16:50:50">
         <insert tableName="grants">
-            <column name="id" value="1"/>
             <column name="name" value="create"/>
         </insert>
         <insert tableName="grants">
-            <column name="id" value="2"/>
             <column name="name" value="delete"/>
         </insert>
         <insert tableName="grants">
-            <column name="id" value="3"/>
             <column name="name" value="update"/>
         </insert>
         <insert tableName="grants">
-            <column name="id" value="4"/>
-            <column name="name" value="publish"/>
+            <column name="name" value="read"/>
         </insert>
         <rollback/>
     </changeSet>

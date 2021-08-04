@@ -15,5 +15,5 @@ public class MessageCriteriaRequest {
     @Past
     private LocalDateTime dateTime;
     @NotNull
-    private Boolean border;
+    private Boolean borderDate;
 }

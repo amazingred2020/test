@@ -34,10 +34,9 @@ public class FriendInvite{
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public FriendInvite(User fromId, User toId, Status status){
+    public FriendInvite(User fromId, User toId){
         this.userFrom = fromId;
         this.userTo = toId;
-        this.status = status;
     }
 }
 

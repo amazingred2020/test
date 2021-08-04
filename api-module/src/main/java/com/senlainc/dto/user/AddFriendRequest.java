@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,14 +15,10 @@ public class AddFriendRequest {
 
     @NotNull
     private Long userFrom;
+
     @NotNull
     private Long userTo;
-    @NotNull
-    private Status status;
 
-    public AddFriendRequest(Long userFrom, Long userTo, Status status){
-        this.userTo = userTo;
-        this.userFrom = userFrom;
-        this.status = status;
-    }
+    @NotEmpty
+    private String buttonName;
 }

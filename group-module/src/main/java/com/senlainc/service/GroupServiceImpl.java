@@ -3,6 +3,7 @@ package com.senlainc.service;
 import com.senlainc.dao.GroupDao;
 import com.senlainc.dao.GroupInviteDao;
 import com.senlainc.dao.UserDao;
+import com.senlainc.dto.group.GroupUserRequest;
 import com.senlainc.dto.group.NewGroupRequest;
 import com.senlainc.entity.Group;
 import com.senlainc.entity.GroupInvite;
@@ -35,21 +36,12 @@ public class GroupServiceImpl implements GroupService{
     }
 
     @Override
-    public void addUserToGroup(Long groupId, Long userId, Long userFromId) {
-        Group group = groupDao.findById(groupId);
-        GroupInvite groupInvite = groupInviteDao.save(new GroupInvite(
-                userDao.findById(userFromId), userDao.findById(userId), Status.WAIT));
-        changeGroupInviteStatus(groupInvite);
-        if(groupInvite.getStatus() == Status.CONFIRM) {
-            groupDao.findById(groupId).addUserToGroup(userDao.findById(userId));
-        }
-    }
-
-    private void changeGroupInviteStatus(GroupInvite groupInvite) {
-        if(Math.random() < 0.5){
-            groupInvite.setStatus(Status.CONFIRM);
+    public void addUserToGroup(GroupUserRequest request) {
+        if(request.getButtonName().equals("confirm")) {
+            groupDao.findById(request.getGroupId()).addUserToGroup(userDao.findById(request.getUserId()));
+            groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId()).setStatus(Status.CONFIRM);
         } else {
-            groupInvite.setStatus(Status.REJECT);
+            groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId()).setStatus(Status.REJECT);
         }
     }
 

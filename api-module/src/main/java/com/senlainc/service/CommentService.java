@@ -6,7 +6,6 @@ import com.senlainc.entity.Comment;
 
 public interface CommentService {
 
-    Comment saveComment(Comment comment);
     void deleteComment(Long id);
     Comment addComment(AddCommentRequest request);
     Comment editComment(EditCommentRequest request);

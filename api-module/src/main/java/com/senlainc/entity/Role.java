@@ -31,9 +31,9 @@ public class Role {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 5)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    //@Fetch(FetchMode.SUBSELECT)
+    //@BatchSize(size = 10)
     @JoinTable(name = "roles_grants",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "grant_id"))

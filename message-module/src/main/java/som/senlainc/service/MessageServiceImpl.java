@@ -42,6 +42,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> findByCriteria(MessageCriteriaRequest request) {
-        return messageDao.findMessagesByCriteries(request.getDateTime(), request.getBorder());
+        return messageDao.findMessagesByCriteries(request.getDateTime(), request.getBorderDate());
     }
 }

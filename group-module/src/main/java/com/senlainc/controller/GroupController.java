@@ -30,12 +30,12 @@ public class GroupController {
         groupService.changeAdmin(request.getGroupId(), request.getUserId());
     }
 
-    @PostMapping(value = "/user/a")
+    @PostMapping(value = "/user/add")
     public void addUserToGroup(@RequestBody @Validated GroupUserRequest request){
-        groupService.addUserToGroup(request.getGroupId(), request.getUserId(), request.getUserFromId());
+        groupService.addUserToGroup(request);
     }
 
-    @GetMapping(value = "/user/d")
+    @GetMapping(value = "/user/delete")
     public void removeUserFromGroup(@RequestBody @Validated GroupUserRequest request){
         groupService.removeUserFromGroup(request.getGroupId(), request.getUserId());
     }

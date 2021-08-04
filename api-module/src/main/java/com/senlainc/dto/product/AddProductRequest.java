@@ -17,15 +17,9 @@ public class AddProductRequest {
     @Digits(integer = 19, fraction = 2)
     private BigDecimal price;
 
+    @NotNull
     @Min(1)
-    private long userId;
+    private Long userId;
 
     private String description;
-
-    public AddProductRequest(String name, BigDecimal price, Long userId, String description) {
-        this.name = name;
-        this.price = price;
-        this.userId = userId;
-        this.description = description;
-    }
 }

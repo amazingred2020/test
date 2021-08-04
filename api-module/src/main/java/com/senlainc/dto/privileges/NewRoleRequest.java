@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -11,9 +13,5 @@ public class NewRoleRequest {
 
     @NotEmpty
     private String roleName;
-    @NotEmpty
-    private String grantOne;
-    private String grantTwo;
-    private String grantThree;
-    private String grantFour;
+    private List<String> grants;
 }

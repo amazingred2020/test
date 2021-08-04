@@ -41,9 +41,8 @@ public class GroupInvite{
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public GroupInvite(User userFrom, User userTo, Status status){
+    public GroupInvite(User userFrom, User userTo){
         this.userFrom = userFrom;
         this.userTo = userTo;
-        this.status = status;
     }
 }

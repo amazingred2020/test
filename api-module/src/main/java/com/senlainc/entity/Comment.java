@@ -6,12 +6,12 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +49,7 @@ public class Comment {
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "created_at")
+    @Generated(GenerationTime.INSERT)
     private LocalDateTime createdAt;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
