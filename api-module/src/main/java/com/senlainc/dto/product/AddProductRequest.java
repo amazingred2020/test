@@ -2,11 +2,13 @@ package com.senlainc.dto.product;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class AddProductRequest {
 

@@ -5,6 +5,8 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -33,6 +35,7 @@ public class Post {
     private Category category;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Generated(GenerationTime.INSERT)
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

@@ -14,7 +14,6 @@ public class GroupInviteDaoImpl implements GroupInviteDao{
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     public GroupInvite save(GroupInvite groupInvite) {
         entityManager.persist(groupInvite);

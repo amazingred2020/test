@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface MessageService {
 
-    Message saveMessage(Message message);
-    void deleteMessage(Long id);
     Message sendMessage(SendMessageRequest request);
     List<Message> findByCriteria(MessageCriteriaRequest request);
 }

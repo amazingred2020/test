@@ -1,6 +1,7 @@
 package com.senlainc.service;
 
 import com.senlainc.dao.FriendsInviteDao;
+import com.senlainc.dao.GroupDao;
 import com.senlainc.dao.GroupInviteDao;
 import com.senlainc.dao.UserDao;
 import com.senlainc.dto.invite.AddGroupInviteRequest;
@@ -21,6 +22,9 @@ public class InviteServiceImpl implements InviteService{
     private UserDao userDao;
 
     @Autowired
+    private GroupDao groupDao;
+
+    @Autowired
     private FriendsInviteDao friendsInviteDao;
 
     @Autowired
@@ -28,9 +32,11 @@ public class InviteServiceImpl implements InviteService{
 
     @Override
     public void addFriendInvite(Long fromId, Long toId) {
-        FriendInvite friendInvite = new FriendInvite(userDao.findById(fromId), userDao.findById(toId));
-        friendInvite.setStatus(Status.WAIT);
-        friendsInviteDao.save(friendInvite);
+        if(friendsInviteDao.findInvitesByUsersId(fromId, toId) == null){
+            FriendInvite friendInvite = new FriendInvite(userDao.findById(fromId), userDao.findById(toId));
+            friendInvite.setStatus(Status.WAIT);
+            friendsInviteDao.save(friendInvite);
+        }
     }
 
     @Override
@@ -40,10 +46,12 @@ public class InviteServiceImpl implements InviteService{
 
     @Override
     public void addGroupInvite(AddGroupInviteRequest request) {
-        GroupInvite groupInvite = new GroupInvite(userDao.findById(request.getUserFrom()),
-                userDao.findById(request.getUserTo()));
-        groupInvite.setStatus(Status.WAIT);
-        groupInviteDao.save(groupInvite);
+        if(groupInviteDao.findInviteByUsersId(request.getUserFrom(), request.getUserTo()) == null) {
+            GroupInvite groupInvite = new GroupInvite(userDao.findById(request.getUserFrom()),
+                    userDao.findById(request.getUserTo()), groupDao.findById(request.getGroupId()));
+            groupInvite.setStatus(Status.WAIT);
+            groupInviteDao.save(groupInvite);
+        }
     }
 
     @Override

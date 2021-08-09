@@ -7,4 +7,5 @@ public interface CategoryDao {
     Category save(Category category);
     Category findById(Long id);
     void remove(Long id);
+    Category findByName(String name);
 }

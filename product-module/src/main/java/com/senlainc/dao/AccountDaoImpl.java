@@ -24,6 +24,9 @@ public class AccountDaoImpl implements AccountDao{
     @Override
     public Optional<Account> getAccountByUser(Long id) {
          return entityManager.createQuery("select a from Account a where a.user.id = :id", Account.class)
-                 .setParameter("id", id).setMaxResults(1).getResultList().stream().findFirst();
+                 .setParameter("id", id).setMaxResults(1)
+                 .getResultList()
+                 .stream()
+                 .findFirst();
     }
 }

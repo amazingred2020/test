@@ -1,42 +1,25 @@
 package com.senlainc.controller;
 
-import com.senlainc.dto.privileges.NewRoleRequest;
-import com.senlainc.entity.Grant;
-import com.senlainc.service.GrantService;
-import com.senlainc.service.RoleService;
+import com.senlainc.entity.Privilege;
+import com.senlainc.routes.AuthRoutes;
+import com.senlainc.service.PrivilegeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/privilege")
 public class PrivilegeController {
 
     @Autowired
-    private RoleService roleService;
+    private PrivilegeService privilegeService;
 
-    @Autowired
-    private GrantService grantService;
-
-    @PostMapping(value = "/role")
-    public void createRole(@RequestBody @Validated NewRoleRequest newRoleRequest){
-        roleService.createNewRole(newRoleRequest);
+    @GetMapping(AuthRoutes.PRIVILEGE)
+    public void createPrivilege(@RequestParam String name){
+        privilegeService.savePrivilege(new Privilege(name));
     }
 
-    @GetMapping(value = "/role/{id}")
-    public void deleteRole(@PathVariable Long id){
-        roleService.deleteRole(id);
-    }
-
-    @GetMapping(value = "/grant")
-    public void createGrant(@RequestParam String name){
-        grantService.saveGrant(new Grant(name));
-    }
-
-    @GetMapping(value = "/grant/{id}")
-    public void deleteGrant(@PathVariable Long id){
-        grantService.deleteGrant(id);
+    @DeleteMapping(AuthRoutes.DELETE_PRIVILEGE)
+    public void deletePrivilege(@PathVariable Long id){
+        privilegeService.deletePrivilege(id);
     }
 
 }

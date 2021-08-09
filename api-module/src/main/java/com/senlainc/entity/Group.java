@@ -5,10 +5,12 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,9 +31,7 @@ public class Group {
 
     private String description;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 10)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_groups",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -42,6 +42,7 @@ public class Group {
     private User user;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Generated(GenerationTime.INSERT)
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

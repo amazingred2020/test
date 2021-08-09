@@ -26,11 +26,6 @@ public class GroupServiceImpl implements GroupService{
     private GroupInviteDao groupInviteDao;
 
     @Override
-    public Group saveGroup(Group group) {
-        return groupDao.save(group);
-    }
-
-    @Override
     public void deleteGroup(Long id) {
         groupDao.remove(id);
     }

@@ -28,21 +28,6 @@ public class ProductServiceImpl implements ProductService {
     private AccountDao accountDao;
 
     @Override
-    public Product saveProduct(Product product) {
-        return productDao.save(product);
-    }
-
-    @Override
-    public void deleteProduct(Long id) {
-        productDao.remove(id);
-    }
-
-    @Override
-    public Product findProductById(Long id) {
-        return productDao.findById(id);
-    }
-
-    @Override
     public Product addProduct(AddProductRequest request) {
         Product newProduct = new Product(request.getName(), request.getPrice());
         User seller = userDao.findById(request.getUserId());

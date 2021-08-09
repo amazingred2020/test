@@ -32,4 +32,10 @@ public class CategoryDaoImpl implements  CategoryDao{
     public void remove(Long id) {
         entityManager.remove(findById(id));
     }
+
+    @Override
+    public Category findByName(String name) {
+        return entityManager.createQuery("select c from Category c where c.name = :name", Category.class)
+                .setParameter("name", name).getSingleResult();
+    }
 }

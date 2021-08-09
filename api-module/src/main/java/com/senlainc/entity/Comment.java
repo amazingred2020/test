@@ -42,14 +42,13 @@ public class Comment {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 10)
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> child = new ArrayList<>();
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
-    @Column(name = "created_at")
     @Generated(GenerationTime.INSERT)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)

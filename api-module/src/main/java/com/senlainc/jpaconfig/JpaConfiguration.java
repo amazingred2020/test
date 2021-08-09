@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 @ComponentScan("com.senlainc")
 @EnableTransactionManagement
 public class JpaConfiguration {
+
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean factoryBean = new LocalEntityManagerFactoryBean();
@@ -28,4 +29,5 @@ public class JpaConfiguration {
 
         return transactionManager;
     }
+
 }

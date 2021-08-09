@@ -5,6 +5,8 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,18 +33,20 @@ public class GroupInvite{
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group groupId;
+    private Group group;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     Status status;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Generated(GenerationTime.INSERT)
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public GroupInvite(User userFrom, User userTo){
+    public GroupInvite(User userFrom, User userTo, Group group){
         this.userFrom = userFrom;
         this.userTo = userTo;
+        this.group = group;
     }
 }

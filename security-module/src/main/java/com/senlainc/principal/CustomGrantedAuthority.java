@@ -1,18 +1,18 @@
 package com.senlainc.principal;
 
-import com.senlainc.entity.Grant;
+import com.senlainc.entity.Privilege;
 import org.springframework.security.core.GrantedAuthority;
 
 public class CustomGrantedAuthority implements GrantedAuthority {
 
-    private Grant grant;
+    private Privilege privilege;
 
-    public CustomGrantedAuthority(Grant grant){
-        this.grant = grant;
+    public CustomGrantedAuthority(Privilege privilege){
+        this.privilege = privilege;
     }
 
     @Override
     public String getAuthority() {
-        return grant.getName();
+        return privilege.getName();
     }
 }

@@ -5,6 +5,8 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,6 +36,7 @@ public class Message {
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "created_at")
+    @Generated(GenerationTime.INSERT)
     private LocalDateTime createdAt;
 
     public Message(String content) {

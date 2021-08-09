@@ -39,6 +39,12 @@ public class GroupDaoImpl implements GroupDao{
     }
 
     @Override
+    public Group findByName(String name) {
+        return entityManager.createQuery("select g from Group g where g.name = :name", Group.class)
+                .setParameter("name", name).getSingleResult();
+    }
+
+    @Override
     public void changeGroupAdmin(Long groupId, Long userId) {
         findById(groupId).setUser(findUser(userId));
     }

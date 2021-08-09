@@ -24,11 +24,6 @@ public class PostServiceImpl implements PostService{
     private CategoryDao categoryDao;
 
     @Override
-    public Post savePost(Post post) {
-        return postDao.save(post);
-    }
-
-    @Override
     public Post findPostById(Long id) {
         return postDao.findById(id);
     }
@@ -50,6 +45,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public Post editPost(EditPostRequest request) {
         Post editPost = findPostById(request.getPostId());
+        editPost.setContent(request.getContent());
         if(request.getCategoryId() != null){
             editPost.setCategory(categoryDao.findById(request.getCategoryId()));
         }

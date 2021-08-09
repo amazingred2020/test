@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @Configuration
 @ComponentScan("com.senlainc")
 @EnableWebSecurity
@@ -33,24 +34,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic()
-                .and()
-                .authorizeRequests()
-                    .mvcMatchers(HttpMethod.POST, "/user/new").hasAuthority("create")
-                    .mvcMatchers("/user/role/**").hasAuthority("update")
-                    .mvcMatchers("/user/friend/*").hasAnyRole("create", "delete", "read")
-                    .mvcMatchers(HttpMethod.POST, "/product/add").hasAuthority("create")
-                    .mvcMatchers("/product/**").hasAnyAuthority("create", "update")
-                    .mvcMatchers("/privileges").hasAnyAuthority("create", "delete")
-                    .antMatchers("/post/*", "/post/category/**")
-                        .hasAnyAuthority("create", "update", "delete")
-                    .mvcMatchers(HttpMethod.POST, "/message/*").hasAnyAuthority("create", "read")
-                    .mvcMatchers("/invite/**").hasAnyAuthority("create", "read")
-                    .antMatchers("/group/*", "/group/user/**")
-                        .hasAnyAuthority("create", "update", "delete")
-                    .mvcMatchers("/comment/*").hasAnyAuthority("create", "update", "delete")
-                .anyRequest().authenticated()
-                .and().logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
-                .and().csrf().disable();
+        http.httpBasic();
+        http.authorizeRequests()
+                .antMatchers("/privilege/*", "/privilege", "/role/*", "/role").hasAnyAuthority("create", "delete")
+                .mvcMatchers(HttpMethod.POST,"/user/new").hasAuthority("create")
+                .mvcMatchers("/user/friend/add").hasAnyAuthority("create", "update")
+                .mvcMatchers("/user/friend/delete").hasAuthority("delete")
+                .mvcMatchers("/product", "/product/*").hasAnyAuthority("create", "update", "delete")
+                .mvcMatchers("/post/**").hasAnyAuthority("create","delete", "update")
+                .mvcMatchers(HttpMethod.POST,"/post").hasAuthority("create")
+                .antMatchers("/message", "/message/*").hasAnyAuthority("create", "read")
+                .mvcMatchers("/invite/**").hasAnyAuthority("create", "read")
+                .mvcMatchers("/group/user/*").hasAnyAuthority("create", "delete")
+                .mvcMatchers("/group","/group/*").hasAnyAuthority("delete", "update")
+                .mvcMatchers("/comment/*").hasAnyAuthority("create", "delete", "update")
+        .anyRequest().authenticated()
+        .and()
+        .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
+        .and().csrf().disable();
     }
 }

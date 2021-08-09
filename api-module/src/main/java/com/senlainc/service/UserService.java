@@ -3,6 +3,7 @@ package com.senlainc.service;
 import com.senlainc.dto.user.AddFriendRequest;
 import com.senlainc.dto.user.UserCriteriaRequest;
 import com.senlainc.dto.user.UserRequest;
+import com.senlainc.entity.FriendInvite;
 import com.senlainc.entity.User;
 
 import java.util.List;

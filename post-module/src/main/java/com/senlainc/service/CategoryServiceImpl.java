@@ -14,11 +14,6 @@ public class CategoryServiceImpl implements CategoryService{
     private CategoryDao categoryDao;
 
     @Override
-    public Category saveCategory(Category category) {
-        return categoryDao.save(category);
-    }
-
-    @Override
     public void deleteCategory(Long id) {
         categoryDao.remove(id);
     }
@@ -36,4 +31,5 @@ public class CategoryServiceImpl implements CategoryService{
         }
         categoryDao.save(newCategory);
     }
+
 }

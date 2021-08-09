@@ -1,6 +1,6 @@
 package com.senlainc.service;
 
-import com.senlainc.dao.GrantDao;
+import com.senlainc.dao.PrivilegeDao;
 import com.senlainc.dao.RoleDao;
 import com.senlainc.dto.privileges.NewRoleRequest;
 import com.senlainc.entity.Role;
@@ -16,7 +16,7 @@ public class RoleServiceImpl implements RoleService{
     private RoleDao roleDao;
 
     @Autowired
-    private GrantDao grantDao;
+    private PrivilegeDao privilegeDao;
 
     @Transactional(readOnly = true)
     @Override
@@ -32,8 +32,8 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public void createNewRole(NewRoleRequest request) {
         Role newRole = new Role(request.getRoleName());
-        for(String s: request.getGrants()){
-            newRole.addGrant(grantDao.findGrantByName(s));
+        for(String s: request.getPrivileges()){
+            newRole.addGrant(privilegeDao.findPrivilegeByName(s));
         }
         roleDao.save(newRole);
     }

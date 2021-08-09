@@ -3,9 +3,8 @@ package com.senlainc.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -50,15 +49,14 @@ public class User {
     private Role role;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    //@Fetch(FetchMode.SELECT)
-    //@BatchSize(size = 50)
     @JoinTable(name = "users_friends",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id"))
     private Set<User> friends = new HashSet<>();
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
-    @Column(name = "created_at", updatable = false)
+    @Generated(GenerationTime.INSERT)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)

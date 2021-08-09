@@ -1,5 +1,6 @@
 package com.senlainc.dao;
 
+import com.senlainc.entity.Category;
 import com.senlainc.entity.Post;
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +32,11 @@ public class PostDaoImpl implements PostDao{
     @Override
     public void remove(Long id) {
         entityManager.remove(findById(id));
+    }
+
+    @Override
+    public Post findByContent(String content) {
+        return entityManager.createQuery("select p from Post p where p.content = :content", Post.class)
+                .setParameter("content", content).getSingleResult();
     }
 }

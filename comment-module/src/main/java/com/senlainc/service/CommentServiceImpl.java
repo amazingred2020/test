@@ -6,6 +6,7 @@ import com.senlainc.dao.UserDao;
 import com.senlainc.dto.comment.AddCommentRequest;
 import com.senlainc.dto.comment.EditCommentRequest;
 import com.senlainc.entity.Comment;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

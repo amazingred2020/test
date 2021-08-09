@@ -14,17 +14,18 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
         <module name="security-module" />
-        <module name="message-module" />
+        <module name="test-module" />
         <module name="user-module" />
         <module name="liquibase-module" />
         <module name="auth-module" />
         <module name="post-module" />
         <module name="invite-module" />
+        <module name="group-module" />
+        <module name="common-mvc-module" />
+        <module name="message-module" />
         <module name="product-module" />
         <module name="comment-module" />
         <module name="api-module" />
-        <module name="group-module" />
-        <module name="common-mvc-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -47,6 +48,7 @@
       <module name="post-module" options="-Amapstruct.defaultComponentModel=spring" />
       <module name="product-module" options="-Amapstruct.defaultComponentModel=spring" />
       <module name="security-module" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="test-module" options="-Amapstruct.defaultComponentModel=spring" />
       <module name="user-module" options="-Amapstruct.defaultComponentModel=spring" />
     </option>
   </component>

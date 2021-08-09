@@ -2,7 +2,6 @@ package com.senlainc.dao;
 
 import com.senlainc.entity.FriendInvite;
 
-import javax.xml.ws.spi.http.HttpExchange;
 import java.util.List;
 
 public interface FriendsInviteDao {

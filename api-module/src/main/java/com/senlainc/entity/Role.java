@@ -4,9 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,27 +27,27 @@ public class Role {
     private String name;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @Generated(GenerationTime.INSERT)
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    //@Fetch(FetchMode.SUBSELECT)
-    //@BatchSize(size = 10)
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "roles_grants",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "grant_id"))
-    private Set<Grant> grants = new HashSet<>();
+    private Set<Privilege> privileges = new HashSet<>();
 
     public Role(String name){
         this.name = name;
     }
 
-    public void addGrant(Grant grant){
-        getGrants().add(grant);
+    public void addGrant(Privilege privilege){
+        getPrivileges().add(privilege);
     }
 
-    public void removeGrant(Grant grant){
-        getGrants().remove(grant);
+    public void removeGrant(Privilege privilege){
+        getPrivileges().remove(privilege);
     }
 }
 
