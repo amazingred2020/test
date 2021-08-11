@@ -1,4 +1,4 @@
-package som.senlainc.routes;
+package com.senlainc.routes;
 
 public interface MessageRoutes {
 

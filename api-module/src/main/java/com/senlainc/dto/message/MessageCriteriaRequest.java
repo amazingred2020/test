@@ -1,5 +1,7 @@
 package com.senlainc.dto.message;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.senlainc.jpaconfig.ParseDeserializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +19,7 @@ public class MessageCriteriaRequest {
 
     @NotNull
     @Past
+    @JsonDeserialize(using = ParseDeserializer.class)
     private LocalDateTime dateTime;
     @NotNull
     private Boolean borderDate;

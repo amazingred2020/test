@@ -9,7 +9,7 @@
             <column name="email" value="some@mail.ru"/>
             <column name="gender" value="мужской"/>
             <column name="city" value="city"/>
-            <column name="role_id" value="4"/>
+            <column name="role_id" value="1"/>
         </insert>
         <rollback/>
     </changeSet>

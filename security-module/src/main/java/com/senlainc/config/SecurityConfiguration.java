@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/product", "/product/*").hasAnyAuthority("create", "update", "delete")
                 .mvcMatchers("/post/**").hasAnyAuthority("create","delete", "update")
                 .mvcMatchers(HttpMethod.POST,"/post").hasAuthority("create")
-                .antMatchers("/message", "/message/*").hasAnyAuthority("create", "read")
+                .mvcMatchers("/message", "/message/*").hasAnyAuthority("create", "read")
                 .mvcMatchers("/invite/**").hasAnyAuthority("create", "read")
                 .mvcMatchers("/group/user/*").hasAnyAuthority("create", "delete")
                 .mvcMatchers("/group","/group/*").hasAnyAuthority("delete", "update")
