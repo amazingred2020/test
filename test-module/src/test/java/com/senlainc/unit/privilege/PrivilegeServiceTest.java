@@ -1,4 +1,4 @@
-package com.senlainc.unit.auth;
+package com.senlainc.unit.privilege;
 
 import com.senlainc.entity.Privilege;
 import com.senlainc.jpaconfig.JpaConfiguration;

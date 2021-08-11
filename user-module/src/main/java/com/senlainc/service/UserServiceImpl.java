@@ -6,7 +6,6 @@ import com.senlainc.dao.UserDao;
 import com.senlainc.dto.user.AddFriendRequest;
 import com.senlainc.dto.user.UserCriteriaRequest;
 import com.senlainc.dto.user.UserRequest;
-import com.senlainc.entity.FriendInvite;
 import com.senlainc.entity.Status;
 import com.senlainc.entity.User;
 import com.senlainc.mappers.UserMapper;
@@ -36,11 +35,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserMapper mapper;
 
-	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
 	public User findUserById(Long id) {
-		log.debug("ВЗЯТЫЙ ИЗ БД ПОЛЬЗОВАТЕЛЬ" + userDao.findById(id));
 		return userDao.findById(id);
 	}
 

@@ -18,12 +18,12 @@ public class UserRequest {
     @NotEmpty
     private String lastName;
     @NotEmpty
-    @Max(7)
+    @Size(max = 7)
     private String gender;
     @NotEmpty
     private String username;
     @NotEmpty
-    @Min(10)
+    @Size(min = 10)
     private String password;
     @NotEmpty
     @Email

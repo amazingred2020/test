@@ -1,10 +1,7 @@
 package com.senlainc.controller;
 
+import com.senlainc.dto.user.*;
 import com.senlainc.routes.UserRoutes;
-import com.senlainc.dto.user.AddFriendRequest;
-import com.senlainc.dto.user.DeleteFriendRequest;
-import com.senlainc.dto.user.UserCriteriaRequest;
-import com.senlainc.dto.user.UserRequest;
 import com.senlainc.entity.User;
 import com.senlainc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

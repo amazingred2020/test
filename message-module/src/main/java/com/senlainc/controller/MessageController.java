@@ -23,15 +23,11 @@ public class MessageController {
 
     @PostMapping(MessageRoutes.MESSAGE)
     public Message sendMessage(@RequestBody @Validated SendMessageRequest request){
-        log.info("ПРИШЕДШИЙ РЕКВЕСТ ПОСЫЛКИ СООБЩЕНИЯ:");
-        log.info(request.toString());
         return messageService.sendMessage(request);
     }
 
     @PostMapping(MessageRoutes.FIND_MESSAGE)
     public List<Message> findByCriteria(@RequestBody @Validated MessageCriteriaRequest request){
-        System.out.println("ПРИШЕДШИЙ РЕКВЕСТ ПОИСКА ПО КРИТЕРИЮ:");
-        System.out.println(request);
         return messageService.findByCriteria(request);
     }
 }
