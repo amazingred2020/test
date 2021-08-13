@@ -22,7 +22,7 @@ public class InviteController {
         inviteService.addFriendInvite(fromId, toId);
     }
 
-    @GetMapping(InviteRoutes.FRIEND_INVITES)
+    @GetMapping(InviteRoutes.FRIEND_INVITIES)
     public List<FriendInvite> getFriendInvitesByUserId(@PathVariable Long userId){
         return inviteService.getAllFriendInvite(userId);
     }

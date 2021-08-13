@@ -6,7 +6,7 @@ public interface InviteRoutes {
     String FRIEND = "/friend";
     String GROUP = "/group";
     String FRIEND_INVITE = INVITE + FRIEND + "/{fromId}/{toId}";
-    String FRIEND_INVITES = INVITE + FRIEND + "/{userId}";
+    String FRIEND_INVITIES = INVITE + FRIEND + "/{userId}";
     String GROUP_INVITE = INVITE + GROUP;
     String GROUP_INVITIES = INVITE + GROUP + "/{id}";
 }

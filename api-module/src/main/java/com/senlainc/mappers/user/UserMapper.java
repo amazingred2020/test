@@ -1,4 +1,4 @@
-package com.senlainc.mappers;
+package com.senlainc.mappers.user;
 
 import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.entity.User;

@@ -8,7 +8,7 @@ import com.senlainc.dto.user.GetUserRequest;
 import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.enums.Status;
 import com.senlainc.entity.User;
-import com.senlainc.mappers.UserMapper;
+import com.senlainc.mappers.user.UserMapper;
 import com.senlainc.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

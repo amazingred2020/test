@@ -32,6 +32,7 @@
       <module name="dicontainer-module" target="8" />
       <module name="entitymanager-module" target="8" />
       <module name="item-module" target="8" />
+      <module name="test-module" target="1.8" />
       <module name="trading-module" target="8" />
     </bytecodeTargetLevel>
   </component>

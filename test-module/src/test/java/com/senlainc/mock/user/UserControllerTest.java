@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senlainc.controller.user.UserController;
 import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.entity.User;
-import com.senlainc.mappers.UserMapper;
+import com.senlainc.mappers.user.UserMapper;
 import com.senlainc.mappers.UserMapperImpl;
 import com.senlainc.routes.UserRoutes;
 import com.senlainc.service.UserService;

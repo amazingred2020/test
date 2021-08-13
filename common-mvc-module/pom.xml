@@ -51,11 +51,6 @@
         </dependency>
         <dependency>
             <groupId>com.senlainc</groupId>
-            <artifactId>auth-module</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.senlainc</groupId>
             <artifactId>invite-module</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

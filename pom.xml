@@ -31,7 +31,6 @@
         <module>message-module</module>
         <module>security-module</module>
         <module>invite-module</module>
-        <module>test-module</module>
     </modules>
 
     <dependencies>

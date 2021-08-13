@@ -1,5 +1,6 @@
 package com.senlainc.config;
 
+import com.senlainc.routes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 @Configuration
 @ComponentScan("com.senlainc")
@@ -36,18 +36,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
         http.authorizeRequests()
-                .antMatchers("/privilege/*", "/privilege", "/role/*", "/role").hasAnyAuthority("create", "delete")
-                .mvcMatchers(HttpMethod.POST,"/user/new").hasAuthority("create")
-                .mvcMatchers("/user/friend/add").hasAnyAuthority("create", "update")
-                .mvcMatchers("/user/friend/delete").hasAuthority("delete")
-                .mvcMatchers("/product", "/product/*").hasAnyAuthority("create", "update", "delete")
-                .mvcMatchers("/post/**").hasAnyAuthority("create","delete", "update")
-                .mvcMatchers(HttpMethod.POST,"/post").hasAuthority("create")
-                .mvcMatchers("/message", "/message/*").hasAnyAuthority("create", "read")
-                .mvcMatchers("/invite/**").hasAnyAuthority("create", "read")
+                .antMatchers(PrivilegeRoutes.PRIVILEGE + "/*",PrivilegeRoutes.PRIVILEGE,
+                        PrivilegeRoutes.ROLE + "/*", PrivilegeRoutes.ROLE)
+                    .hasAnyAuthority("create", "delete")
+                .mvcMatchers(HttpMethod.POST, UserRoutes.USER).hasAuthority("create")
+                .mvcMatchers(UserRoutes.USER_FRIEND).hasAnyAuthority("create", "update","delete")
+                .mvcMatchers(ProductRoutes.PRODUCT + "/**")
+                    .hasAnyAuthority("create", "update", "delete")
+                .mvcMatchers(PostRoutes.POST + "/**").hasAnyAuthority("create","delete", "update")
+                .mvcMatchers(HttpMethod.POST, PostRoutes.POST).hasAuthority("create")
+                .mvcMatchers(MessageRoutes.MESSAGE, MessageRoutes.MESSAGE_BY_PARAMS)
+                    .hasAnyAuthority("create", "read")
+                .mvcMatchers(InviteRoutes.INVITE + "/**").hasAnyAuthority("create", "read")
                 .mvcMatchers("/group/user/*").hasAnyAuthority("create", "delete")
-                .mvcMatchers("/group","/group/*").hasAnyAuthority("delete", "update")
-                .mvcMatchers("/comment/*").hasAnyAuthority("create", "delete", "update")
+                .mvcMatchers(GroupRoutes.GROUP, GroupRoutes.GROUP + "/**")
+                    .hasAnyAuthority("delete", "update")
+                .mvcMatchers(CommentRoutes.COMMENT + "/*")
+                    .hasAnyAuthority("create", "delete", "update")
         .anyRequest().authenticated()
         .and()
         .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
