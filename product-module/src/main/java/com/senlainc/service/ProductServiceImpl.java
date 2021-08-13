@@ -3,10 +3,11 @@ package com.senlainc.service;
 import com.senlainc.dao.AccountDao;
 import com.senlainc.dao.ProductDao;
 import com.senlainc.dao.UserDao;
-import com.senlainc.dto.product.AddProductRequest;
+import com.senlainc.dto.product.SaveProductRequest;
 import com.senlainc.entity.Account;
 import com.senlainc.entity.Product;
 import com.senlainc.entity.User;
+import com.senlainc.mappers.product.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,15 +28,14 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private AccountDao accountDao;
 
+    @Autowired
+    private ProductMapper productMapper;
+
     @Override
-    public Product addProduct(AddProductRequest request) {
-        Product newProduct = new Product(request.getName(), request.getPrice());
+    public Product addProduct(SaveProductRequest request) {
+        Product newProduct = productMapper.fromSaveProductRequestToProduct(request);
         User seller = userDao.findById(request.getUserId());
         checkUserAccount(seller);
-        newProduct.setUser(seller);
-        if(request.getDescription() != null){
-            newProduct.setDescription(request.getDescription());
-        }
         return productDao.save(newProduct);
     }
 

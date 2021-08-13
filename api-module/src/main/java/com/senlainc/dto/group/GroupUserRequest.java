@@ -4,20 +4,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class GroupUserRequest {
 
-    @NotNull
-    private Long groupId;
+    @Min(1)
+    private long groupId;
 
-    @NotNull
-    private Long userId;
+    @Min(1)
+    private long userId;
 
-    private Long fromId;
+    private long fromId;
 
     private String buttonName;
 }

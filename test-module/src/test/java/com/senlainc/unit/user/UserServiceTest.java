@@ -1,8 +1,8 @@
 package com.senlainc.unit.user;
 
 import com.senlainc.dto.user.AddFriendRequest;
-import com.senlainc.dto.user.UserCriteriaRequest;
-import com.senlainc.dto.user.UserRequest;
+import com.senlainc.dto.user.GetUserRequest;
+import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.entity.User;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.UserService;
@@ -34,7 +34,7 @@ public class UserServiceTest {
 
     @Test
     public void testSaveUser(){
-        UserRequest request = new UserRequest();
+        SaveUserRequest request = new SaveUserRequest();
         request.setFirstName("name");
         request.setLastName("surname");
         request.setUsername("someNickname");
@@ -80,7 +80,7 @@ public class UserServiceTest {
 
     @Test
     public void testFindUsersByCriteria(){
-        UserCriteriaRequest request = new UserCriteriaRequest();
+        GetUserRequest request = new GetUserRequest();
         request.setName("Иван");
         request.setSurname("Cидоров");
         List<User> users = userService.findUsersByCriteria(request);

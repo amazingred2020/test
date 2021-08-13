@@ -4,7 +4,6 @@ public interface PostRoutes {
 
     String POST = "/post";
     String POST_CATEGORY = POST + "/category";
-    String DELETE_POST = POST + "/{postId}";
-    String UPDATE_POST = POST + "/edit";
-    String DELETE_POST_CATEGORY = POST_CATEGORY + "/{id}";
+    String POST_BY_ID = POST + "/{postId}";
+    String POST_CATEGORY_BY_ID = POST_CATEGORY + "/{id}";
 }

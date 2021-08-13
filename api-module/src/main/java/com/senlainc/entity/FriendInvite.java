@@ -1,6 +1,7 @@
 package com.senlainc.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.enums.Status;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

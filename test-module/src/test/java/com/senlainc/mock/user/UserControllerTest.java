@@ -1,8 +1,8 @@
 package com.senlainc.mock.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.senlainc.controller.UserController;
-import com.senlainc.dto.user.UserRequest;
+import com.senlainc.controller.user.UserController;
+import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.entity.User;
 import com.senlainc.mappers.UserMapper;
 import com.senlainc.mappers.UserMapperImpl;
@@ -41,7 +41,7 @@ public class UserControllerTest {
 
     @Test
     public void testAddUser() throws Exception {
-        UserRequest request = new UserRequest("name","surname","gender",
+        SaveUserRequest request = new SaveUserRequest("name","surname","gender",
                 "nickname", "password", "email@mail.ru","city",1l);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -55,12 +55,12 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(userService, atLeastOnce()).saveUser(Matchers.any(UserRequest.class));
+        verify(userService, atLeastOnce()).saveUser(Matchers.any(SaveUserRequest.class));
     }
 
     @Test
     public void testFindUserById() throws Exception {
-        UserRequest request = new UserRequest("name","surname","gender",
+        SaveUserRequest request = new SaveUserRequest("name","surname","gender",
                 "nickname", "password", "email@mail.ru","city",1l);
 
         UserMapper userMapper = new UserMapperImpl();

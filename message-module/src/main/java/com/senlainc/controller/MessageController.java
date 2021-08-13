@@ -1,7 +1,7 @@
 package com.senlainc.controller;
 
-import com.senlainc.dto.message.MessageCriteriaRequest;
-import com.senlainc.dto.message.SendMessageRequest;
+import com.senlainc.dto.message.GetMessageRequest;
+import com.senlainc.dto.message.SaveMessageRequest;
 import com.senlainc.entity.Message;
 import com.senlainc.routes.MessageRoutes;
 import com.senlainc.service.MessageService;
@@ -22,12 +22,12 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping(MessageRoutes.MESSAGE)
-    public Message sendMessage(@RequestBody @Validated SendMessageRequest request){
+    public Message sendMessage(@RequestBody @Validated SaveMessageRequest request){
         return messageService.sendMessage(request);
     }
 
-    @PostMapping(MessageRoutes.FIND_MESSAGE)
-    public List<Message> findByCriteria(@RequestBody @Validated MessageCriteriaRequest request){
+    @PostMapping(MessageRoutes.MESSAGE_BY_PARAMS)
+    public List<Message> findByCriteria(@RequestBody @Validated GetMessageRequest request){
         return messageService.findByCriteria(request);
     }
 }

@@ -1,6 +1,6 @@
 package com.senlainc.controller;
 
-import com.senlainc.dto.invite.AddGroupInviteRequest;
+import com.senlainc.dto.invite.SaveGroupInviteRequest;
 import com.senlainc.entity.FriendInvite;
 import com.senlainc.entity.GroupInvite;
 import com.senlainc.routes.InviteRoutes;
@@ -17,22 +17,22 @@ public class InviteController {
     @Autowired
     private InviteService inviteService;
 
-    @GetMapping(InviteRoutes.ADD_FRIEND_INVITE)
+    @GetMapping(InviteRoutes.FRIEND_INVITE)
     public void addFriendInvite(@PathVariable Long fromId, @PathVariable Long toId){
         inviteService.addFriendInvite(fromId, toId);
     }
 
-    @GetMapping(InviteRoutes.ALL_FRIEND_INVITES)
+    @GetMapping(InviteRoutes.FRIEND_INVITES)
     public List<FriendInvite> getFriendInvitesByUserId(@PathVariable Long userId){
         return inviteService.getAllFriendInvite(userId);
     }
 
-    @PostMapping(InviteRoutes.ADD_GROUP_INVITE)
-    public void addGroupInvite(@RequestBody @Validated AddGroupInviteRequest request){
+    @PostMapping(InviteRoutes.GROUP_INVITE)
+    public void addGroupInvite(@RequestBody @Validated SaveGroupInviteRequest request){
         inviteService.addGroupInvite(request);
     }
 
-    @GetMapping(InviteRoutes.ALL_GROUP_INVITIES)
+    @GetMapping(InviteRoutes.GROUP_INVITIES)
     public List<GroupInvite> getGroupInvitesByUserId(@PathVariable("id") Long userId){
         return inviteService.getAllGroupInvite(userId);
     }

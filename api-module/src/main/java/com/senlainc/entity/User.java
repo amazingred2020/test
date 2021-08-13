@@ -1,6 +1,7 @@
 package com.senlainc.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.senlainc.enums.Gender;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.*;
 import org.hibernate.annotations.Generated;
@@ -31,7 +32,7 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
-    private String gender;
+    private Gender gender;
 
     @Column(nullable = false)
     private String username;
@@ -63,16 +64,6 @@ public class User {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    public User(String firstName, String lastName, String gender, String city, String email, String username, String password){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.city = city;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-    }
 
     public void addFriend(User user){
         friends.add(user);

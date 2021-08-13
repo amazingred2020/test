@@ -3,14 +3,14 @@ package com.senlainc.dto.user;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
 
 @Getter
 @NoArgsConstructor
 public class DeleteFriendRequest {
 
-    @NotNull
-    private Long userFrom;
-    @NotNull
-    private Long userTo;
+    @Min(1)
+    private long userFrom;
+    @Min(1)
+    private long userTo;
 }

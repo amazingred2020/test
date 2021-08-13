@@ -1,8 +1,8 @@
 package com.senlainc.service;
 
 import com.senlainc.dto.user.AddFriendRequest;
-import com.senlainc.dto.user.UserCriteriaRequest;
-import com.senlainc.dto.user.UserRequest;
+import com.senlainc.dto.user.GetUserRequest;
+import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.entity.User;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
 public interface UserService {
 
     User findUserById(Long id);
-    User saveUser(UserRequest request);
+    User saveUser(SaveUserRequest request);
     void addFriend(AddFriendRequest addFriendRequest);
     void deleteFriend(Long userId, Long friendId);
     void changeRole(Long userId, Long roleId);
-    List<User> findUsersByCriteria(UserCriteriaRequest request);
+    List<User> findUsersByCriteria(GetUserRequest request);
 
 }

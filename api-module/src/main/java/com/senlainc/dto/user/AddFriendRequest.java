@@ -1,11 +1,10 @@
 package com.senlainc.dto.user;
 
-import com.senlainc.entity.Status;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
@@ -13,11 +12,11 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class AddFriendRequest {
 
-    @NotNull
-    private Long userFrom;
+    @Min(1)
+    private long userFrom;
 
-    @NotNull
-    private Long userTo;
+    @Min(1)
+    private long userTo;
 
     @NotEmpty
     private String buttonName;

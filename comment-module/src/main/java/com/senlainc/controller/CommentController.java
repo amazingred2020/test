@@ -1,7 +1,7 @@
 package com.senlainc.controller;
 
-import com.senlainc.dto.comment.AddCommentRequest;
-import com.senlainc.dto.comment.EditCommentRequest;
+import com.senlainc.dto.comment.SaveCommentRequest;
+import com.senlainc.dto.comment.UpdateCommentRequest;
 import com.senlainc.entity.Comment;
 import com.senlainc.routes.CommentRoutes;
 import com.senlainc.service.CommentService;
@@ -16,16 +16,16 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping(CommentRoutes.COMMENT)
-    public Comment addComment(@RequestBody @Validated AddCommentRequest request){
+    public Comment addComment(@RequestBody @Validated SaveCommentRequest request){
         return commentService.addComment(request);
     }
 
-    @PutMapping(CommentRoutes.UPDATE_COMMENT)
-    public Comment editComment(@RequestBody @Validated EditCommentRequest request){
+    @PutMapping(CommentRoutes.COMMENT)
+    public Comment editComment(@RequestBody @Validated UpdateCommentRequest request){
         return commentService.editComment(request);
     }
 
-    @DeleteMapping(CommentRoutes.DELETE_COMMENT)
+    @DeleteMapping(CommentRoutes.COMMENT_BY_ID)
     public void deleteComment(@PathVariable("id") Long commentId){
         commentService.deleteComment(commentId);
     }

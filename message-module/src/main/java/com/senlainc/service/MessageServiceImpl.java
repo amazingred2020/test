@@ -2,10 +2,10 @@ package com.senlainc.service;
 
 import com.senlainc.dao.MessageDao;
 import com.senlainc.dao.UserDao;
-import com.senlainc.dto.message.MessageCriteriaRequest;
-import com.senlainc.dto.message.SendMessageRequest;
+import com.senlainc.dto.message.GetMessageRequest;
+import com.senlainc.dto.message.SaveMessageRequest;
 import com.senlainc.entity.Message;
-import com.senlainc.service.MessageService;
+import com.senlainc.mappers.message.MessageMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,16 +24,17 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private MessageMapper messageMapper;
+
     @Override
-    public Message sendMessage(SendMessageRequest request) {
-        Message newMessage = new Message(request.getContent());
-        newMessage.setUserFrom(userDao.findById(request.getUserFrom()));
-        newMessage.setUserTo(userDao.findById(request.getUserTo()));
+    public Message sendMessage(SaveMessageRequest request) {
+        Message newMessage = messageMapper.fromSaveMessageRequestToMessage(request);
         return messageDao.save(newMessage);
     }
 
     @Override
-    public List<Message> findByCriteria(MessageCriteriaRequest request) {
+    public List<Message> findByCriteria(GetMessageRequest request) {
         return messageDao.findMessagesByCriteries(request.getDateTime(), request.getBorderDate());
     }
 }

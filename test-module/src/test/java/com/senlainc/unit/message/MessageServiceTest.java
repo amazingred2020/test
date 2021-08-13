@@ -1,7 +1,6 @@
 package com.senlainc.unit.message;
 
-import com.senlainc.dto.message.MessageCriteriaRequest;
-import com.senlainc.dto.message.SendMessageRequest;
+import com.senlainc.dto.message.GetMessageRequest;
 import com.senlainc.entity.Message;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.MessageService;
@@ -27,16 +26,16 @@ public class MessageServiceTest {
 
     @Test
     public void testSendMessage(){
-        SendMessageRequest request = new SendMessageRequest();
-        request.setContent("text message");
-        request.setUserFrom(1l);
-        request.setUserTo(2l);
-        messageService.sendMessage(request);
+        //SendMessageRequest request = new SendMessageRequest();
+        //request.setContent("text message");
+        //request.setUserFrom(1l);
+        //request.setUserTo(2l);
+        //messageService.sendMessage(request);
     }
 
     @Test
     public void testFindByCriteria(){
-        MessageCriteriaRequest request = new MessageCriteriaRequest();
+        GetMessageRequest request = new GetMessageRequest();
         request.setDateTime(LocalDateTime.of(2018, 9, 19, 14, 5));
         request.setBorderDate(false);
         List<Message> messages = messageService.findByCriteria(request);

@@ -17,7 +17,6 @@
         <module name="test-module" />
         <module name="user-module" />
         <module name="liquibase-module" />
-        <module name="auth-module" />
         <module name="post-module" />
         <module name="invite-module" />
         <module name="group-module" />
@@ -29,6 +28,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="auth-module" target="1.8" />
       <module name="dicontainer-module" target="8" />
       <module name="entitymanager-module" target="8" />
       <module name="item-module" target="8" />

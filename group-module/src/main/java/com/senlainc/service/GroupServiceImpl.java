@@ -3,11 +3,11 @@ package com.senlainc.service;
 import com.senlainc.dao.GroupDao;
 import com.senlainc.dao.GroupInviteDao;
 import com.senlainc.dao.UserDao;
+import com.senlainc.dto.group.SaveGroupRequest;
 import com.senlainc.dto.group.GroupUserRequest;
-import com.senlainc.dto.group.NewGroupRequest;
 import com.senlainc.entity.Group;
-import com.senlainc.entity.GroupInvite;
-import com.senlainc.entity.Status;
+import com.senlainc.enums.Status;
+import com.senlainc.mappers.group.GroupMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +24,9 @@ public class GroupServiceImpl implements GroupService{
 
     @Autowired
     private GroupInviteDao groupInviteDao;
+
+    @Autowired
+    private GroupMapper groupMapper;
 
     @Override
     public void deleteGroup(Long id) {
@@ -46,12 +49,8 @@ public class GroupServiceImpl implements GroupService{
     }
 
     @Override
-    public void addGroup(NewGroupRequest request) {
-        Group newGroup = new Group(request.getName());
-        newGroup.setUser(userDao.findById(request.getUserId()));
-        if(request.getDescription() != null){
-            newGroup.setDescription(request.getDescription());
-        }
+    public void addGroup(SaveGroupRequest request) {
+        Group newGroup = groupMapper.fromGroupRequestToGroup(request);
         groupDao.save(newGroup);
     }
 
