@@ -86,13 +86,9 @@ public class UserDaoImpl implements UserDao {
     public Optional<List<User>> getUsersByTextSearch(String firstName, String lastName, String city) {
         Query users = entityManager.createNativeQuery("select *\n" +
                 "from users u\n" +
-                "where setweight(to_tsvector('russian', u.first_name), 'A') ||\n" +
-                "setweight(to_tsvector('russian', u.last_name), 'B') ||\n" +
-                "setweight(to_tsvector('russian', u.city), 'C') @@ " +
+                "where make_tsvector(u.first_name, u.last_name, u.city) @@ " +
                 "to_tsquery('" + firstName + " | " + lastName + " | " + city + "')\n" +
-                "order by ts_rank(setweight(to_tsvector('russian', u.first_name), 'A') ||\n" +
-                "setweight(to_tsvector('russian', u.last_name), 'B') ||\n" +
-                "setweight(to_tsvector('russian', u.city), 'C'), " +
+                "order by ts_rank(make_tsvector(u.first_name, u.last_name, u.city), " +
                 "to_tsquery('" + firstName + " | " + lastName + " | " + city + "'))", User.class);
         return Optional.ofNullable(users.getResultList());
     }

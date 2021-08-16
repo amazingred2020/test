@@ -40,7 +40,8 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public Comment editComment(UpdateCommentRequest request) {
-        Comment editComment = сommentMapper.fromUpdateCommentRequestToComment(request);
+        Comment editComment = commentDao.findById(request.getCommentId());
+        editComment.setContent(request.getContent());
         return commentDao.save(editComment);
     }
 }

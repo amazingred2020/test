@@ -12,7 +12,8 @@
                 <constraints foreignKeyName="fk_comments_users2" referencedColumnNames="id" referencedTableName="users"/>
             </column>
             <column name="post_id" type="BIGINT">
-                <constraints foreignKeyName="fk_comments_posts1" referencedColumnNames="id" referencedTableName="posts"/>
+                <constraints foreignKeyName="fk_comments_posts1" referencedColumnNames="id" referencedTableName="posts"
+                             deleteCascade="true"/>
             </column>
             <column name="parent_id" type="BIGINT">
                 <constraints foreignKeyName="fk_comments_comments1" referencedColumnNames="id" referencedTableName="comments"/>
