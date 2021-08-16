@@ -9,5 +9,5 @@ import java.util.List;
 public interface MessageService {
 
     Message sendMessage(SaveMessageRequest request);
-    List<Message> findByCriteria(GetMessageRequest request);
+    List<Message> findByParameters(GetMessageRequest request);
 }

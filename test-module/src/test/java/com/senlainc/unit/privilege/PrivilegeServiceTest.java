@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JpaConfiguration.class})
+@ContextConfiguration(classes = JpaConfiguration.class)
 public class PrivilegeServiceTest {
 
     @Autowired

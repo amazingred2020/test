@@ -1,12 +1,12 @@
 package com.senlainc.unit.comment;
 
+import com.senlainc.TestConfiguration;
 import com.senlainc.dao.CommentDao;
-import com.senlainc.dto.comment.AddCommentRequest;
+import com.senlainc.dto.comment.SaveCommentRequest;
 import com.senlainc.dto.comment.UpdateCommentRequest;
 import com.senlainc.entity.Comment;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.CommentService;
-import com.senlainc.testconfig.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,13 +36,13 @@ public class CommentServiceTest{
 
     @Test
     public void testAddComment(){
-       // AddCommentRequest request = new AddCommentRequest();
-        //request.setContent("comment text");
-        //request.setPostId(1l);
-        //request.setUserId(1l);
-        //Comment comment = commentService.addComment(request);
+        SaveCommentRequest request = new SaveCommentRequest();
+        request.setContent("comment text");
+        request.setPostId(1l);
+        request.setUserId(1l);
+        Comment comment = commentService.addComment(request);
 
-        //Assert.assertNotEquals(Long.valueOf(2), comment.getPost().getId());
+        Assert.assertNotEquals(Long.valueOf(2), comment.getPost().getId());
     }
 
     @Test

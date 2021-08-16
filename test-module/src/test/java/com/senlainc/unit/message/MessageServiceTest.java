@@ -4,7 +4,7 @@ import com.senlainc.dto.message.GetMessageRequest;
 import com.senlainc.entity.Message;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.MessageService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,11 +34,11 @@ public class MessageServiceTest {
     }
 
     @Test
-    public void testFindByCriteria(){
+    public void testFindByParameters(){
         GetMessageRequest request = new GetMessageRequest();
         request.setDateTime(LocalDateTime.of(2018, 9, 19, 14, 5));
         request.setBorderDate(false);
-        List<Message> messages = messageService.findByCriteria(request);
+        List<Message> messages = messageService.findByParameters(request);
 
         Assert.assertFalse(messages.isEmpty());
     }

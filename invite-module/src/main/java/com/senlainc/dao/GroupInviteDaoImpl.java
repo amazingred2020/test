@@ -1,12 +1,12 @@
 package com.senlainc.dao;
 
-import com.senlainc.entity.FriendInvite;
 import com.senlainc.entity.GroupInvite;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class GroupInviteDaoImpl implements GroupInviteDao{
@@ -37,9 +37,10 @@ public class GroupInviteDaoImpl implements GroupInviteDao{
     }
 
     @Override
-    public GroupInvite findInviteByUsersId(Long fromId, Long userId) {
+    public Optional<GroupInvite> findInviteByUsersId(Long fromId, Long userId) {
         return entityManager.createQuery("select gi from GroupInvite gi " +
                 "where gi.userFrom.id = :fromId and gi.userTo.id = :toId", GroupInvite.class)
-                .setParameter("fromId", fromId).setParameter("toId", userId).setMaxResults(1).getSingleResult();
+                .setParameter("fromId", fromId).setParameter("toId", userId)
+                .setMaxResults(1).getResultList().stream().findFirst();
     }
 }

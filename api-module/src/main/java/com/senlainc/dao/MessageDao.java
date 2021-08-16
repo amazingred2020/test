@@ -10,5 +10,5 @@ public interface MessageDao {
     Message save(Message message);
     Message findById(Long id);
     void remove(Long id);
-    List<Message> findMessagesByCriteries(LocalDateTime dateTime, boolean borderDate);
+    List<Message> findMessagesByParameters(LocalDateTime dateTime, boolean borderDate);
 }

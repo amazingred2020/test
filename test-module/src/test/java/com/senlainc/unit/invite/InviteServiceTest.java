@@ -6,7 +6,7 @@ import com.senlainc.entity.FriendInvite;
 import com.senlainc.entity.GroupInvite;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.InviteService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +35,7 @@ public class InviteServiceTest {
     @Test(expected = NoResultException.class)
     public void testAddFriendInvite(){
         inviteService.addFriendInvite(1l, 2l);
-        FriendInvite friendInvite = friendsInviteDao.findInvitesByUsersId(1l, 2l);
+        FriendInvite friendInvite = friendsInviteDao.findInvitesByUsersId(1l, 2l).get();
 
         Assert.assertNotNull(friendInvite);
     }

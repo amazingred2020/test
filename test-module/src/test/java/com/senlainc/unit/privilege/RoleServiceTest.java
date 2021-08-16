@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JpaConfiguration.class})
+@ContextConfiguration(classes = JpaConfiguration.class)
 public class RoleServiceTest {
 
     @Autowired

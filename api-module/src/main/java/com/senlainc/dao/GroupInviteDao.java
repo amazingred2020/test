@@ -3,6 +3,7 @@ package com.senlainc.dao;
 import com.senlainc.entity.GroupInvite;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GroupInviteDao {
 
@@ -10,5 +11,5 @@ public interface GroupInviteDao {
     void remove(Long id);
     GroupInvite findById(Long id);
     List<GroupInvite> findInvitesByUserId(Long userId);
-    GroupInvite findInviteByUsersId(Long fromId, Long userId);
+    Optional<GroupInvite> findInviteByUsersId(Long fromId, Long userId);
 }

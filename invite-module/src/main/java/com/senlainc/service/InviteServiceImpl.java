@@ -40,7 +40,7 @@ public class InviteServiceImpl implements InviteService{
 
     @Override
     public void addFriendInvite(Long userFrom, Long userTo) {
-        if(friendsInviteDao.findInvitesByUsersId(userFrom, userTo) == null){
+        if(!friendsInviteDao.findInvitesByUsersId(userFrom, userTo).isPresent()){
             FriendInvite friendInvite = friendInviteMapper.fromIdsToFriendInvite(userFrom, userTo);
             friendInvite.setStatus(Status.WAIT);
             friendsInviteDao.save(friendInvite);
@@ -54,7 +54,7 @@ public class InviteServiceImpl implements InviteService{
 
     @Override
     public void addGroupInvite(SaveGroupInviteRequest request) {
-        if(groupInviteDao.findInviteByUsersId(request.getUserFrom(), request.getUserTo()) == null) {
+        if(!groupInviteDao.findInviteByUsersId(request.getUserFrom(), request.getUserTo()).isPresent()) {
             GroupInvite groupInvite = groupInviteMapper.fromSaveGroupInviteRequestToGroup(request);
             groupInviteDao.save(groupInvite);
         }

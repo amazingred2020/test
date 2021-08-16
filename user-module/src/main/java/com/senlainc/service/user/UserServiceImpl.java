@@ -6,6 +6,7 @@ import com.senlainc.dao.UserDao;
 import com.senlainc.dto.user.AddFriendRequest;
 import com.senlainc.dto.user.GetUserRequest;
 import com.senlainc.dto.user.SaveUserRequest;
+import com.senlainc.dto.user.UserTextSearchRequest;
 import com.senlainc.enums.Status;
 import com.senlainc.entity.User;
 import com.senlainc.mappers.user.UserMapper;
@@ -57,9 +58,9 @@ public class UserServiceImpl implements UserService {
 	public void addFriend(AddFriendRequest request) {
 		if(request.getButtonName().equals("confirm")){
 			userDao.addFriend(request.getUserFrom(), request.getUserTo());
-			friendsInviteDao.findInvitesByUsersId(request.getUserFrom(), request.getUserTo()).setStatus(Status.CONFIRM);
+			friendsInviteDao.findInvitesByUsersId(request.getUserFrom(), request.getUserTo()).get().setStatus(Status.CONFIRM);
 		} else {
-			friendsInviteDao.findInvitesByUsersId(request.getUserFrom(), request.getUserTo()).setStatus(Status.REJECT);
+			friendsInviteDao.findInvitesByUsersId(request.getUserFrom(), request.getUserTo()).get().setStatus(Status.REJECT);
 		}
 	}
 
@@ -74,8 +75,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findUsersByCriteria(GetUserRequest request) {
-		return userDao.findByCriteries(request.getName(), request.getSurname());
+	public List<User> findUsersByParameters(GetUserRequest request) {
+		return userDao.findByParameters(request.getName(), request.getSurname());
+	}
+
+	@Override
+	public List<User> getUsersByTextSearch(UserTextSearchRequest request) {
+		return userDao.getUsersByTextSearch(request.getFirstName(), request.getLastName(), request.getCity()).get();
 	}
 
 }

@@ -27,7 +27,7 @@ public class MessageController {
     }
 
     @PostMapping(MessageRoutes.MESSAGE_BY_PARAMS)
-    public List<Message> findByCriteria(@RequestBody @Validated GetMessageRequest request){
-        return messageService.findByCriteria(request);
+    public List<Message> findByParameters(@RequestBody @Validated GetMessageRequest request){
+        return messageService.findByParameters(request);
     }
 }

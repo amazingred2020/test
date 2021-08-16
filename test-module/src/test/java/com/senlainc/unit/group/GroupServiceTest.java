@@ -2,12 +2,10 @@ package com.senlainc.unit.group;
 
 import com.senlainc.dao.GroupDao;
 import com.senlainc.dto.group.GroupUserRequest;
-import com.senlainc.dto.group.NewGroupRequest;
-import com.senlainc.entity.Group;
 import com.senlainc.entity.User;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.GroupService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

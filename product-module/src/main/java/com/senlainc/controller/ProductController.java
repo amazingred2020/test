@@ -19,7 +19,7 @@ public class ProductController {
         return productService.addProduct(request);
     }
 
-    @GetMapping(ProductRoutes.PRODUCT)
+    @GetMapping(ProductRoutes.BUY_PRODUCT)
     public void buyProduct(@PathVariable Long productId, @PathVariable Long userId){
         productService.buyProduct(productId, userId);
     }

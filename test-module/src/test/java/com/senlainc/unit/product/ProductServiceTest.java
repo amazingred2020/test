@@ -4,7 +4,7 @@ import com.senlainc.dao.ProductDao;
 import com.senlainc.entity.Product;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.ProductService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 @Transactional

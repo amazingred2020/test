@@ -4,7 +4,7 @@ import com.senlainc.dao.CategoryDao;
 import com.senlainc.entity.Category;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.CategoryService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

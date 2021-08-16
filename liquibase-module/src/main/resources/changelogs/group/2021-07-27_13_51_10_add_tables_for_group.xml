@@ -1,0 +1,54 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="liquibase-script" id="2021-07-27 14:10:10">
+        <createTable tableName="groups">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(150)"/>
+            <column name="admin_id" type="BIGINT"/>
+            <column name="created_at" type="datetime" defaultValue="now()"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase-script" id="2021-07-27 14:10:20">
+        <sql splitStatements="false">
+            CREATE TRIGGER update_date_groups before update ON groups
+            FOR EACH ROW
+            EXECUTE PROCEDURE update_date();
+        </sql>
+    </changeSet>
+    <changeSet author="liquibase-script" id="2021-07-27 14:10:30">
+        <createTable tableName="users_groups">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="fk_users_groups_has_user1" referencedColumnNames="id" referencedTableName="users"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="fk_users_groups_has_groups1" referencedColumnNames="id" referencedTableName="groups"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase-script" id="2021-07-27 14:10:40">
+        <createTable tableName="group_invite">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_from_id" type="BIGINT">
+                <constraints foreignKeyName="fk_group_invite_users1" referencedColumnNames="id" referencedTableName="users"/>
+            </column>
+            <column name="user_to_id" type="BIGINT">
+                <constraints foreignKeyName="fk_group_invite_users2" referencedColumnNames="id" referencedTableName="users"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints foreignKeyName="fk_group_invite_groups1" referencedColumnNames="id" referencedTableName="groups"/>
+            </column>
+            <column name="status" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime" defaultValue="now()"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

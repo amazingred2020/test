@@ -4,9 +4,10 @@ import com.senlainc.dto.user.AddFriendRequest;
 import com.senlainc.dto.user.GetUserRequest;
 import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.entity.User;
+import com.senlainc.enums.Gender;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.UserService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,7 @@ public class UserServiceTest {
         request.setLastName("surname");
         request.setUsername("someNickname");
         request.setPassword("somePassword");
-        request.setGender("gender");
+        request.setGender(Gender.MAN);
         request.setCity("city");
         request.setEmail("mailonetwothree@mail.ru");
         request.setRoleId(1l);
@@ -79,11 +80,11 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindUsersByCriteria(){
+    public void testFindUsersByParameters(){
         GetUserRequest request = new GetUserRequest();
-        request.setName("Иван");
-        request.setSurname("Cидоров");
-        List<User> users = userService.findUsersByCriteria(request);
+        request.setName("Сидор");
+        request.setSurname("Петров");
+        List<User> users = userService.findUsersByParameters(request);
 
         Assert.assertTrue(users.size() > 0);
     }

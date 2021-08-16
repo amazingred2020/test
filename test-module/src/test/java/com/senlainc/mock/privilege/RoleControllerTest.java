@@ -2,7 +2,6 @@ package com.senlainc.mock.privilege;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senlainc.controller.privilege.RoleController;
-import com.senlainc.dto.privileges.NewRoleRequest;
 import com.senlainc.routes.PrivilegeRoutes;
 import com.senlainc.service.RoleService;
 import org.junit.Before;

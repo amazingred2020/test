@@ -5,7 +5,7 @@ import com.senlainc.dto.post.UpdatePostRequest;
 import com.senlainc.entity.Post;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.PostService;
-import com.senlainc.testconfig.TestConfiguration;
+import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -33,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping(UserRoutes.USER_BY_PARAMS)
-    public List<User> findUsersByCriteria(@RequestBody @Validated GetUserRequest request){
-        return userService.findUsersByCriteria(request);
+    public List<User> findUsersByParameters(@RequestBody @Validated GetUserRequest request){
+        return userService.findUsersByParameters(request);
     }
 
     @GetMapping(UserRoutes.ALL_FRIENDS)
@@ -52,13 +52,9 @@ public class UserController {
         userService.deleteFriend(deleteEvent.getUserFrom(), deleteEvent.getUserTo());
     }
 
-
-    /*@GetMapping("/user/test")
-    public void test(Authentication authentication){
-        authentication.getPrincipal();
-        for(GrantedAuthority authority: authentication.getAuthorities()){
-            System.out.println(authority.getAuthority());
-        }
-    }*/
+    @PostMapping(UserRoutes.USER_TEXT_SEARCH)
+    public List<User> getUsersByTextSearch(@RequestBody @Validated UserTextSearchRequest request){
+        return userService.getUsersByTextSearch(request);
+    }
 
 }

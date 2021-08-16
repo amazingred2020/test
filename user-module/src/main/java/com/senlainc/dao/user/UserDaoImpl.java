@@ -8,11 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
+
 @Log4j2
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -58,7 +62,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByCriteries(String name, String surname) {
+    public List<User> findByParameters(String name, String surname) {
         String temp1 = name;
         String temp2 = surname;
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -76,6 +80,21 @@ public class UserDaoImpl implements UserDao {
                 builder.desc(root.get("firstName")),
                 builder.asc(root.get("lastName")));
         return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public Optional<List<User>> getUsersByTextSearch(String firstName, String lastName, String city) {
+        Query users = entityManager.createNativeQuery("select *\n" +
+                "from users u\n" +
+                "where setweight(to_tsvector('russian', u.first_name), 'A') ||\n" +
+                "setweight(to_tsvector('russian', u.last_name), 'B') ||\n" +
+                "setweight(to_tsvector('russian', u.city), 'C') @@ " +
+                "to_tsquery('" + firstName + " | " + lastName + " | " + city + "')\n" +
+                "order by ts_rank(setweight(to_tsvector('russian', u.first_name), 'A') ||\n" +
+                "setweight(to_tsvector('russian', u.last_name), 'B') ||\n" +
+                "setweight(to_tsvector('russian', u.city), 'C'), " +
+                "to_tsquery('" + firstName + " | " + lastName + " | " + city + "'))", User.class);
+        return Optional.ofNullable(users.getResultList());
     }
 }
 

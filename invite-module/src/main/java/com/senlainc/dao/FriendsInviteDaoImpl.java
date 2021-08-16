@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class FriendsInviteDaoImpl implements FriendsInviteDao{
@@ -35,10 +36,11 @@ public class FriendsInviteDaoImpl implements FriendsInviteDao{
     }
 
     @Override
-    public FriendInvite findInvitesByUsersId(Long userFrom, Long userTo) {
+    public Optional<FriendInvite> findInvitesByUsersId(Long userFrom, Long userTo) {
         return entityManager.createQuery("select fi from FriendInvite fi " +
                 "where fi.userFrom.id = :idFrom and fi.userTo.id = :idTo", FriendInvite.class)
-                .setParameter("idFrom", userFrom).setParameter("idTo", userTo).setMaxResults(1).getSingleResult();
+                .setParameter("idFrom", userFrom).setParameter("idTo", userTo)
+                .setMaxResults(1).getResultList().stream().findFirst();
     }
 
 }

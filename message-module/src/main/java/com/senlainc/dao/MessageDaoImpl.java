@@ -41,7 +41,7 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    public List<Message> findMessagesByCriteries(LocalDateTime dateTime, boolean dateBorder) {
+    public List<Message> findMessagesByParameters(LocalDateTime dateTime, boolean dateBorder) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Message> query = builder.createQuery(Message.class);
         Root<Message> root = query.from(Message.class);

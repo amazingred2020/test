@@ -37,9 +37,11 @@ public class GroupServiceImpl implements GroupService{
     public void addUserToGroup(GroupUserRequest request) {
         if(request.getButtonName().equals("confirm")) {
             groupDao.findById(request.getGroupId()).addUserToGroup(userDao.findById(request.getUserId()));
-            groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId()).setStatus(Status.CONFIRM);
+            groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId())
+                    .get().setStatus(Status.CONFIRM);
         } else {
-            groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId()).setStatus(Status.REJECT);
+            groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId())
+                    .get().setStatus(Status.REJECT);
         }
     }
 

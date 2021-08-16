@@ -3,6 +3,7 @@ package com.senlainc.dao;
 import com.senlainc.entity.FriendInvite;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FriendsInviteDao {
 
@@ -10,5 +11,5 @@ public interface FriendsInviteDao {
     void remove(Long id);
     FriendInvite findById(Long id);
     List<FriendInvite> findInvitesByUserId(Long userId);
-    FriendInvite findInvitesByUsersId(Long userFrom, Long userTo);
+    Optional<FriendInvite> findInvitesByUsersId(Long userFrom, Long userTo);
 }
