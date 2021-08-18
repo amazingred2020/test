@@ -92,5 +92,13 @@ public class UserDaoImpl implements UserDao {
                 "to_tsquery('" + firstName + " | " + lastName + " | " + city + "'))", User.class);
         return Optional.ofNullable(users.getResultList());
     }
+
+    @Override
+    public List<User> getPaginatedUserList(int pageNumber, int pageSize){
+        Query query = entityManager.createQuery("from User");
+        query.setFirstResult((pageNumber - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        return query.getResultList();
+    }
 }
 

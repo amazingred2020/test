@@ -28,14 +28,15 @@ public class CategoryServiceTest {
     public void testDeleteCategory(){
         Long id = 1l;
         categoryService.deleteCategory(id);
-        Category category = categoryService.findCategoryById(1l);
+        Category category = categoryService.findCategoryById(id);
 
         Assert.assertNull(category);
     }
 
     @Test
     public void testFindCategoryById(){
-        Category category = categoryService.findCategoryById(1l);
+        Long id = 5l;
+        Category category = categoryService.findCategoryById(id);
         Assert.assertFalse(category.getName().length() == 0);
     }
 

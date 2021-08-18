@@ -8,7 +8,7 @@
             <column name="name" type="VARCHAR(30)">
                 <constraints nullable="false"/>
             </column>
-            <column name="desctiption" type="VARCHAR(60)"/>
+            <column name="description" type="VARCHAR(60)"/>
             <column name="price" type="DECIMAL(10, 2)">
                 <constraints nullable="false"/>
             </column>

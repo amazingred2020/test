@@ -16,4 +16,6 @@ public interface UserDao {
 	List<User> findByParameters(String name, String surname);
 
 	Optional<List<User>> getUsersByTextSearch(String firstName, String lastName, String city);
+
+    List<User> getPaginatedUserList(int pageNumber, int pageSize);
 }

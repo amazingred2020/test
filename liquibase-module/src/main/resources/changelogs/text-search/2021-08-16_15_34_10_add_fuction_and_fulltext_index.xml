@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-    <changeSet author="liquibase-script"  id="2021-08-16 15:46:30">
+    <changeSet author="liquibase-script"  id="2021-08-16 15:46:10">
         <sql splitStatements="false">
             create or replace function make_tsvector(first_name varchar, last_name varchar, city varchar)
             returns tsvector as $$
@@ -12,7 +12,7 @@
             $$ language 'plpgsql' immutable;
         </sql>
     </changeSet>
-    <changeSet author="liquibase-script"  id="2021-08-16 15:46:30">
+    <changeSet author="liquibase-script"  id="2021-08-16 15:46:20">
         <sql splitStatements="false">
             drop index if exists user_text_search;
             create index if not exists user_text_search on users using gin(make_tsvector(first_name, last_name, city));

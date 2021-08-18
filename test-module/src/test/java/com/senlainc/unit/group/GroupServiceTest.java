@@ -2,6 +2,7 @@ package com.senlainc.unit.group;
 
 import com.senlainc.dao.GroupDao;
 import com.senlainc.dto.group.GroupUserRequest;
+import com.senlainc.dto.group.SaveGroupRequest;
 import com.senlainc.entity.User;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.GroupService;
@@ -32,6 +33,8 @@ public class GroupServiceTest {
         Long id = 1l;
         groupService.deleteGroup(id);
         User user = groupDao.findById(id).getUser();
+
+        Assert.assertNull(user);
     }
 
     @Test(expected = NullPointerException.class)
@@ -42,6 +45,8 @@ public class GroupServiceTest {
         request.setUserId(2l);
         groupService.addUserToGroup(request);
         Set<User> users = groupDao.findById(1l).getUsers();
+
+        Assert.assertTrue(users.size() > 0);
     }
 
     @Test
@@ -54,11 +59,11 @@ public class GroupServiceTest {
 
     @Test
     public void testAddGroup(){
-        //NewGroupRequest request = new NewGroupRequest();
-        //request.setName("group name");
-        //request.setDescription("group description");
-        //request.setUserId(1l);
-        //groupService.addGroup(request);
+        SaveGroupRequest request = new SaveGroupRequest();
+        request.setName("group name");
+        request.setDescription("group description");
+        request.setUserId(1l);
+        groupService.addGroup(request);
         String description = groupDao.findByName("group name").getDescription();
 
         Assert.assertSame("group description", description);

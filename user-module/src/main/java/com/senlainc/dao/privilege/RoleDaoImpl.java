@@ -33,4 +33,10 @@ public class RoleDaoImpl implements RoleDao {
     public void delete(Long id) {
         entityManager.remove(findById(id));
     }
+
+    @Override
+    public Role findByName(String name) {
+        return entityManager.createQuery("select r from Role r where r.name = :name", Role.class)
+                .setParameter("name", name).getSingleResult();
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -48,6 +49,11 @@ public class ProductServiceImpl implements ProductService {
             accountDao.getAccountByUser(product.getUser().getId()).get().putMoney(product.getPrice());
             productDao.remove(productId);
         }
+    }
+
+    @Override
+    public List<Product> getPaginatedUserList(int page, int size) {
+        return productDao.getPaginatedUserList(page, size);
     }
 
     private boolean solvencyBuyerCheck(User buyer, Product product) {

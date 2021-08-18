@@ -8,4 +8,5 @@ public interface RoleService {
     Role findRoleById(Long id);
     void deleteRole(Long id);
     void createNewRole(SaveRoleRequest newRoleRequest);;
+    Role findByName(String name);
 }

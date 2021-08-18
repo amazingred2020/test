@@ -8,6 +8,7 @@ import com.senlainc.enums.Gender;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.UserService;
 import com.senlainc.TestConfiguration;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Log4j2
 @Transactional
 @ContextConfiguration(classes = {JpaConfiguration.class, TestConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,36 +56,36 @@ public class UserServiceTest {
     @Test
     public void testAddFriend(){
         AddFriendRequest request = new AddFriendRequest();
-        request.setUserFrom(2l);
-        request.setUserTo(4l);
+        request.setUserFrom(5l);
+        request.setUserTo(1l);
         request.setButtonName("confirm");
         userService.addFriend(request);
-        User user = userService.findUserById(2l);
+        User user = userService.findUserById(5l);
 
         Assert.assertFalse(user.getFriends().isEmpty());
     }
 
     @Test
     public void testDeleteFriend(){
-        userService.deleteFriend(2l,1l);
+        userService.deleteFriend(1l,2l);
         User user = userService.findUserById(2l);
 
-        Assert.assertTrue(user.getFriends().size() == 1);
+        Assert.assertTrue(user.getFriends().isEmpty());
     }
 
     @Test
     public void changeRole(){
-        userService.changeRole(4l, 3l);
-        User user = userService.findUserById(4l);
+        userService.changeRole(1l, 2l);
+        User user = userService.findUserById(1l);
 
-        Assert.assertEquals(Long.valueOf(3), user.getRole().getId());
+        Assert.assertEquals(Long.valueOf(2), user.getRole().getId());
     }
 
     @Test
     public void testFindUsersByParameters(){
         GetUserRequest request = new GetUserRequest();
-        request.setName("Сидор");
-        request.setSurname("Петров");
+        request.setName("Петя");
+        request.setSurname("Иванов");
         List<User> users = userService.findUsersByParameters(request);
 
         Assert.assertTrue(users.size() > 0);

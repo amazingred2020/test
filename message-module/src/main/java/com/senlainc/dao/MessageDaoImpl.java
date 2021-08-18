@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -53,5 +54,19 @@ public class MessageDaoImpl implements MessageDao {
         }
 
         return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<Message> getPaginatedMessageList(int page, int size) {
+        CriteriaBuilder criteriaBuilder = entityManager
+                .getCriteriaBuilder();
+        CriteriaQuery<Message> criteriaQuery = criteriaBuilder
+                .createQuery(Message.class);
+        Root<Message> from = criteriaQuery.from(Message.class);
+        CriteriaQuery<Message> select = criteriaQuery.select(from);
+        TypedQuery<Message> typedQuery = entityManager.createQuery(select);
+        typedQuery.setFirstResult((page - 1) * size);
+        typedQuery.setMaxResults(size);
+        return typedQuery.getResultList();
     }
 }

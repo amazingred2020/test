@@ -37,4 +37,9 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> findByParameters(GetMessageRequest request) {
         return messageDao.findMessagesByParameters(request.getDateTime(), request.getBorderDate());
     }
+
+    @Override
+    public List<Message> getPaginatedProductList(int page, int size) {
+        return messageDao.getPaginatedMessageList(page, size);
+    }
 }

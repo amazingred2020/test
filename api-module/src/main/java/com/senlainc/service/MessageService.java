@@ -10,4 +10,6 @@ public interface MessageService {
 
     Message sendMessage(SaveMessageRequest request);
     List<Message> findByParameters(GetMessageRequest request);
+
+    List<Message> getPaginatedProductList(int page, int size);
 }

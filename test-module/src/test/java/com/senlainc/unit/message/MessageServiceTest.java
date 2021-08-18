@@ -1,6 +1,7 @@
 package com.senlainc.unit.message;
 
 import com.senlainc.dto.message.GetMessageRequest;
+import com.senlainc.dto.message.SaveMessageRequest;
 import com.senlainc.entity.Message;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.MessageService;
@@ -26,11 +27,13 @@ public class MessageServiceTest {
 
     @Test
     public void testSendMessage(){
-        //SendMessageRequest request = new SendMessageRequest();
-        //request.setContent("text message");
-        //request.setUserFrom(1l);
-        //request.setUserTo(2l);
-        //messageService.sendMessage(request);
+        SaveMessageRequest request = new SaveMessageRequest();
+        request.setContent("text message");
+        request.setUserFrom(1l);
+        request.setUserTo(2l);
+        Message message = messageService.sendMessage(request);
+
+        Assert.assertTrue("text message".equals(message.getContent()));
     }
 
     @Test

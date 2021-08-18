@@ -38,7 +38,7 @@ public class CommentServiceTest{
     public void testAddComment(){
         SaveCommentRequest request = new SaveCommentRequest();
         request.setContent("comment text");
-        request.setPostId(1l);
+        request.setPostId(4l);
         request.setUserId(1l);
         Comment comment = commentService.addComment(request);
 

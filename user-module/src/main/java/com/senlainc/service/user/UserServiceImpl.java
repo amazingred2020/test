@@ -34,10 +34,10 @@ public class UserServiceImpl implements UserService {
 	private FriendsInviteDao friendsInviteDao;
 
 	@Autowired
-	UserMapper userMapper;
+	private UserMapper userMapper;
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
 	public User findUserById(Long id) {
@@ -82,6 +82,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUsersByTextSearch(UserTextSearchRequest request) {
 		return userDao.getUsersByTextSearch(request.getFirstName(), request.getLastName(), request.getCity()).get();
+	}
+
+	@Override
+	public List<User> getPaginatedUserList(int page, int size) {
+		return userDao.getPaginatedUserList(page, size);
 	}
 
 }

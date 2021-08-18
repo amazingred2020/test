@@ -1,5 +1,6 @@
 package com.senlainc.unit.privilege;
 
+import com.senlainc.dto.privileges.SaveRoleRequest;
 import com.senlainc.entity.Role;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.RoleService;
@@ -33,15 +34,16 @@ public class RoleServiceTest {
         roleService.deleteRole(id);
         Assert.assertEquals("not equals!", null, roleService.findRoleById(id));
     }
-/*
+
     @Test
     public void testCreateNewRole(){
-        NewRoleRequest request = new NewRoleRequest();
+        SaveRoleRequest request = new SaveRoleRequest();
         request.setRoleName("testRole");
         request.setPrivileges(Arrays.asList(new String[]{"create","update"}));
         roleService.createNewRole(request);
+        int size = roleService.findByName("testRole").getPrivileges().size();
 
-        Assert.assertEquals("not equals!", 2, roleService.findRoleById(5l).getPrivileges().size());
+        Assert.assertEquals("not equals!", 2, size);
     }
-    */
+
 }

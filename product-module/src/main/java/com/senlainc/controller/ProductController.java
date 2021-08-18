@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProductController {
 
@@ -22,5 +24,10 @@ public class ProductController {
     @GetMapping(ProductRoutes.BUY_PRODUCT)
     public void buyProduct(@PathVariable Long productId, @PathVariable Long userId){
         productService.buyProduct(productId, userId);
+    }
+
+    @GetMapping(ProductRoutes.PAGINATION)
+    public List<Product> getPaginatedList(@PathVariable int page, @PathVariable int size) {
+        return productService.getPaginatedUserList(page, size);
     }
 }

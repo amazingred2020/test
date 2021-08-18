@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Set;
 
 @RestController
+@Validated
 public class UserController {
 
 	@Autowired
@@ -28,7 +30,7 @@ public class UserController {
     }
 
     @PutMapping(UserRoutes.CHANGE_ROLE)
-    private void changeUserRole(@PathVariable Long userId, @PathVariable Long roleId){
+    private void changeUserRole(@PathVariable @Min(1) long userId, @PathVariable long roleId){
         userService.changeRole(userId, roleId);
     }
 
@@ -57,4 +59,8 @@ public class UserController {
         return userService.getUsersByTextSearch(request);
     }
 
+    @GetMapping(UserRoutes.PAGINATION)
+    public List<User> getPaginatedList(@PathVariable int page, @PathVariable int size){
+        return userService.getPaginatedUserList(page, size);
+    }
 }

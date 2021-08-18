@@ -11,4 +11,6 @@ public interface MessageDao {
     Message findById(Long id);
     void remove(Long id);
     List<Message> findMessagesByParameters(LocalDateTime dateTime, boolean borderDate);
+
+    List<Message> getPaginatedMessageList(int page, int size);
 }
