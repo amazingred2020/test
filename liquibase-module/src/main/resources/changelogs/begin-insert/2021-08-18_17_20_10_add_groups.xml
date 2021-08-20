@@ -18,7 +18,7 @@
         </insert>
         <rollback/>
     </changeSet>
-    <changeSet author="liquibase-script"  id="2021-08-18 17:21:10">
+    <changeSet author="liquibase-script"  id="2021-08-18 17:21:20">
         <insert tableName="users_groups">
             <column name="user_id" value="1"/>
             <column name="group_id" value="1"/>
