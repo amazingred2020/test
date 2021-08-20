@@ -2,6 +2,7 @@ package com.senlainc.mock.comment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senlainc.controller.CommentController;
+import com.senlainc.dto.comment.SaveCommentRequest;
 import com.senlainc.dto.comment.UpdateCommentRequest;
 import com.senlainc.entity.Comment;
 import com.senlainc.entity.Post;
@@ -43,25 +44,25 @@ public class CommentControllerTest {
 
     @Test
     public void testAddComment() throws Exception {
-        //AddCommentRequest request = new AddCommentRequest();
-        //request.setUserId(1l);
-        //request.setPostId(1l);
-        //request.setContent("content");
+        SaveCommentRequest request = new SaveCommentRequest();
+        request.setUserId(1l);
+        request.setPostId(1l);
+        request.setContent("content");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        //String json = objectMapper.writeValueAsString(request);
+        String json = objectMapper.writeValueAsString(request);
 
         Comment comment = new Comment();
         comment.setContent("content");
         comment.setUser(new User());
         comment.setPost(new Post());
 
-       // when(commentService.addComment(request)).thenReturn(comment);
+        when(commentService.addComment(request)).thenReturn(comment);
 
-      //  mockMvc.perform(post(CommentRoutes.COMMENT)
-              //  .contentType(MediaType.APPLICATION_JSON)
-          //      .content(json))
-            //    .andExpect(status().isOk());
+        mockMvc.perform(post(CommentRoutes.COMMENT)
+              .contentType(MediaType.APPLICATION_JSON)
+              .content(json))
+              .andExpect(status().isOk());
 
     }
 
@@ -69,8 +70,8 @@ public class CommentControllerTest {
     public void testDeleteComment() throws Exception {
         doNothing().when(commentService).deleteComment(anyLong());
 
-        //mockMvc.perform(delete(CommentRoutes.DELETE_COMMENT, anyLong()))
-         //       .andExpect(status().isOk());
+        mockMvc.perform(delete(CommentRoutes.COMMENT_BY_ID, anyLong()))
+                .andExpect(status().isOk());
 
         verify(commentService, atLeast(1)).deleteComment(anyLong());
     }
@@ -92,11 +93,11 @@ public class CommentControllerTest {
 
         when(commentService.editComment(request)).thenReturn(comment);
 
-        //mockMvc.perform(put(CommentRoutes.UPDATE_COMMENT)
-          //      .accept(MediaType.APPLICATION_JSON)
-            //    .content(objectMapper.writeValueAsString(request))
-              //  .contentType(MediaType.APPLICATION_JSON))
-                //.andExpect(status().is2xxSuccessful())
-                //.andDo(MockMvcResultHandlers.print());
+        mockMvc.perform(put(CommentRoutes.COMMENT)
+              .accept(MediaType.APPLICATION_JSON)
+              .content(objectMapper.writeValueAsString(request))
+              .contentType(MediaType.APPLICATION_JSON))
+              .andExpect(status().is2xxSuccessful())
+              .andDo(MockMvcResultHandlers.print());
     }
 }

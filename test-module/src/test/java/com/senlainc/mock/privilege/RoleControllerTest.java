@@ -2,6 +2,7 @@ package com.senlainc.mock.privilege;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senlainc.controller.privilege.RoleController;
+import com.senlainc.dto.privileges.SaveRoleRequest;
 import com.senlainc.routes.PrivilegeRoutes;
 import com.senlainc.service.RoleService;
 import org.junit.Before;
@@ -37,10 +38,10 @@ public class RoleControllerTest {
     public void setup(){
         mockMvc = MockMvcBuilders.standaloneSetup(roleController).build();
     }
-/*
+
     @Test
     public void testCreateRole() throws Exception {
-        NewRoleRequest request = new NewRoleRequest();
+        SaveRoleRequest request = new SaveRoleRequest();
         request.setPrivileges(Arrays.asList("create", "delete"));
         request.setRoleName("newRole");
 
@@ -57,10 +58,10 @@ public class RoleControllerTest {
     public void testDeleteRole() throws Exception {
         doNothing().when(roleService).deleteRole(eq(1l));
 
-        mockMvc.perform(delete(PrivilegeRoutes.DELETE_ROLE, 1l))
-                .andExpect(status().is4xxClientError());
+        mockMvc.perform(delete(PrivilegeRoutes.ROLE_BY_ID, 1l))
+                .andExpect(status().is2xxSuccessful());
 
-        verify(roleService, times(0)).deleteRole(anyLong());
+        verify(roleService, times(1)).deleteRole(anyLong());
     }
-*/
+
 }

@@ -56,11 +56,11 @@ public class UserServiceTest {
     @Test
     public void testAddFriend(){
         AddFriendRequest request = new AddFriendRequest();
-        request.setUserFrom(5l);
-        request.setUserTo(1l);
+        request.setUserFrom(3l);
+        request.setUserTo(2l);
         request.setButtonName("confirm");
         userService.addFriend(request);
-        User user = userService.findUserById(5l);
+        User user = userService.findUserById(3l);
 
         Assert.assertFalse(user.getFriends().isEmpty());
     }

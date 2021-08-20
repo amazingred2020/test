@@ -1,16 +1,25 @@
 package com.senlainc.mock.product;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senlainc.controller.ProductController;
+import com.senlainc.dto.product.SaveProductRequest;
+import com.senlainc.entity.Product;
+import com.senlainc.entity.User;
 import com.senlainc.routes.ProductRoutes;
 import com.senlainc.service.ProductService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.math.BigDecimal;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -34,7 +43,7 @@ public class ProductControllerTest {
 
     @Test
     public void testAddProductForSale() throws Exception {
-       /* AddProductRequest request = new AddProductRequest();
+        SaveProductRequest request = new SaveProductRequest();
         request.setUserId(1l);
         request.setPrice(new BigDecimal("20000"));
         request.setName("name");
@@ -62,14 +71,13 @@ public class ProductControllerTest {
 
         Assert.assertNotNull(mvcResult);
 
-        */
     }
 
     @Test
     public void testBuyProduct() throws Exception {
-        doNothing().when(productService).buyProduct(1l, 2l);
+        doNothing().when(productService).buyProduct(2l, 1l);
 
-        mockMvc.perform(get(ProductRoutes.BUY_PRODUCT, 1l, 2l))
+        mockMvc.perform(get(ProductRoutes.BUY_PRODUCT, 2l, 1l))
                 .andExpect(status().isOk());
 
         verify(productService, atLeastOnce()).buyProduct(anyLong(),anyLong());

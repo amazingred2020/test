@@ -35,7 +35,7 @@ public class CategoryServiceTest {
 
     @Test
     public void testFindCategoryById(){
-        Long id = 5l;
+        Long id = 1l;
         Category category = categoryService.findCategoryById(id);
         Assert.assertFalse(category.getName().length() == 0);
     }

@@ -3,8 +3,9 @@ package com.senlainc.mock.user;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senlainc.controller.user.UserController;
 import com.senlainc.dto.user.SaveUserRequest;
+import com.senlainc.entity.Role;
 import com.senlainc.entity.User;
-import com.senlainc.mappers.user.UserMapper;
+import com.senlainc.enums.Gender;
 import com.senlainc.routes.UserRoutes;
 import com.senlainc.service.UserService;
 import org.junit.Before;
@@ -40,34 +41,47 @@ public class UserControllerTest {
 
     @Test
     public void testAddUser() throws Exception {
-      //  SaveUserRequest request = new SaveUserRequest("name","surname","gender",
-       //         "nickname", "password", "email@mail.ru","city",1l);
+        SaveUserRequest request = new SaveUserRequest("name","surname", Gender.MAN,
+        "nickname", "password", "email@mail.ru","city",1l);
 
         ObjectMapper objectMapper = new ObjectMapper();
-      //  UserMapper userMapper = new UserMapperImpl();
-        //User user = userMapper.userDtoToUser(request);
+        User user = new User();
+        user.setFirstName("name");
+        user.setLastName("surname");
+        user.setGender(Gender.MAN);
+        user.setUsername("nickname");
+        user.setPassword("password");
+        user.setEmail("email@mail.ru");
+        user.setCity("city");
+        user.setRole(new Role());
 
-     //   when(userService.saveUser(request)).thenReturn(user);
+        when(userService.saveUser(request)).thenReturn(user);
 
-       // mockMvc.perform(post(UserRoutes.USER)
-      //          .content(objectMapper.writeValueAsString(request))
-       //         .contentType(MediaType.APPLICATION_JSON))
-       //         .andExpect(status().isOk());
+        mockMvc.perform(post(UserRoutes.USER)
+                .content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
-       // verify(userService, atLeastOnce()).saveUser(Matchers.any(SaveUserRequest.class));
+        verify(userService, atLeastOnce()).saveUser(Matchers.any(SaveUserRequest.class));
     }
 
     @Test
     public void testFindUserById() throws Exception {
-       // SaveUserRequest request = new SaveUserRequest("name","surname","gender",
-       //         "nickname", "password", "email@mail.ru","city",1l);
+        SaveUserRequest request = new SaveUserRequest("name","surname",Gender.MAN,
+                "nickname", "password", "email@mail.ru","city",1l);
 
-       // UserMapper userMapper = new UserMapperImpl();
         ObjectMapper objectMapper = new ObjectMapper();
+        User user = new User();
+        user.setFirstName("name");
+        user.setLastName("surname");
+        user.setGender(Gender.MAN);
+        user.setUsername("nickname");
+        user.setPassword("password");
+        user.setEmail("email@mail.ru");
+        user.setCity("city");
+        user.setRole(new Role());
 
-       /// User user = userMapper.userDtoToUser(request);
-
-      //  when(userService.findUserById(1l)).thenReturn(user);
+        when(userService.findUserById(1l)).thenReturn(user);
 
         mockMvc.perform(get(UserRoutes.USER_BY_ID, 1l)
             .accept(MediaType.APPLICATION_JSON))

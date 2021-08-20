@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Transactional
@@ -40,11 +41,9 @@ public class ProductServiceTest {
 
         Assert.assertEquals(Long.valueOf(2l), product.getUser().getId());
     }
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void buyProduct() {
-        productService.buyProduct(1l,1l);
-        //Optional<Product> product = Optional.ofNullable(productDao.findById(1l));
-        Product product = productDao.findById(1l);
-        Assert.assertNull(product);
+        productService.buyProduct(2l,1l);
+        Product product = productDao.findById(2l);
     }
 }

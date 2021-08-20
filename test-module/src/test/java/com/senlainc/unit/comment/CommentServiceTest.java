@@ -38,11 +38,11 @@ public class CommentServiceTest{
     public void testAddComment(){
         SaveCommentRequest request = new SaveCommentRequest();
         request.setContent("comment text");
-        request.setPostId(4l);
+        request.setPostId(2l);
         request.setUserId(1l);
         Comment comment = commentService.addComment(request);
 
-        Assert.assertNotEquals(Long.valueOf(2), comment.getPost().getId());
+        Assert.assertNotEquals(Long.valueOf(3), comment.getPost().getId());
     }
 
     @Test

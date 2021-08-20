@@ -3,18 +3,21 @@
     <changeSet author="liquibase-script"  id="2021-08-18 13:13:10">
         <insert tableName="comments">
             <column name="content" value="message text 1"/>
-            <column name="user_from_id" value="3"/>
-            <column name="user_to_id" value="2"/>
+            <column name="author_id" value="3"/>
+            <column name="post_id" value="2"/>
+            <column name="parent_id" value="null"/>
         </insert>
         <insert tableName="comments">
             <column name="content" value="message text 2"/>
-            <column name="user_from_id" value="2"/>
-            <column name="user_to_id" value="3"/>
+            <column name="author_id" value="2"/>
+            <column name="post_id" value="3"/>
+            <column name="parent_id" value="null"/>
         </insert>
         <insert tableName="comments">
             <column name="content" value="message text 3"/>
-            <column name="user_from_id" value="1"/>
-            <column name="user_to_id" value="2"/>
+            <column name="author_id" value="1"/>
+            <column name="post_id" value="2"/>
+            <column name="parent_id" value="1"/>
         </insert>
         <rollback/>
     </changeSet>

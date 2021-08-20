@@ -44,7 +44,7 @@ public class InviteServiceTest {
 
     @Test
     public void  testGetAllFriendInvite(){
-        List<FriendInvite> invites = inviteService.getAllFriendInvite(1l);
+        List<FriendInvite> invites = inviteService.getAllFriendInvite(2l);
 
         Assert.assertTrue(invites.size() > 0);
     }
@@ -64,7 +64,7 @@ public class InviteServiceTest {
 
     @Test
     public void testGetAllGroupInvite(){
-        List<GroupInvite> invites = inviteService.getAllGroupInvite(1l);
+        List<GroupInvite> invites = inviteService.getAllGroupInvite(2l);
 
         Assert.assertFalse(invites.isEmpty());
     }
