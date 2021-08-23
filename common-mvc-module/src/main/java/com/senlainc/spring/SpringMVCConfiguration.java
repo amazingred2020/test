@@ -12,7 +12,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.senlainc.controller")
+@ComponentScan(basePackages = "com.senlainc")
 public class SpringMVCConfiguration implements WebMvcConfigurer {
 
     @Override

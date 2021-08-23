@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>com.senlainc</groupId>
-            <artifactId>message-module</artifactId>
+            <artifactId>com.senlainc.unit.message-module</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

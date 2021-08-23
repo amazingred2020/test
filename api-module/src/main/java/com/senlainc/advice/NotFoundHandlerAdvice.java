@@ -23,7 +23,7 @@ public class NotFoundHandlerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception, WebRequest request){
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Entity not found");
+        body.put("com.senlainc.unit.message", "Entity not found");
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }

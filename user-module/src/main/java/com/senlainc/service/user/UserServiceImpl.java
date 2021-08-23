@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -41,7 +42,11 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(readOnly = true)
 	public User findUserById(Long id) {
-		return userDao.findById(id);
+		Optional<User> user = Optional.ofNullable(userDao.findById(id));
+		if(user.isPresent()){
+			return user.get();
+		}
+		return null;
 	}
 
 	@Override

@@ -27,20 +27,5 @@ public class CustomWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-/*
-public class CustomWebAppInitializer implements WebApplicationInitializer {
 
-    @Override
-    public void onStartup(ServletContext container) {
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(JpaConfiguration.class, SecurityConfiguration.class);
-        ContextLoaderListener contextLoaderListener = new ContextLoaderListener(rootContext);
-        container.addListener(contextLoaderListener);
-        AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
-        webContext.register(SpringMVCConfiguration.class);
-        DispatcherServlet dispatcherServlet = new DispatcherServlet(webContext);
-        ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
-        dispatcher.addMapping("/");
-    }
-*/
 }

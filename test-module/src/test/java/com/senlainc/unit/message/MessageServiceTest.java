@@ -28,12 +28,12 @@ public class MessageServiceTest {
     @Test
     public void testSendMessage(){
         SaveMessageRequest request = new SaveMessageRequest();
-        request.setContent("text message");
+        request.setContent("text com.senlainc.unit.message");
         request.setUserFrom(1l);
         request.setUserTo(2l);
         Message message = messageService.sendMessage(request);
 
-        Assert.assertTrue("text message".equals(message.getContent()));
+        Assert.assertTrue("text com.senlainc.unit.message".equals(message.getContent()));
     }
 
     @Test

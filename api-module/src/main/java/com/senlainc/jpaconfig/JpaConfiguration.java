@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan("com.senlainc")
+//@ComponentScan(includeFilters = )
 @EnableTransactionManagement
 public class JpaConfiguration {
 
