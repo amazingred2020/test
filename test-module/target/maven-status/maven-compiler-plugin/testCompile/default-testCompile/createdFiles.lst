@@ -1,0 +1,15 @@
+com/senlainc/mock/user/UserControllerTest.class
+com/senlainc/unit/post/PostServiceTest.class
+com/senlainc/unit/privilege/PrivilegeServiceTest.class
+com/senlainc/unit/invite/InviteServiceTest.class
+com/senlainc/unit/comment/CommentServiceTest.class
+com/senlainc/mock/privilege/RoleControllerTest.class
+com/senlainc/unit/privilege/RoleServiceTest.class
+com/senlainc/mock/privilege/PrivilegeControllerTest.class
+com/senlainc/unit/message/MessageServiceTest.class
+com/senlainc/unit/product/ProductServiceTest.class
+com/senlainc/mock/product/ProductControllerTest.class
+com/senlainc/unit/user/UserServiceTest.class
+com/senlainc/mock/comment/CommentControllerTest.class
+com/senlainc/unit/post/CategoryServiceTest.class
+com/senlainc/unit/group/GroupServiceTest.class

@@ -1,0 +1,15 @@
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/mock/user/UserControllerTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/group/GroupServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/privilege/PrivilegeServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/post/PostServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/product/ProductServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/user/UserServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/mock/product/ProductControllerTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/invite/InviteServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/mock/comment/CommentControllerTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/mock/privilege/PrivilegeControllerTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/comment/CommentServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/message/MessageServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/post/CategoryServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/unit/privilege/RoleServiceTest.java
+/home/user/IdeaProjects/social-parent/test-module/src/test/java/com/senlainc/mock/privilege/RoleControllerTest.java
