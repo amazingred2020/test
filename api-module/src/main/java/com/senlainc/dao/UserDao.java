@@ -18,4 +18,6 @@ public interface UserDao {
 	Optional<List<User>> getUsersByTextSearch(String firstName, String lastName, String city);
 
     List<User> getPaginatedUserList(int pageNumber, int pageSize);
+
+    Optional<User> findByAnyId(Long id);
 }

@@ -19,4 +19,6 @@ public interface UserService {
 
     List<User> getUsersByTextSearch(UserTextSearchRequest request);
     List<User> getPaginatedUserList(int page, int size);
+
+    User findByAnyId(Long id);
 }

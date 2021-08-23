@@ -100,5 +100,10 @@ public class UserDaoImpl implements UserDao {
         query.setMaxResults(pageSize);
         return query.getResultList();
     }
+
+    @Override
+    public Optional<User> findByAnyId(Long id){
+        return Optional.ofNullable(entityManager.find(User.class, id));
+    }
 }
 

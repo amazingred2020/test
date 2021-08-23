@@ -1,5 +1,6 @@
 package com.senlainc.service;
 
+import com.senlainc.dto.product.FieldsObject;
 import com.senlainc.dto.product.SaveProductRequest;
 import com.senlainc.entity.Product;
 
@@ -11,4 +12,7 @@ public interface ProductService {
     void buyProduct(Long productId, Long buyerId);
 
     List<Product> getPaginatedUserList(int page, int size);
+
+    void addProduct(FieldsObject fields);
+    void addProductFromArray(String[] array);
 }

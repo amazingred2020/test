@@ -94,4 +94,13 @@ public class UserServiceImpl implements UserService {
 		return userDao.getPaginatedUserList(page, size);
 	}
 
+	@Override
+	public User findByAnyId(Long id) {
+		Optional<User> user = userDao.findByAnyId(id);
+		if(user.isPresent()){
+			return user.get();
+		}
+		return null;
+	}
+
 }
