@@ -1,12 +1,1 @@
 /.idea/
-/common-mvc-module/target/
-/liquibase-module/target/
-/message-module/target/
-/test-module/target/
-/comment-module/target/
-/api-module/target/
-/group-module/target/
-/invite-module/target/
-/post-module/target/
-/product-module/target/
-/test-module/target/
