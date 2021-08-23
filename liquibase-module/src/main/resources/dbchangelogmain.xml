@@ -6,7 +6,7 @@
     <includeAll path="changelogs/group"/>
     <includeAll path="changelogs/post"/>
     <includeAll path="changelogs/comment"/>
-    <includeAll path="changelogs/com.senlainc.unit.message"/>
+    <includeAll path="changelogs/message"/>
     <includeAll path="changelogs/product"/>
     <includeAll path="changelogs/text-search"/>
     <include file="changelogs/begin-insert/2021-07-28_16_46_10_add_users_and_accounts.xml"/>
