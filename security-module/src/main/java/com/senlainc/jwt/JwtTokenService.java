@@ -1,12 +1,15 @@
 package com.senlainc.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -25,21 +28,26 @@ public class JwtTokenService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    private Key getSigningKey() {
+        byte[] keyBytes = this.tokenKey.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
     public String generateToken(UserDetails userDetails){
         String token = "";
         Map<String,Object> claims = new HashMap<>();
         claims.put("privileges", userDetails.getAuthorities());
         try {
             token = Jwts.builder()
-                .setHeaderParam("typ", "JWT")
-                .setClaims(claims)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date())
-                .setExpiration(Date.from(LocalDateTime.now()
-                        .plusMinutes(Integer.parseInt(tokenExpirationTime))
-                        .atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(SignatureAlgorithm.HS256, tokenKey)
-                .compact();
+                    .setHeaderParam("typ", "JWT")
+                    .setClaims(claims)
+                    .setSubject(userDetails.getUsername())
+                    .setIssuedAt(new Date())
+                    .setExpiration(Date.from(LocalDateTime.now()
+                            .plusMinutes(Integer.parseInt(tokenExpirationTime))
+                            .atZone(ZoneId.systemDefault()).toInstant()))
+                    .signWith(getSigningKey())
+                    .compact();
         } catch (JwtException e){
             e.printStackTrace();
         }
@@ -48,9 +56,9 @@ public class JwtTokenService {
 
     public Claims getClaimsFromToken(String token){
         return Jwts.parserBuilder()
-                .setSigningKey(tokenKey)
+                .setSigningKey(getSigningKey())
                 .build()
-                .parseClaimsJws(token.substring(7))
+                .parseClaimsJws(token)
                 .getBody();
     }
 
@@ -63,16 +71,17 @@ public class JwtTokenService {
                 .setExpiration(Date.from(LocalDateTime.now()
                         .plusMinutes(Integer.parseInt(tokenExpirationTime))
                         .atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(SignatureAlgorithm.HS256, tokenKey)
+                .signWith(getSigningKey())
                 .compact();
     }
 
     public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(tokenKey)
-                .parseClaimsJwt(token)
-                .getBody();
-        return claims.getSubject();
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     public UserDetails loadUserByUsername(String username) {
