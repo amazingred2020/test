@@ -13,4 +13,6 @@ public interface ProductService {
     List<Product> getPaginatedUserList(int page, int size);
 
     void saveProduct(Product product);
+
+    List<Product> getAllProducts();
 }

@@ -61,6 +61,11 @@ public class ProductServiceImpl implements ProductService {
         productDao.save(product);
     }
 
+    @Override
+    public List<Product> getAllProducts() {
+        return productDao.getAllProducts();
+    }
+
     private boolean solvencyBuyerCheck(User buyer, Product product) {
         Account account = accountDao.getAccountByUser(buyer.getId()).get();
         if(account != null && account.getAccountMoney().compareTo(product.getPrice()) > 0){

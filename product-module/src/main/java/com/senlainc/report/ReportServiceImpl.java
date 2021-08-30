@@ -5,6 +5,8 @@ import com.senlainc.entity.User;
 import com.senlainc.service.ProductService;
 import com.senlainc.service.ReportService;
 import com.senlainc.service.UserService;
+import javassist.bytecode.ByteArray;
+import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
@@ -13,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import javax.activation.FileTypeMap;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -53,15 +55,17 @@ public class ReportServiceImpl implements ReportService {
         return array;
     }
 
-    public void writeToExelFile() {
-        List<String[]> rows = generateRows();
+    public byte[] generateExelFile() {
+        List<Product> productList = productService.getAllProducts();
+
+        // ТУТ СДЕЛАТЬ ПАКЕТНУЮ ПЕРЕДАЧУ(НАПРИМЕР 100 ПЕРЕДАЛ-ОБРАБОТАЛ, ПОТОМ ЕЩЁ 100 И Т.Д.)
 
         int cellNumber = 0;
         SXSSFWorkbook workbook = new SXSSFWorkbook(100);
         SXSSFSheet sheet = workbook.createSheet("Products");
         Row row;
         Cell cell;
-        String[] currentFields;
+        Product currentProduct;
 
         XSSFFont font = (XSSFFont) workbook.createFont();
         font.setBold(true);
@@ -79,21 +83,21 @@ public class ReportServiceImpl implements ReportService {
         row.getCell(cellNumber).setCellStyle(style);
         cellNumber = 0;
 
-        for(int i = 1; i <= rows.size(); i++){
+        for(int i = 1; i <= productList.size(); i++){
             row = sheet.createRow(i);
-            currentFields = rows.get(i - 1);
+            currentProduct = productList.get(i - 1);
 
-            cell = row.createCell(cellNumber, CellType.STRING);
-            cell.setCellValue(currentFields[cellNumber++]);
+            cell = row.createCell(cellNumber++, CellType.STRING);
+            cell.setCellValue(currentProduct.getName());
 
-            cell = row.createCell(cellNumber, CellType.STRING);
-            cell.setCellValue(currentFields[cellNumber++]);
+            cell = row.createCell(cellNumber++, CellType.STRING);
+            cell.setCellValue(currentProduct.getDescription());
+
+            cell = row.createCell(cellNumber++, CellType.NUMERIC);
+            cell.setCellValue(currentProduct.getPrice().toString());
 
             cell = row.createCell(cellNumber, CellType.NUMERIC);
-            cell.setCellValue(currentFields[cellNumber++]);
-
-            cell = row.createCell(cellNumber, CellType.NUMERIC);
-            cell.setCellValue(currentFields[cellNumber]);
+            cell.setCellValue(currentProduct.getUser().getId());
 
             cellNumber = 0;
         }
@@ -104,22 +108,17 @@ public class ReportServiceImpl implements ReportService {
         sheet.autoSizeColumn(2);
         sheet.autoSizeColumn(3);
 
-        File file = new File("./product-module/src/products.xlsx");
-        if(!file.exists()){
-            try {
-                file.getParentFile().mkdir();
-                file.createNewFile();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        try (FileOutputStream out = new FileOutputStream(file)) {
+        byte[] byteArray = new byte[0];
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             workbook.write(out);
+            byteArray = out.toByteArray();
             workbook.dispose();
+            workbook.close();
         } catch (IOException e){
             e.printStackTrace();
         }
+        
+        return byteArray;
     }
 
     public List<Product> readFromExelFile(MultipartFile file) {
@@ -173,64 +172,12 @@ public class ReportServiceImpl implements ReportService {
         return product;
     }
 
-    public List<Product> readFromExelFile1(MultipartFile file) {
-        XSSFWorkbook workbook = null;
-        try {
-            workbook = new XSSFWorkbook(file.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        long start = System.currentTimeMillis();
-        XSSFSheet sheet = workbook.getSheet("Products");
-        Iterator<Row> rowIterator = sheet.rowIterator();
-        rowIterator.next();
-        XSSFRow row = null;
-        XSSFCell cell = null;
-        int currentCellNumber = 3;
-        List<Future<Product>> futureList = new ArrayList<>();
-
-        while (rowIterator.hasNext()) {
-            row = (XSSFRow) rowIterator.next();
-            XSSFRow finalRow = row;
-            futureList.add(CompletableFuture.supplyAsync(() -> getProductAsync(finalRow, currentCellNumber)));
-        }
-
-        CompletableFuture.allOf(futureList.toArray(new CompletableFuture[futureList.size()])).join();
-        System.out.println("Времени потрачено: " + (System.currentTimeMillis() - start));
-        return futureList.stream().map(this::getProduct).collect(Collectors.toList());
-    }
-
-    private Product getProductAsync(XSSFRow row, int currentCellNumber){
-        Product product = new Product();
-        XSSFCell cell = null;
-        cell = row.getCell(currentCellNumber--);;
-        product.setUser(userService.findUserById(Long.valueOf(cell.getStringCellValue())));
-        cell = row.getCell(currentCellNumber--);
-        product.setPrice(new BigDecimal(cell.getStringCellValue().replace(",", ".")));
-        cell = row.getCell(currentCellNumber--);
-        product.setDescription(cell.getStringCellValue());
-        cell = row.getCell(currentCellNumber);
-        product.setName(cell.getStringCellValue());
-        return product;
-    }
-
-    private Product getProduct(Future<Product> future){
-        Product product = null;
-        try {
-            product = future.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return product;
-    }
-
-    public void validateAndSave(MultipartFile file){
+    public boolean validateAndSave(MultipartFile file){
         List<Product> productList = readFromExelFile(file);
         productList.stream()
                 .filter(product -> Objects.nonNull(product.getUser()))
                 .map(product -> CompletableFuture.runAsync(() -> {productService.saveProduct(product);}))
                 .forEach(CompletableFuture::join);
+        return true;
     }
 }

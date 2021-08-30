@@ -12,4 +12,6 @@ public interface ProductDao {
     Product findByName(String name);
 
     List<Product> getPaginatedUserList(int page, int size);
+
+    List<Product> getAllProducts();
 }

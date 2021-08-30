@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ReportService {
 
-    void validateAndSave(MultipartFile file);
+    byte[] generateExelFile();
+    boolean validateAndSave(MultipartFile file);
     List<Product> readFromExelFile(MultipartFile file);
 }

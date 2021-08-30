@@ -44,4 +44,9 @@ public class ProductDaoImpl implements ProductDao {
         query.setMaxResults(pageSize);
         return query.getResultList();
     }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return entityManager.createQuery("select p from Product p join fetch p.user", Product.class).getResultList();
+    }
 }
