@@ -32,6 +32,7 @@
         <module>security-module</module>
         <module>invite-module</module>
         <module>test-module</module>
+        <module>check-module</module>
     </modules>
 
     <dependencies>

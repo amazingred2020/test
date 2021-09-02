@@ -45,6 +45,4 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         return multipartResolver;
     }
-
-
 }

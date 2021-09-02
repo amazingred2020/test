@@ -30,4 +30,5 @@ public class ProductController {
     public List<Product> getPaginatedList(@PathVariable int page, @PathVariable int size) {
         return productService.getPaginatedUserList(page, size);
     }
+
 }

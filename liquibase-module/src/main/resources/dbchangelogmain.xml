@@ -16,4 +16,5 @@
     <include file="changelogs/begin-insert/2021-08-18_14_34_10_add_comments.xml"/>
     <include file="changelogs/begin-insert/2021-08-18_17_20_10_add_groups.xml"/>
     <include file="changelogs/begin-insert/2021-07-18_13_35_10_add_invites.xml"/>
+    <includeAll path="changelogs/check"/>
 </databaseChangeLog>

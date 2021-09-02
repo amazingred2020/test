@@ -17,7 +17,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product save(Product product) {
-        entityManager.persist(product);
+        if(product.getId() == null){
+            entityManager.persist(product);
+        } else {
+            entityManager.merge(product);
+        }
+
         return product;
     }
 

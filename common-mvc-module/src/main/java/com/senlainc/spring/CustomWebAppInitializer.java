@@ -1,5 +1,6 @@
 package com.senlainc.spring;
 
+import com.senlainc.config.RabbitConfiguration;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.config.SecurityConfiguration;
 import org.springframework.web.WebApplicationInitializer;
@@ -15,7 +16,7 @@ public class CustomWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{JpaConfiguration.class, SecurityConfiguration.class};
+        return new Class<?>[]{JpaConfiguration.class, SecurityConfiguration.class, RabbitConfiguration.class};
     }
 
     @Override
