@@ -1,9 +1,6 @@
 package com.senlainc.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -13,6 +10,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -37,41 +35,41 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public Queue queue(){
-        return new Queue(properties.getMAKER_QUEUE_NAME(), true);
+    public Queue makerQueue(){
+        return new Queue(properties.getMakerQueueName(), true);
     }
 
     @Bean
-    public DirectExchange exchange(){
-        return new DirectExchange(properties.getMAKER_EXCHANGE_NAME());
+    public DirectExchange makerExchange(){
+        return new DirectExchange(properties.getMakerExchangeName());
     }
 
     @Bean
-    Binding exchangeBinding(DirectExchange directExchange, Queue queue){
-        return BindingBuilder.bind(queue).to(directExchange).with(properties.getROUTING_KEY());
+    Binding makerExchangeBinding(DirectExchange directExchange, @Qualifier("makerQueue") Queue queue){
+        return BindingBuilder.bind(queue).to(directExchange).with(properties.getMakerRoutingKey());
     }
 
     @Bean
     public Queue checkerQueue(){
-        return new Queue(properties.getCHECKER_QUEUE_NAME(), true);
+        return new Queue(properties.getCheckerQueueName(), true);
     }
 
     @Bean
-    public DirectExchange checkerExchange(){
-        return new DirectExchange(properties.getCHECKER_EXCHANGE_NAME());
+    public TopicExchange checkerExchange(){
+        return new TopicExchange(properties.getCheckerExchangeName());
     }
 
     @Bean
-    Binding checkerExchangeBinding(DirectExchange directExchange, Queue queue){
-        return BindingBuilder.bind(queue).to(directExchange).with(properties.getCHECKER_ROUTING_KEY());
+    Binding checkerExchangeBinding(TopicExchange topicExchange, @Qualifier("checkerQueue") Queue queue){
+        return BindingBuilder.bind(queue).to(topicExchange).with(properties.getCheckerRoutingKey());
     }
 
     @Bean
     public RabbitAdmin rabbitAdmin(){
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory());
-        rabbitAdmin.declareQueue(queue());
-        rabbitAdmin.declareExchange(exchange());
-        rabbitAdmin.declareBinding(exchangeBinding(exchange(),queue()));
+        rabbitAdmin.declareQueue(makerQueue());
+        rabbitAdmin.declareExchange(makerExchange());
+        rabbitAdmin.declareBinding(makerExchangeBinding(makerExchange(),makerQueue()));
         rabbitAdmin.declareQueue(checkerQueue());
         rabbitAdmin.declareExchange(checkerExchange());
         rabbitAdmin.declareBinding(checkerExchangeBinding(checkerExchange(),checkerQueue()));
@@ -86,17 +84,6 @@ public class RabbitConfiguration {
     @Bean
     public RabbitTemplate rabbitTemplate(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        rabbitTemplate.setRoutingKey(properties.getROUTING_KEY());
-        rabbitTemplate.setExchange(properties.getMAKER_EXCHANGE_NAME());
-        rabbitTemplate.setMessageConverter(messageConverter());
-        return rabbitTemplate;
-    }
-
-    @Bean
-    public RabbitTemplate checkerTemplate(){
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        rabbitTemplate.setRoutingKey(properties.getCHECKER_ROUTING_KEY());
-        rabbitTemplate.setExchange(properties.getCHECKER_EXCHANGE_NAME());
         rabbitTemplate.setMessageConverter(messageConverter());
         return rabbitTemplate;
     }
@@ -105,6 +92,7 @@ public class RabbitConfiguration {
     public SimpleRabbitListenerContainerFactory listenerContainerFactory(){
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
+        factory.setMessageConverter(messageConverter());
         return factory;
     }
 }

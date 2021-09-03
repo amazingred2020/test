@@ -10,21 +10,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class RabbitProperties {
 
-    @Value("${queue.name}")
-    private String MAKER_QUEUE_NAME;
+    @Value("${maker.queue.name}")
+    private String makerQueueName;
 
-    @Value("${exchange.name}")
-    private String MAKER_EXCHANGE_NAME;
+    @Value("${maker.exchange.name}")
+    private String makerExchangeName;
 
-    @Value("${routing-key}")
-    private String ROUTING_KEY;
+    @Value("${maker.routing-key}")
+    private String makerRoutingKey;
 
     @Value("${checker.queue.name}")
-    private String CHECKER_QUEUE_NAME;
+    private String checkerQueueName;
 
     @Value("${checker.exchange.name}")
-    private String CHECKER_EXCHANGE_NAME;
+    private String checkerExchangeName;
 
     @Value("${checker.routing-key}")
-    private String CHECKER_ROUTING_KEY;
+    private String checkerRoutingKey;
 }

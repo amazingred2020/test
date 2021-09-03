@@ -34,12 +34,12 @@ public class Product {
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable = false)
     private User user;
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Generated(GenerationTime.INSERT)
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
 }
