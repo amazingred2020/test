@@ -29,6 +29,10 @@
             </column>
             <column name="created_at" type="datetime" defaultValue="now()"/>
             <column name="updated_at" type="datetime"/>
+            <column name="profile_id" type="BIGINT"/>
+            <column name="group_id" type="BIGINT">
+                <constraints foreignKeyName="fk_posts_groups1" referencedColumnNames="id" referencedTableName="groups"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-27 13:06:30">

@@ -2,10 +2,12 @@ package com.senlainc.service;
 
 import com.senlainc.dao.GroupDao;
 import com.senlainc.dao.GroupInviteDao;
+import com.senlainc.dao.SubscriberDao;
 import com.senlainc.dao.UserDao;
 import com.senlainc.dto.group.SaveGroupRequest;
 import com.senlainc.dto.group.GroupUserRequest;
 import com.senlainc.entity.Group;
+import com.senlainc.entity.Subscriber;
 import com.senlainc.enums.Status;
 import com.senlainc.mappers.group.GroupMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class GroupServiceImpl implements GroupService{
     private UserDao userDao;
 
     @Autowired
+    private SubscriberDao subscriberDao;
+
+    @Autowired
     private GroupInviteDao groupInviteDao;
 
     @Autowired
@@ -36,7 +41,8 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public void addUserToGroup(GroupUserRequest request) {
         if(request.getButtonName().equals("confirm")) {
-            groupDao.findById(request.getGroupId()).addUserToGroup(userDao.findById(request.getUserId()));
+            Subscriber subscriber = groupMapper.fromGroupUserRequestToSubscriber(request);
+            subscriberDao.save(subscriber);
             groupInviteDao.findInviteByUsersId(request.getFromId(), request.getUserId())
                     .get().setStatus(Status.CONFIRM);
         } else {
@@ -47,13 +53,17 @@ public class GroupServiceImpl implements GroupService{
 
     @Override
     public void removeUserFromGroup(Long groupId, Long userId) {
-        groupDao.findById(groupId).removeUserFromGroup(userDao.findById(userId));
+        subscriberDao.delete(groupId, userId);
     }
 
     @Override
     public void addGroup(SaveGroupRequest request) {
         Group newGroup = groupMapper.fromGroupRequestToGroup(request);
-        groupDao.save(newGroup);
+        Group group = groupDao.save(newGroup);
+        Subscriber subscriber = new Subscriber();
+        subscriber.setUser(userDao.findById(request.getUserId()));
+        subscriber.setGroup(group);
+        subscriberDao.save(subscriber);
     }
 
     @Override

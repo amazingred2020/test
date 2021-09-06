@@ -3,13 +3,12 @@ package com.senlainc.dao.user;
 
 import com.senlainc.dao.UserDao;
 import com.senlainc.entity.User;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -17,7 +16,6 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
-@Log4j2
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -30,13 +28,12 @@ public class UserDaoImpl implements UserDao {
         } else {
             entityManager.merge(user);
         }
-      
+
         return user;
     }
 
     public User findById(Long id){
-        User user = entityManager.find(User.class, id);
-        return user;
+        return entityManager.find(User.class, id);
     }
 
     @Override
@@ -45,20 +42,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addFriend(Long userId, Long friendId) {
-        findById(userId).addFriend(findById(friendId));
-    }
-
-    @Override
-    public void deleteFriend(Long userId, Long friendId) {
-        findById(userId).deleteFriend(findById(friendId));
-    }
-
-    @Override
     public User findByUsername(String username) {
-        return entityManager.createQuery("select u from User u where u.username = :username", User.class)
+        return entityManager.createQuery("select u from User u join fetch u.role where u.username = :username", User.class)
                 .setParameter("username", username).getSingleResult();
-
     }
 
     @Override
@@ -104,6 +90,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findByAnyId(Long id){
         return Optional.ofNullable(entityManager.find(User.class, id));
+    }
+
+    @Override
+    public List<User> getAllFriends(Long id) {
+        Query users = entityManager.createNativeQuery("select * from users as u " +
+                "where u.id in (select f.friend_id from friendship as f where f.user_id = :id)", User.class)
+                .setParameter("id", id);
+        return users.getResultList();
     }
 }
 

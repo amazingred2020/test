@@ -58,8 +58,6 @@ public class ReportServiceImpl implements ReportService {
     public byte[] generateExelFile() {
         List<Product> productList = productService.getAllProducts();
 
-        // ТУТ СДЕЛАТЬ ПАКЕТНУЮ ПЕРЕДАЧУ(НАПРИМЕР 100 ПЕРЕДАЛ-ОБРАБОТАЛ, ПОТОМ ЕЩЁ 100 И Т.Д.)
-
         int cellNumber = 0;
         SXSSFWorkbook workbook = new SXSSFWorkbook(100);
         SXSSFSheet sheet = workbook.createSheet("Products");

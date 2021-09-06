@@ -16,6 +16,56 @@
             <column name="user_from_id" value="1"/>
             <column name="user_to_id" value="2"/>
         </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 4"/>
+            <column name="user_from_id" value="5"/>
+            <column name="user_to_id" value="1"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 5"/>
+            <column name="user_from_id" value="6"/>
+            <column name="user_to_id" value="1"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 6"/>
+            <column name="user_from_id" value="5"/>
+            <column name="user_to_id" value="1"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 7"/>
+            <column name="user_from_id" value="1"/>
+            <column name="user_to_id" value="2"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 8"/>
+            <column name="user_from_id" value="1"/>
+            <column name="user_to_id" value="4"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 8"/>
+            <column name="user_from_id" value="2"/>
+            <column name="user_to_id" value="1"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 9"/>
+            <column name="user_from_id" value="1"/>
+            <column name="user_to_id" value="4"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 10"/>
+            <column name="user_from_id" value="1"/>
+            <column name="user_to_id" value="5"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 11"/>
+            <column name="user_from_id" value="1"/>
+            <column name="user_to_id" value="6"/>
+        </insert>
+        <insert tableName="messages">
+            <column name="content" value="message text 12"/>
+            <column name="user_from_id" value="1"/>
+            <column name="user_to_id" value="2"/>
+        </insert>
         <rollback/>
     </changeSet>
 </databaseChangeLog>

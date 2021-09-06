@@ -6,9 +6,9 @@
             <column name="last_name" value="Петров"/>
             <column name="username" value="name1"/>
             <column name="password" value="$2a$12$KTmH1rvF6gPA.MsdjDtf5.P6WuZbAs66Md0TLWoS/dvsa8V.w3Q9m"/>
-            <column name="email" value="some@mail.ru"/>
+            <column name="email" value="email1@mail.ru"/>
             <column name="gender" value="MAN"/>
-            <column name="city" value="тула"/>
+            <column name="city" value="Тула"/>
             <column name="role_id" value="1"/>
         </insert>
         <insert tableName="users">
@@ -16,9 +16,9 @@
             <column name="last_name" value="Иванов"/>
             <column name="username" value="name2"/>
             <column name="password" value="$2a$12$XIS4earePv0L6.urze6VFOw1OLSm8E4oZgE8XR5/SpkFVe1n8Ht0m"/>
-            <column name="email" value="another@mail.ru"/>
+            <column name="email" value="email2@mail.ru"/>
             <column name="gender" value="MAN"/>
-            <column name="city" value="калуга"/>
+            <column name="city" value="Калуга"/>
             <column name="role_id" value="2"/>
         </insert>
         <insert tableName="users">
@@ -26,9 +26,9 @@
             <column name="last_name" value="Сидоров"/>
             <column name="username" value="name3"/>
             <column name="password" value="$2a$12$WQc.CTdg8bh0VbOIJ4BwRug7zE2cLSF8hneTMajPdF7XXmhlM6uUi"/>
-            <column name="email" value="mail765@mail.ru"/>
+            <column name="email" value="email3@mail.ru"/>
             <column name="gender" value="MAN"/>
-            <column name="city" value="курск"/>
+            <column name="city" value="Курск"/>
             <column name="role_id" value="2"/>
         </insert>
         <insert tableName="users">
@@ -36,23 +36,78 @@
             <column name="last_name" value="Николаев"/>
             <column name="username" value="name4"/>
             <column name="password" value="$2a$12$jvibten6B/uvEhD06pc3uO5dtqXf3r03hx/HiIgUycFSNg7AdoLcG"/>
-            <column name="email" value="mail432@mail.ru"/>
+            <column name="email" value="email4@mail.ru"/>
             <column name="gender" value="MAN"/>
-            <column name="city" value="челябинск"/>
+            <column name="city" value="Челябинск"/>
             <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="Галина"/>
+            <column name="last_name" value="Галинина"/>
+            <column name="username" value="name5"/>
+            <column name="password" value="$2a$12$FXbI1XEwAFWUatbHf9Xn1u2AApQdoX4Lkr88.pCRgnXEhvgDZg59i"/>
+            <column name="email" value="email5@mail.ru"/>
+            <column name="gender" value="WOMAN"/>
+            <column name="city" value="Брянск"/>
+            <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="Марина"/>
+            <column name="last_name" value="Маринченко"/>
+            <column name="username" value="name6"/>
+            <column name="password" value="$2a$12$FRmdBarLxoeZfzAGdj.fMuIqhp.ETgBZ5Aw/pYDpjsFK6fPDqLESG"/>
+            <column name="email" value="email6@mail.ru"/>
+            <column name="gender" value="WOMAN"/>
+            <column name="city" value="Тула"/>
+            <column name="role_id" value="2"/>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="Никита"/>
+            <column name="last_name" value="Никитин"/>
+            <column name="username" value="name7"/>
+            <column name="password" value="$2a$12$XCm3uobMoRO4X/qBx6uvIO4G3Kzh3CAfEnKNqYKmoah1J/y1yHwZe"/>
+            <column name="email" value="email7@mail.ru"/>
+            <column name="gender" value="MAN"/>
+            <column name="city" value="Саратов"/>
+            <column name="role_id" value="2"/>
         </insert>
         <rollback/>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-28 16:40:20">
         <insert tableName="accounts">
             <column name="number" value="11122233"/>
-            <column name="money" value="50000.00"/>
+            <column name="money" value="1000.00"/>
             <column name="user_id" value="1"/>
         </insert>
         <insert tableName="accounts">
             <column name="number" value="22233344"/>
             <column name="money" value="64000.00"/>
+            <column name="user_id" value="2"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="number" value="33344455"/>
+            <column name="money" value="0.00"/>
             <column name="user_id" value="3"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="number" value="44455566"/>
+            <column name="money" value="538.60"/>
+            <column name="user_id" value="4"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="number" value="55566677"/>
+            <column name="money" value="1670.00"/>
+            <column name="user_id" value="5"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="number" value="66677788"/>
+            <column name="money" value="780.00"/>
+            <column name="user_id" value="6"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="number" value="77788899"/>
+            <column name="money" value="64.00"/>
+            <column name="user_id" value="7"/>
         </insert>
         <rollback/>
     </changeSet>
@@ -88,9 +143,61 @@
         <rollback/>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-28 16:40:40">
-        <insert tableName="users_friends">
+        <insert tableName="friendship">
+            <column name="user_id" value="2"/>
+            <column name="friend_id" value="4"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="4"/>
+            <column name="friend_id" value="2"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="4"/>
+            <column name="friend_id" value="7"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="7"/>
+            <column name="friend_id" value="4"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="2"/>
+            <column name="friend_id" value="5"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="5"/>
+            <column name="friend_id" value="2"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="7"/>
+            <column name="friend_id" value="3"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="3"/>
+            <column name="friend_id" value="7"/>
+        </insert>
+        <insert tableName="friendship">
             <column name="user_id" value="1"/>
             <column name="friend_id" value="2"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="2"/>
+            <column name="friend_id" value="1"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="3"/>
+            <column name="friend_id" value="5"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="5"/>
+            <column name="friend_id" value="3"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="1"/>
+            <column name="friend_id" value="6"/>
+        </insert>
+        <insert tableName="friendship">
+            <column name="user_id" value="6"/>
+            <column name="friend_id" value="1"/>
         </insert>
         <rollback/>
     </changeSet>

@@ -14,14 +14,14 @@ public class PrivilegeDaoImpl implements PrivilegeDao {
     private EntityManager entityManager;
 
     @Override
-    public Privilege save(Privilege grant) {
-        if(grant.getId() == null){
-            entityManager.persist(grant);
+    public Privilege save(Privilege privilege) {
+        if(privilege.getId() == null){
+            entityManager.persist(privilege);
         } else {
-            entityManager.merge(grant);
+            entityManager.merge(privilege);
         }
 
-        return grant;
+        return privilege;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class PrivilegeDaoImpl implements PrivilegeDao {
 
     @Override
     public Privilege findPrivilegeByName(String name) {
-        return entityManager.createQuery("select p from Privilege p where p.name = :name", Privilege.class)
+        return entityManager.createQuery("select g from Privilege g where g.name = :name", Privilege.class)
                 .setParameter("name", name).getSingleResult();
     }
 }

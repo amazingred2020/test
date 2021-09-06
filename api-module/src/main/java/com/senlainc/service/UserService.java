@@ -7,6 +7,7 @@ import com.senlainc.dto.user.UserTextSearchRequest;
 import com.senlainc.entity.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -16,9 +17,8 @@ public interface UserService {
     void deleteFriend(Long userId, Long friendId);
     void changeRole(Long userId, Long roleId);
     List<User> findUsersByParameters(GetUserRequest request);
-
     List<User> getUsersByTextSearch(UserTextSearchRequest request);
     List<User> getPaginatedUserList(int page, int size);
-
     User findByAnyId(Long id);
+    List<User> getAllFriends(Long userId);
 }

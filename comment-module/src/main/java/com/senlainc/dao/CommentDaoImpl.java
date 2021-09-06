@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class CommentDaoImpl implements CommentDao{
@@ -20,7 +21,7 @@ public class CommentDaoImpl implements CommentDao{
             entityManager.merge(comment);
         }
 
-        return comment;
+        return findById(comment.getId());
     }
 
     @Override
@@ -31,5 +32,11 @@ public class CommentDaoImpl implements CommentDao{
     @Override
     public void remove(Long id) {
         entityManager.remove(findById(id));
+    }
+
+    @Override
+    public List<Comment> getCommentsByPostId(long id) {
+        return entityManager.createQuery("select c from Comment c join fetch c.post p where p.id = :id", Comment.class)
+                .setParameter("id", id).getResultList();
     }
 }

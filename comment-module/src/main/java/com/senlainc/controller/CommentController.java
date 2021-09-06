@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CommentController {
 
@@ -28,5 +30,10 @@ public class CommentController {
     @DeleteMapping(CommentRoutes.COMMENT_BY_ID)
     public void deleteComment(@PathVariable("id") Long commentId){
         commentService.deleteComment(commentId);
+    }
+
+    @GetMapping(CommentRoutes.COMMENT_BY_ID)
+    public List<Comment> getCommentsByPostId(@PathVariable long id){
+        return commentService.getCommentsByPostId(id);
     }
 }

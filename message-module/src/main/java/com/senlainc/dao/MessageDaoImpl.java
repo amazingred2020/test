@@ -1,11 +1,13 @@
 package com.senlainc.dao;
 
 import com.senlainc.entity.Message;
+import com.senlainc.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -28,7 +30,7 @@ public class MessageDaoImpl implements MessageDao {
             entityManager.merge(message);
         }
 
-        return message;
+        return findById(message.getId());
     }
 
     @Override
@@ -68,5 +70,25 @@ public class MessageDaoImpl implements MessageDao {
         typedQuery.setFirstResult((page - 1) * size);
         typedQuery.setMaxResults(size);
         return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<User> getAllDialogs(long id){
+        Query query = entityManager.createNativeQuery("select * from users as u where u.id in(\n" +
+                "select m1.user_to_id from messages as m1 where m1.user_from_id = :id\n" +
+                "union\n" +
+                "select m2.user_from_id from messages as m2 where user_to_id = :id)", User.class)
+                .setParameter("id", id);
+        List<User> dialogs = query.getResultList();
+        return dialogs;
+    }
+
+    @Override
+    public List<Message> getDialogMessages(long userOneId, long userTwoId) {
+        Query query = entityManager.createNativeQuery("select * from messages as m where (m.user_from_id = :one " +
+                "and m.user_to_id = :two) or (m.user_from_id = :two and m.user_to_id = :one)", Message.class)
+                .setParameter("one", userOneId).setParameter("two", userTwoId);
+        List<Message> messages = query.getResultList();
+        return messages;
     }
 }

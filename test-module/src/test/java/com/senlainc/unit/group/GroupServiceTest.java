@@ -1,8 +1,11 @@
 package com.senlainc.unit.group;
 
 import com.senlainc.dao.GroupDao;
+import com.senlainc.dao.SubscriberDao;
 import com.senlainc.dto.group.GroupUserRequest;
 import com.senlainc.dto.group.SaveGroupRequest;
+import com.senlainc.entity.Group;
+import com.senlainc.entity.Subscriber;
 import com.senlainc.entity.User;
 import com.senlainc.jpaconfig.JpaConfiguration;
 import com.senlainc.service.GroupService;
@@ -10,12 +13,15 @@ import com.senlainc.TestConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.Set;
+import static org.mockito.Mockito.*;
 
 @Transactional
 @ContextConfiguration(classes = {JpaConfiguration.class, TestConfiguration.class})
@@ -28,33 +34,29 @@ public class GroupServiceTest {
     @Autowired
     private GroupDao groupDao;
 
-    @Test(expected = NullPointerException.class)
+    @Autowired
+    private SubscriberDao subscriberDao;
+
+    @Test
     public void testDeleteGroup(){
         Long id = 1l;
         groupService.deleteGroup(id);
-        User user = groupDao.findById(id).getUser();
-
-        Assert.assertNull(user);
+        Group group = groupDao.findById(id);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testAddUserToGroup(){
-        GroupUserRequest request = new GroupUserRequest();
-        request.setGroupId(1l);
-        request.setFromId(1l);
-        request.setUserId(2l);
-        groupService.addUserToGroup(request);
-        Set<User> users = groupDao.findById(1l).getUsers();
+    @Mock
+    private SubscriberDao subscriberMockDao;
 
-        Assert.assertTrue(users.size() > 0);
+    @Test(expected = NoResultException.class)
+    public void testRemoveUserFromGroup(){
+        groupService.removeUserFromGroup(1l,1l);
+        Subscriber subscriber = subscriberDao.findByUserAndGroupId(1l, 1l);
     }
 
     @Test
-    public void testRemoveUserFromGroup(){
-        groupService.removeUserFromGroup(1l,1l);
-        Set<User> users = groupDao.findById(1l).getUsers();
-
-        Assert.assertTrue(users.size() == 0);
+    public void testGetSubscriber(){
+        Subscriber subscriber = subscriberDao.findByUserAndGroupId(4l, 1l);
+        Assert.assertTrue(subscriber.getId() == 5l);
     }
 
     @Test

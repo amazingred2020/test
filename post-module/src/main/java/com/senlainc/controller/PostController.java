@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PostController {
 
@@ -42,5 +44,15 @@ public class PostController {
     @DeleteMapping(PostRoutes.POST_CATEGORY_BY_ID)
     public void deleteCategory(@PathVariable Long id){
         categoryService.deleteCategory(id);
+    }
+
+    @GetMapping(PostRoutes.PROFILE_POST)
+    public List<Post> getPostsByProfile(@PathVariable long id){
+        return postService.getPostsByProfile(id);
+    }
+
+    @GetMapping(PostRoutes.GROUP_POST)
+    public List<Post> getPostsByGroup(@PathVariable long id){
+        return postService.getPostsByGroupId(id);
     }
 }

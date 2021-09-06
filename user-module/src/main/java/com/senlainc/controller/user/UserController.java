@@ -8,16 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Set;
 
 @RestController
-@Validated
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping(UserRoutes.USER)
     public User addUser(@RequestBody @Validated SaveUserRequest request){
@@ -30,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping(UserRoutes.CHANGE_ROLE)
-    private void changeUserRole(@PathVariable @Min(1) long userId, @PathVariable long roleId){
+    private void changeUserRole(@PathVariable long userId, @PathVariable long roleId){
         userService.changeRole(userId, roleId);
     }
 
@@ -40,8 +38,8 @@ public class UserController {
     }
 
     @GetMapping(UserRoutes.ALL_FRIENDS)
-    public Set<User> getAllFriends(@PathVariable("id") Long userId){
-        return userService.findUserById(userId).getFriends();
+    public List<User> getAllFriends(@PathVariable("id") Long userId){
+        return userService.getAllFriends(userId);
     }
 
     @PostMapping(UserRoutes.USER_FRIEND)

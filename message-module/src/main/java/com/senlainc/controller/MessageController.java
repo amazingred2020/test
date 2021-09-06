@@ -3,6 +3,7 @@ package com.senlainc.controller;
 import com.senlainc.dto.message.GetMessageRequest;
 import com.senlainc.dto.message.SaveMessageRequest;
 import com.senlainc.entity.Message;
+import com.senlainc.entity.User;
 import com.senlainc.routes.MessageRoutes;
 import com.senlainc.service.MessageService;
 import lombok.extern.log4j.Log4j2;
@@ -32,5 +33,15 @@ public class MessageController {
     @GetMapping(MessageRoutes.PAGINATION)
     public List<Message> getPaginatedList(@PathVariable int page, @PathVariable int size){
         return messageService.getPaginatedProductList(page, size);
+    }
+
+    @GetMapping(MessageRoutes.DIALOGS)
+    public List<User> getAllDialogs(@PathVariable long id){
+        return messageService.getAllDialogs(id);
+    }
+
+    @GetMapping(MessageRoutes.DIALOG)
+    public List<Message> getSingleDialog(@PathVariable("one") long userOneId, @PathVariable("two") long userTwoId){
+        return messageService.getDialogMessages(userOneId, userTwoId);
     }
 }

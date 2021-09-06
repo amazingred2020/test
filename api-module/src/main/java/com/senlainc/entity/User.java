@@ -1,5 +1,6 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.enums.Gender;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
@@ -47,15 +48,10 @@ public class User {
     @Column(nullable = false)
     private String city;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "users_friends",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "friend_id"))
-    private Set<User> friends = new HashSet<>();
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Generated(GenerationTime.INSERT)
@@ -66,11 +62,4 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public void addFriend(User user){
-        friends.add(user);
-    }
-
-    public void deleteFriend(User user){
-        friends.remove(user);
-    }
 }

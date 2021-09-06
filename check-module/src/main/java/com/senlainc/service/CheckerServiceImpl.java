@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import com.senlainc.enums.CheckerStatus;
 import com.senlainc.mappers.product.ProductMapper;
+import lombok.NoArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class CheckerService {
+public class CheckerServiceImpl implements CheckerService{
 
     @Autowired
     private CheckerDao checkerDao;
@@ -37,11 +38,8 @@ public class CheckerService {
     @Autowired
     private ProductMapper productMapper;
 
-    public CheckerService(CheckerDao checkerDao){
-        this.checkerDao = checkerDao;
-    }
-
     @Transactional(readOnly = true)
+    @Override
     public List<ProductChecker> getAllPendingProducts(){
         Optional<List<ProductChecker>> list = checkerDao.getAllPendingProducts();
         if(list.isPresent()){
@@ -51,10 +49,12 @@ public class CheckerService {
     }
 
     @Transactional(readOnly = true)
+    @Override
     public ProductChecker getProductById(Long id){
         return checkerDao.getById(id);
     }
 
+    @Override
     public void makerProducer(SaveProductCheckerRequest request) {
         ProductChecker productChecker = productMapper.fromSaveProductRequestToProductChecker(request);
         productChecker.setCheckerStatus(CheckerStatus.PENDING);
@@ -64,10 +64,12 @@ public class CheckerService {
     }
 
     @RabbitListener(containerFactory = "listenerContainerFactory", queues = "maker.queue")
+    @Override
     public void makerConsumer(ProductChecker productChecker){
         checkerDao.save(productChecker);
     }
 
+    @Override
     public void checkerProducer(long id) {
         ProductChecker productChecker = checkerDao.getById(id);
         Product product = productMapper.fromProductCheckerToProduct(productChecker);
@@ -79,6 +81,7 @@ public class CheckerService {
     }
 
     @RabbitListener(containerFactory = "listenerContainerFactory", queues = "checker.queue")
+    @Override
     public void checkerConsumer(Product product){
         Product targetProduct = productDao.findById(product.getId());
         targetProduct.setName(product.getName());
@@ -87,6 +90,7 @@ public class CheckerService {
         productDao.save(product);
     }
 
+    @Override
     public void rejectUpdate(long id) {
         ProductChecker productChecker = checkerDao.getById(id);
         productChecker.setCheckerStatus(CheckerStatus.REJECT);

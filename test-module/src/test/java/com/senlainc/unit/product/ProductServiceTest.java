@@ -41,9 +41,10 @@ public class ProductServiceTest {
 
         Assert.assertEquals(Long.valueOf(2l), product.getUser().getId());
     }
-    @Test(expected = NoSuchElementException.class)
+
+    @Test
     public void buyProduct() {
-        productService.buyProduct(2l,1l);
-        Product product = productDao.findById(2l);
+        productService.buyProduct(5l,1l);
+        Assert.assertNull(productDao.findById(5l));
     }
 }

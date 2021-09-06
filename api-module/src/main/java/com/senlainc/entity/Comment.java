@@ -1,5 +1,6 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
@@ -33,17 +34,19 @@ public class Comment {
     @JoinColumn(name = "author_id")
     private User user;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Comment parent;
+    //@JsonIgnore
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "parent_id")
+    //private Comment parent;
 
-    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> child = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "parent_id")
+    private List<Comment> comments = new ArrayList<>();
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Generated(GenerationTime.INSERT)

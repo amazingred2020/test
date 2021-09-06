@@ -13,6 +13,66 @@
             <column name="price" value="19943"/>
             <column name="user_id" value="4"/>
         </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 3"/>
+            <column name="description" value="product description 3"/>
+            <column name="price" value="6700.30"/>
+            <column name="user_id" value="7"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 4"/>
+            <column name="description" value="product description 4"/>
+            <column name="price" value="12441.51"/>
+            <column name="user_id" value="3"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 5"/>
+            <column name="description" value="product description 5"/>
+            <column name="price" value="200"/>
+            <column name="user_id" value="5"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 6"/>
+            <column name="description" value="product description 6"/>
+            <column name="price" value="999.99"/>
+            <column name="user_id" value="4"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 7"/>
+            <column name="description" value="product description 7"/>
+            <column name="price" value="4400"/>
+            <column name="user_id" value="2"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 8"/>
+            <column name="description" value="product description 8"/>
+            <column name="price" value="586.22"/>
+            <column name="user_id" value="3"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 9"/>
+            <column name="description" value="product description 9"/>
+            <column name="price" value="15678"/>
+            <column name="user_id" value="6"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 10"/>
+            <column name="description" value="product description 10"/>
+            <column name="price" value="744"/>
+            <column name="user_id" value="7"/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="product name 11"/>
+            <column name="description" value="product description 11"/>
+            <column name="price" value="100"/>
+            <column name="user_id" value="5"/>
+        </insert>
+            <insert tableName="products">
+            <column name="name" value="product name 12"/>
+            <column name="description" value="product description 12"/>
+            <column name="price" value="7894"/>
+            <column name="user_id" value="5"/>
+        </insert>
         <rollback/>
     </changeSet>
 </databaseChangeLog>

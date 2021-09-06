@@ -4,5 +4,7 @@ public interface MessageRoutes {
 
     String MESSAGE = "/message";
     String MESSAGE_BY_PARAMS = MESSAGE + "/find";
-    String PAGINATION = MESSAGE + "/{page}/{size}";
+    String PAGINATION = MESSAGE + "/pagination/{page}/{size}";
+    String DIALOGS = MESSAGE + "/dialogs/{id}";
+    String DIALOG = MESSAGE + "/dialog/{one}/{two}";
 }

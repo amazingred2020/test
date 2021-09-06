@@ -18,5 +18,4 @@ public interface ProductMapper {
     ProductChecker fromSaveProductRequestToProductChecker(SaveProductCheckerRequest request);
 
     Product fromProductCheckerToProduct(ProductChecker productChecker);
-
 }

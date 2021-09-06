@@ -1,5 +1,6 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
@@ -31,13 +32,8 @@ public class Group {
 
     private String description;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "users_groups",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> users = new HashSet<>();
-
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private User user;
 
@@ -52,13 +48,5 @@ public class Group {
 
     public Group(String name){
         this.name = name;
-    }
-
-    public void addUserToGroup(User user){
-        getUsers().add(user);
-    }
-
-    public void removeUserFromGroup(User user){
-        getUsers().remove(user);
     }
 }

@@ -1,5 +1,6 @@
 package com.senlainc.dto.post;
 
+import com.senlainc.enums.EnumNamePattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,4 +21,8 @@ public class SavePostRequest {
 
     @Min(1)
     private long categoryId;
+
+    private long profileId;
+
+    private long groupId;
 }

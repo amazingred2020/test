@@ -1,6 +1,7 @@
 package com.senlainc.service;
 
 import com.senlainc.dao.CategoryDao;
+import com.senlainc.dao.GroupDao;
 import com.senlainc.dao.PostDao;
 import com.senlainc.dao.UserDao;
 import com.senlainc.dto.post.SavePostRequest;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class PostServiceImpl implements PostService{
@@ -20,6 +23,9 @@ public class PostServiceImpl implements PostService{
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private GroupDao groupDao;
 
     @Autowired
     private CategoryDao categoryDao;
@@ -40,7 +46,13 @@ public class PostServiceImpl implements PostService{
     @Override
     public Post publishPost(SavePostRequest request) {
         Post newPost = postMapper.fromSavePostRequestToPost(request);
-
+        Long groupId = request.getGroupId();
+        Long profileId = request.getProfileId();
+        if(groupId != null){
+            newPost.setGroup(groupDao.findById(groupId));
+        } else if(profileId != null){
+            newPost.setProfileId(profileId);
+        }
         return postDao.save(newPost);
     }
 
@@ -53,5 +65,15 @@ public class PostServiceImpl implements PostService{
         }
 
         return postDao.save(editPost);
+    }
+
+    @Override
+    public List<Post> getPostsByProfile(long profileId){
+        return postDao.getPostsByProfileId(profileId);
+    }
+
+    @Override
+    public List<Post> getPostsByGroupId(long groupId){
+        return postDao.getPostsByGroupId(groupId);
     }
 }

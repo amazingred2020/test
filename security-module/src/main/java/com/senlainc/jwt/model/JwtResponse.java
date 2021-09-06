@@ -2,8 +2,7 @@ package com.senlainc.jwt.model;
 
 import java.io.Serializable;
 
-public class JwtResponse implements Serializable
-{
+public class JwtResponse implements Serializable {
 
     private final String jwttoken;
 

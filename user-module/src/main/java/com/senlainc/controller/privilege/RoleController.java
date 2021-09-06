@@ -14,12 +14,13 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping(PrivilegeRoutes.ROLE)
-    public void createRole(@RequestBody @Validated SaveRoleRequest newRoleRequest){
-        roleService.createNewRole(newRoleRequest);
+    public void createRole(@RequestBody @Validated SaveRoleRequest request){
+        roleService.createNewRole(request);
     }
 
     @DeleteMapping(PrivilegeRoutes.ROLE_BY_ID)
     public void deleteRole(@PathVariable Long id){
         roleService.deleteRole(id);
     }
+
 }

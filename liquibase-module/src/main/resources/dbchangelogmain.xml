@@ -12,9 +12,9 @@
     <include file="changelogs/begin-insert/2021-07-28_16_46_10_add_users_and_accounts.xml"/>
     <include file="changelogs/begin-insert/2021-08-18_13_11_10_add_messages.xml"/>
     <include file="changelogs/begin-insert/2021-08-18_15_45_10_add_products.xml"/>
+    <include file="changelogs/begin-insert/2021-08-18_17_20_10_add_groups.xml"/>
     <include file="changelogs/begin-insert/2021-08-18_15_51_10_add_categories_and_posts.xml"/>
     <include file="changelogs/begin-insert/2021-08-18_14_34_10_add_comments.xml"/>
-    <include file="changelogs/begin-insert/2021-08-18_17_20_10_add_groups.xml"/>
     <include file="changelogs/begin-insert/2021-07-18_13_35_10_add_invites.xml"/>
     <includeAll path="changelogs/check"/>
 </databaseChangeLog>

@@ -1,5 +1,6 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
@@ -42,6 +43,14 @@ public class Post {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "profile_id")
+    private Long profileId;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     public Post(String content) {
         this.content = content;

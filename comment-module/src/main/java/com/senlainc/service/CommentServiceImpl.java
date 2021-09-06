@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CommentServiceImpl implements CommentService{
@@ -43,5 +45,10 @@ public class CommentServiceImpl implements CommentService{
         Comment editComment = commentDao.findById(request.getCommentId());
         editComment.setContent(request.getContent());
         return commentDao.save(editComment);
+    }
+
+    @Override
+    public List<Comment> getCommentsByPostId(long id) {
+        return commentDao.getCommentsByPostId(id);
     }
 }

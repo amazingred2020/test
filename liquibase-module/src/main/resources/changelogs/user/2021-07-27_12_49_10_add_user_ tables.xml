@@ -39,12 +39,15 @@
         </sql>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-27 12:52:30">
-        <createTable tableName="users_friends">
+        <createTable tableName="friendship">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
             <column name="user_id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" foreignKeyName="fk_users_friends_has_users1" referencedColumnNames="id" referencedTableName="users"/>
+                <constraints foreignKeyName="fk_friendship_users1" referencedColumnNames="id" referencedTableName="users"/>
             </column>
             <column name="friend_id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" foreignKeyName="fk_users_friends_has_users2" referencedColumnNames="id" referencedTableName="users"/>
+                <constraints foreignKeyName="fk_friendship_users2" referencedColumnNames="id" referencedTableName="users"/>
             </column>
         </createTable>
     </changeSet>

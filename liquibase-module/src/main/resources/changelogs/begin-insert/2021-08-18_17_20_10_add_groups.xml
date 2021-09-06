@@ -19,11 +19,35 @@
         <rollback/>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-08-18 17:21:20">
-        <insert tableName="users_groups">
+        <insert tableName="subscribers">
             <column name="user_id" value="1"/>
             <column name="group_id" value="1"/>
         </insert>
-        <insert tableName="users_groups">
+        <insert tableName="subscribers">
+            <column name="user_id" value="1"/>
+            <column name="group_id" value="2"/>
+        </insert>
+        <insert tableName="subscribers">
+            <column name="user_id" value="1"/>
+            <column name="group_id" value="3"/>
+        </insert>
+        <insert tableName="subscribers">
+            <column name="user_id" value="2"/>
+            <column name="group_id" value="1"/>
+        </insert>
+        <insert tableName="subscribers">
+            <column name="user_id" value="4"/>
+            <column name="group_id" value="1"/>
+        </insert>
+        <insert tableName="subscribers">
+            <column name="user_id" value="5"/>
+            <column name="group_id" value="1"/>
+        </insert>
+        <insert tableName="subscribers">
+            <column name="user_id" value="6"/>
+            <column name="group_id" value="1"/>
+        </insert>
+        <insert tableName="subscribers">
             <column name="user_id" value="3"/>
             <column name="group_id" value="2"/>
         </insert>

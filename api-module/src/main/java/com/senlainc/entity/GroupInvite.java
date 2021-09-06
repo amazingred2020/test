@@ -1,5 +1,6 @@
 package com.senlainc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.enums.Status;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
@@ -28,7 +29,8 @@ public class GroupInvite{
     @JoinColumn(name = "user_from_id")
     private User userFrom;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_to_id")
     private User userTo;
 

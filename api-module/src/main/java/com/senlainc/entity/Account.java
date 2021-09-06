@@ -30,7 +30,7 @@ public class Account {
     @Column(name = "money")
     private BigDecimal accountMoney;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

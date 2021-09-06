@@ -44,7 +44,7 @@ public class InviteServiceTest {
 
     @Test
     public void  testGetAllFriendInvite(){
-        List<FriendInvite> invites = inviteService.getAllFriendInvite(2l);
+        List<FriendInvite> invites = inviteService.getAllFriendInvite(1l);
 
         Assert.assertTrue(invites.size() > 0);
     }

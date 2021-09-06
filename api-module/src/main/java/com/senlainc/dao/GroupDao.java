@@ -8,7 +8,4 @@ public interface GroupDao {
     Group findById(Long id);
     void remove(Long id);
     Group findByName(String name);
-    void changeGroupAdmin(Long groupId, Long userId);
-    void addUserToGroup(Long groupId, Long userId);
-    void removeUserFromGroup(Long groupId, Long userId);
 }
