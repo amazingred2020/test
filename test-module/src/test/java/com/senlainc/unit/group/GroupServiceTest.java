@@ -44,9 +44,6 @@ public class GroupServiceTest {
         Group group = groupDao.findById(id);
     }
 
-    @Mock
-    private SubscriberDao subscriberMockDao;
-
     @Test(expected = NoResultException.class)
     public void testRemoveUserFromGroup(){
         groupService.removeUserFromGroup(1l,1l);

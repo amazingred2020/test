@@ -30,7 +30,7 @@
         </insert>
         <insert tableName="group_invite">
             <column name="user_from_id" value="3"/>
-            <column name="user_to_id" value="2"/>
+            <column name="user_to_id" value="1"/>
             <column name="group_id" value="2"/>
             <column name="status" value="WAIT"/>
         </insert>

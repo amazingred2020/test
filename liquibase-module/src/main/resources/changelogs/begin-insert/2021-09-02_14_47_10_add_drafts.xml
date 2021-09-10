@@ -1,0 +1,26 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="liquibase-script"  id="2021-09-02 14:34:10">
+        <insert tableName="drafts">
+            <column name="product_id" value="7"/>
+            <column name="name" value="checker update test 7"/>
+            <column name="description" value="checker test description 7"/>
+            <column name="price" value="654.67"/>
+            <column name="status" value="PENDING"/>
+        </insert>
+        <insert tableName="drafts">
+            <column name="product_id" value="8"/>
+            <column name="name" value="checker update test 8"/>
+            <column name="price" value="4000.71"/>
+            <column name="status" value="PENDING"/>
+        </insert>
+        <insert tableName="drafts">
+            <column name="product_id" value="3"/>
+            <column name="name" value="checker update test 3"/>
+            <column name="description" value="checker test description 3"/>
+            <column name="price" value="3656.99"/>
+            <column name="status" value="PENDING"/>
+        </insert>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>

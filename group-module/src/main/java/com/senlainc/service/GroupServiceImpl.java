@@ -8,11 +8,14 @@ import com.senlainc.dto.group.SaveGroupRequest;
 import com.senlainc.dto.group.GroupUserRequest;
 import com.senlainc.entity.Group;
 import com.senlainc.entity.Subscriber;
+import com.senlainc.entity.User;
 import com.senlainc.enums.Status;
 import com.senlainc.mappers.group.GroupMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -71,5 +74,10 @@ public class GroupServiceImpl implements GroupService{
         Group group = groupDao.findById(groupId);
         group.setUser(userDao.findById(userId));
         groupDao.save(group);
+    }
+
+    @Override
+    public List<User> getGroupSubscribers(long id) {
+        return subscriberDao.getAllSubscribers(id);
     }
 }

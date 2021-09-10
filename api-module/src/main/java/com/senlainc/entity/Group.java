@@ -32,8 +32,7 @@ public class Group {
 
     private String description;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "admin_id")
     private User user;
 

@@ -9,7 +9,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="parent_id" type="BIGINT">
-                <constraints foreignKeyName="fk_categories_categories1" referencedColumnNames="id" referencedTableName="categories"/>
+                <constraints foreignKeyName="fk_categories_categories1" referencedColumnNames="id" referencedTableName="categories" deleteCascade="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -22,20 +22,26 @@
                 <constraints nullable="false"/>
             </column>
             <column name="author_id" type="BIGINT">
-                <constraints foreignKeyName="fk_posts_users1" referencedColumnNames="id" referencedTableName="users"/>
+                <constraints foreignKeyName="fk_posts_users1" referencedColumnNames="id" referencedTableName="users" />
             </column>
-            <column name="category_id" type="BIGINT">
-                <constraints foreignKeyName="fk_posts_categories1" referencedColumnNames="id" referencedTableName="categories"/>
-            </column>
+            <column name="category_id" type="BIGINT"/>
             <column name="created_at" type="datetime" defaultValue="now()"/>
             <column name="updated_at" type="datetime"/>
             <column name="profile_id" type="BIGINT"/>
             <column name="group_id" type="BIGINT">
-                <constraints foreignKeyName="fk_posts_groups1" referencedColumnNames="id" referencedTableName="groups"/>
+                <constraints foreignKeyName="fk_posts_groups1" referencedColumnNames="id" referencedTableName="groups" deleteCascade="true"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="liquibase-script"  id="2021-07-27 13:06:30">
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="posts"
+                                 constraintName="fk_posts_categories1"
+                                 onDelete="SET NULL"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categories"/>
+    </changeSet>
+    <changeSet author="liquibase-script"  id="2021-07-27 13:06:40">
         <sql splitStatements="false">
             CREATE TRIGGER update_date_posts before update ON posts
             FOR EACH ROW

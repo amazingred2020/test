@@ -6,4 +6,5 @@ public interface GroupRoutes {
     String GROUP_BY_ID = GROUP + "/{id}";
     String USER_IN = GROUP + "/add";
     String USER_OUT = GROUP + "/delete";
+    String SUBSCRIBERS = GROUP + "/subs/{id}";
 }

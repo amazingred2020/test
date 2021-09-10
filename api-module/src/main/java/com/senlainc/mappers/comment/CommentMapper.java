@@ -11,7 +11,6 @@ public interface CommentMapper {
 
     @Mapping(source = "request.userId", target = "user")
     @Mapping(source = "request.postId", target = "post")
-    //@Mapping(source = "request.parentId", target = "parent")
+    @Mapping(source = "request.parentId", target = "parent")
     Comment fromSaveCommentRequestToComment(SaveCommentRequest request);
-
 }

@@ -52,6 +52,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getAllProducts() {
-        return entityManager.createQuery("select p from Product p join fetch p.user", Product.class).getResultList();
+        return entityManager.createQuery("from Product", Product.class).getResultList();
     }
 }

@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
 @Table(name = "subscribers")
 public class Subscriber {
 

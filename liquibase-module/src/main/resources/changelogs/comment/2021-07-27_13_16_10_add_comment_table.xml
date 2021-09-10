@@ -9,14 +9,13 @@
                 <constraints nullable="false"/>
             </column>
             <column name="author_id" type="BIGINT">
-                <constraints foreignKeyName="fk_comments_users2" referencedColumnNames="id" referencedTableName="users"/>
+                <constraints foreignKeyName="fk_comments_users2" referencedColumnNames="id" referencedTableName="users" deleteCascade="true"/>
             </column>
             <column name="post_id" type="BIGINT">
-                <constraints foreignKeyName="fk_comments_posts1" referencedColumnNames="id" referencedTableName="posts"
-                             deleteCascade="true"/>
+                <constraints foreignKeyName="fk_comments_posts1" referencedColumnNames="id" referencedTableName="posts" deleteCascade="true"/>
             </column>
             <column name="parent_id" type="BIGINT">
-                <constraints foreignKeyName="fk_comments_comments1" referencedColumnNames="id" referencedTableName="comments"/>
+                <constraints foreignKeyName="fk_comments_comments1" referencedColumnNames="id" referencedTableName="comments" deleteCascade="true"/>
             </column>
             <column name="created_at" type="datetime" defaultValue="now()"/>
             <column name="updated_at" type="datetime"/>

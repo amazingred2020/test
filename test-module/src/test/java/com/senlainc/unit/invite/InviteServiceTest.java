@@ -64,7 +64,7 @@ public class InviteServiceTest {
 
     @Test
     public void testGetAllGroupInvite(){
-        List<GroupInvite> invites = inviteService.getAllGroupInvite(2l);
+        List<GroupInvite> invites = inviteService.getAllGroupInvite(1l);
 
         Assert.assertFalse(invites.isEmpty());
     }

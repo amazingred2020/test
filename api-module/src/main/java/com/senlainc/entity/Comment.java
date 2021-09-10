@@ -39,13 +39,11 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    //@JsonIgnore
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "parent_id")
-    //private Comment parent;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
     @JoinColumn(name = "parent_id")
+    private Comment parent;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)

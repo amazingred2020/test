@@ -20,4 +20,6 @@ public class SaveCommentRequest {
 
     @Min(1)
     private long postId;
+
+    private long parentId;
 }

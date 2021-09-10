@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.NoResultException;
 import java.util.List;
 
-@Log4j2
 @Transactional
 @ContextConfiguration(classes = {JpaConfiguration.class, TestConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)

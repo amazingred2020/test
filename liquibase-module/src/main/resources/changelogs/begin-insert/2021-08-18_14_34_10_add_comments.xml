@@ -17,7 +17,7 @@
             <column name="content" value="comment text 3"/>
             <column name="author_id" value="1"/>
             <column name="post_id" value="7"/>
-            <column name="parent_id" value="3"/>
+            <column name="parent_id" value="2"/>
         </insert>
         <insert tableName="comments">
             <column name="content" value="comment text 4"/>
@@ -35,7 +35,7 @@
             <column name="content" value="comment text 6"/>
             <column name="author_id" value="3"/>
             <column name="post_id" value="7"/>
-            <column name="parent_id" value="3"/>
+            <column name="parent_id" value="2"/>
         </insert>
         <insert tableName="comments">
             <column name="content" value="comment text 7"/>
