@@ -5,8 +5,6 @@ import com.senlainc.entity.User;
 import com.senlainc.service.ProductService;
 import com.senlainc.service.ReportService;
 import com.senlainc.service.UserService;
-import javassist.bytecode.ByteArray;
-import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.activation.FileTypeMap;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;

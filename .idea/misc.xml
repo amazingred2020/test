@@ -10,8 +10,10 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/auth-module/pom.xml" />
+        <option value="$PROJECT_DIR$/check-module/pom.xml" />
         <option value="$PROJECT_DIR$/dicontainer-module/pom.xml" />
         <option value="$PROJECT_DIR$/item-module/pom.xml" />
+        <option value="$PROJECT_DIR$/test-module/pom.xml" />
       </set>
     </option>
   </component>

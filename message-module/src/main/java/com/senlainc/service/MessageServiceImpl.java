@@ -7,14 +7,12 @@ import com.senlainc.dto.message.SaveMessageRequest;
 import com.senlainc.entity.Message;
 import com.senlainc.entity.User;
 import com.senlainc.mappers.message.MessageMapper;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Log4j2
 @Service
 @Transactional
 public class MessageServiceImpl implements MessageService {

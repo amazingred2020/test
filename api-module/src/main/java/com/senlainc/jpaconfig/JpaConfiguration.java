@@ -3,6 +3,7 @@ package com.senlainc.jpaconfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -11,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan("com.senlainc")
+@EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class JpaConfiguration {
 

@@ -3,6 +3,7 @@ package com.senlainc.controller;
 import com.senlainc.dto.group.GroupUserRequest;
 import com.senlainc.dto.group.SaveGroupRequest;
 import com.senlainc.entity.User;
+import com.senlainc.enums.AopMarker;
 import com.senlainc.routes.GroupRoutes;
 import com.senlainc.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
+    @AopMarker
     @PostMapping(GroupRoutes.GROUP)
     public void newGroup(@RequestBody @Validated SaveGroupRequest request){
         groupService.addGroup(request);

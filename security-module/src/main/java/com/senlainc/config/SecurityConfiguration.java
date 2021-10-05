@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @PropertySource("classpath:token.properties")
 @ComponentScan("com.senlainc")
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationProvider authenticationProvider;
@@ -67,17 +67,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                     .hasAnyAuthority("delete", "update")
                 .mvcMatchers(CommentRoutes.COMMENT + "/*")
                     .hasAnyAuthority("create", "delete", "update")
-                .mvcMatchers("/maker/**", "/checker/**").access("hasAuthority('create')" +
-                " and hasAuthority('delete') and hasAuthority('update') and hasAuthority('read')")
+
         .anyRequest().authenticated()
         .and()
         .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID");
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*");
-    }
 }

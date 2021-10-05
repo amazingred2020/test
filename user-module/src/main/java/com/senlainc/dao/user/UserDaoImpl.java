@@ -1,12 +1,10 @@
 package com.senlainc.dao.user;
 
-
 import com.senlainc.dao.UserDao;
 import com.senlainc.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedEntityGraph;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;

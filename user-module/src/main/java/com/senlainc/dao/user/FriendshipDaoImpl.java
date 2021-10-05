@@ -2,7 +2,6 @@ package com.senlainc.dao.user;
 
 import com.senlainc.dao.FriendshipDao;
 import com.senlainc.entity.Friendship;
-import com.senlainc.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

@@ -6,6 +6,7 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Table(name = "messages")
 public class Message {
 

@@ -2,7 +2,6 @@ package com.senlainc.dao;
 
 import com.senlainc.entity.Message;
 import com.senlainc.entity.User;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,7 +14,6 @@ import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Log4j2
 @Repository
 public class MessageDaoImpl implements MessageDao {
 

@@ -9,6 +9,7 @@ import com.senlainc.dto.group.GroupUserRequest;
 import com.senlainc.entity.Group;
 import com.senlainc.entity.Subscriber;
 import com.senlainc.entity.User;
+import com.senlainc.enums.AopMarker;
 import com.senlainc.enums.Status;
 import com.senlainc.mappers.group.GroupMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class GroupServiceImpl implements GroupService{
         subscriberDao.delete(groupId, userId);
     }
 
+    @AopMarker
     @Override
     public void addGroup(SaveGroupRequest request) {
         Group newGroup = groupMapper.fromGroupRequestToGroup(request);
@@ -76,6 +78,7 @@ public class GroupServiceImpl implements GroupService{
         groupDao.save(group);
     }
 
+    @AopMarker
     @Override
     public List<User> getGroupSubscribers(long id) {
         return subscriberDao.getAllSubscribers(id);

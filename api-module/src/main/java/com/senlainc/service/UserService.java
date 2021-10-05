@@ -5,9 +5,7 @@ import com.senlainc.dto.user.GetUserRequest;
 import com.senlainc.dto.user.SaveUserRequest;
 import com.senlainc.dto.user.UserTextSearchRequest;
 import com.senlainc.entity.User;
-
 import java.util.List;
-import java.util.Set;
 
 public interface UserService {
 

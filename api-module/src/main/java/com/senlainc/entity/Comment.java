@@ -6,6 +6,7 @@ import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Table(name = "comments")
 public class Comment {
 

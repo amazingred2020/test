@@ -1,6 +1,5 @@
 package com.senlainc.dao;
 
-import com.senlainc.entity.Category;
 import com.senlainc.entity.Post;
 import org.springframework.stereotype.Repository;
 

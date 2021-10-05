@@ -2,7 +2,6 @@ package com.senlainc.mappers.comment;
 
 import com.senlainc.dao.UserDao;
 import com.senlainc.entity.User;
-import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

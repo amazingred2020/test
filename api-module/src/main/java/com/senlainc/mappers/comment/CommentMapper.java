@@ -1,7 +1,6 @@
 package com.senlainc.mappers.comment;
 
 import com.senlainc.dto.comment.SaveCommentRequest;
-import com.senlainc.dto.comment.UpdateCommentRequest;
 import com.senlainc.entity.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

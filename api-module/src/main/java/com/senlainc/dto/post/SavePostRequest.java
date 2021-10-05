@@ -1,6 +1,5 @@
 package com.senlainc.dto.post;
 
-import com.senlainc.enums.EnumNamePattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

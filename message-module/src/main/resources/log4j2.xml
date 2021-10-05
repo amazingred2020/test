@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true"
+               name="XMLConfigTest" packages="com.senlainc">
+
+    <Appenders>
+        <RollingFile name="rollingFile"
+                     fileName="logs/loggingMessage.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50 MB" />
+            </Policies>
+        </RollingFile>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="rollingFile" />
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

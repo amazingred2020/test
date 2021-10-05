@@ -1,6 +1,5 @@
 package com.senlainc.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senlainc.jpaconfig.CustomLocalDateTimeSerializer;
 import lombok.Getter;
@@ -9,12 +8,9 @@ import lombok.Setter;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -45,7 +41,4 @@ public class Group {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Group(String name){
-        this.name = name;
-    }
 }

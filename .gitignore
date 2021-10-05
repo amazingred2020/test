@@ -9,9 +9,7 @@
 /invite-module/target/
 /post-module/target/
 /product-module/target/
-/test-module/target/
 /security-module/target/
 /user-module/target/
-/check-module/target/
 /test-module/logs/
-/test-module/logs/
+/target/
