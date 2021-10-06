@@ -12,7 +12,7 @@ public class GroupAspect {
     private static final Logger logger = LogManager.getLogger(GroupAspect.class);
 
     //@Around("within(com.senlainc.service..*) && @annotation(com.senlainc.enums.AopMarker)")
-    @Around("within(com.senlainc.service..*) && @annotation(com.senlainc.enums.AopMarker)")
+    @Around("execution(* com.senlainc.service.GroupService.*(..))")
     public void groupAdvice(ProceedingJoinPoint proceedingJoinPoint){
         logger.info("-----Внутри метода groupAdvice----");
         logger.info("До вызова целевого метода!");
