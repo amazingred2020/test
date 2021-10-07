@@ -14,26 +14,38 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
         <module name="security-module" />
-        <module name="user-module" />
         <module name="message-module" />
+        <module name="user-module" />
         <module name="liquibase-module" />
         <module name="invite-module" />
         <module name="post-module" />
         <module name="product-module" />
-        <module name="comment-module" />
         <module name="api-module" />
+        <module name="comment-module" />
         <module name="common-mvc-module" />
         <module name="group-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-module" target="1.8" />
       <module name="auth-module" target="1.8" />
       <module name="check-module" target="1.8" />
+      <module name="comment-module" target="1.8" />
+      <module name="common-mvc-module" target="1.8" />
       <module name="dicontainer-module" target="8" />
       <module name="entitymanager-module" target="8" />
+      <module name="group-module" target="1.8" />
+      <module name="invite-module" target="1.8" />
       <module name="item-module" target="8" />
+      <module name="liquibase-module" target="1.8" />
+      <module name="message-module" target="1.8" />
+      <module name="post-module" target="1.8" />
+      <module name="product-module" target="1.8" />
+      <module name="security-module" target="1.8" />
+      <module name="test" target="1.8" />
       <module name="test-module" target="1.8" />
       <module name="trading-module" target="8" />
+      <module name="user-module" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

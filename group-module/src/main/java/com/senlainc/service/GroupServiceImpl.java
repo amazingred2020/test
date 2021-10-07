@@ -60,7 +60,6 @@ public class GroupServiceImpl implements GroupService{
         subscriberDao.delete(groupId, userId);
     }
 
-    @AopMarker
     @Override
     public void addGroup(SaveGroupRequest request) {
         Group newGroup = groupMapper.fromGroupRequestToGroup(request);
@@ -78,7 +77,6 @@ public class GroupServiceImpl implements GroupService{
         groupDao.save(group);
     }
 
-    @AopMarker
     @Override
     public List<User> getGroupSubscribers(long id) {
         return subscriberDao.getAllSubscribers(id);

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/*
 @Component
 @Aspect
 public class CommentAspect {
@@ -19,7 +19,7 @@ public class CommentAspect {
     private static final Logger logger = LogManager.getLogger(CommentAspect.class);
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    @Pointcut("execution(* com.senlainc.service.CommentService.addComment())")
+    @Pointcut("execution(* com.senlainc.service.CommentService.addComment(..))")
     public void commentPerformance(){}
 
     @Around("commentPerformance() && args(request)")
@@ -50,3 +50,4 @@ public class CommentAspect {
         }
     }
 }
+ */

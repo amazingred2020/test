@@ -6,6 +6,7 @@ import com.senlainc.dao.UserDao;
 import com.senlainc.dto.comment.SaveCommentRequest;
 import com.senlainc.dto.comment.UpdateCommentRequest;
 import com.senlainc.entity.Comment;
+import com.senlainc.enums.AopMarker;
 import com.senlainc.mappers.comment.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class CommentServiceImpl implements CommentService{
         commentDao.remove(id);
     }
 
+    @AopMarker
     @Override
     public Comment addComment(SaveCommentRequest request) {
         Comment newComment = сommentMapper.fromSaveCommentRequestToComment(request);

@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan("com.senlainc")
+@EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class JpaConfiguration {
 
